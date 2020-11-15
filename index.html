@@ -163,6 +163,80 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/15/%E8%AE%BE%E7%BD%AEgit%E7%9A%84%E7%89%B9%E5%AE%9A%E7%BD%91%E7%AB%99%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ggq">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ggqshr's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/15/%E8%AE%BE%E7%BD%AEgit%E7%9A%84%E7%89%B9%E5%AE%9A%E7%BD%91%E7%AB%99%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86/" class="post-title-link" itemprop="url">设置git的特定网站使用代理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-15 20:03:26 / 修改时间：20:11:05" itemprop="dateCreated datePublished" datetime="2020-11-15T20:03:26+08:00">2020-11-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1><span id="she-zhi-git-te-ding-wang-zhan-shi-yong-dai-li">设置git特定网站使用代理</span><a href="#she-zhi-git-te-ding-wang-zhan-shi-yong-dai-li" class="header-anchor">#</a></h1><h2><span id="1-ming-ling-xing-de-fang-shi">1.命令行的方式</span><a href="#1-ming-ling-xing-de-fang-shi" class="header-anchor">#</a></h2><p>直接使用命令即可设置特定网站的使用特定代理，比如github</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.https://github.com.proxy http://127.0.0.1:1080</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取消代理</span></span><br><span class="line">git config --global --<span class="built_in">unset</span> http.https://github.com.proxy</span><br></pre></td></tr></table></figure>
+
+<p>如果不想设置全局的，则可以设置repository特定的代理，如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git config --<span class="built_in">local</span> http.https://github.com.proxy http://127.0.0.1:1080</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取消代理</span></span><br><span class="line">git config --<span class="built_in">local</span> --<span class="built_in">unset</span> http.https://github.com.proxy</span><br></pre></td></tr></table></figure>
+
+<h2><span id="2-bian-ji-pei-zhi-wen-jian-de-fang-shi">2. 编辑配置文件的方式</span><a href="#2-bian-ji-pei-zhi-wen-jian-de-fang-shi" class="header-anchor">#</a></h2><p>直接编辑git的配置文件，该文件的位置为<code>~/.gitconfig</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[http &quot;https:&#x2F;&#x2F;github.com&quot;] # 添加特定网站</span><br><span class="line">	proxy &#x3D; http:&#x2F;&#x2F;127.0.0.1:1080</span><br><span class="line">    </span><br><span class="line">[http] # 设置全部http都使用某个代理</span><br><span class="line">    proxy &#x3D; http:&#x2F;&#x2F;127.0.0.1:1080 </span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -353,20 +427,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
