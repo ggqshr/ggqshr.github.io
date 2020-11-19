@@ -103,9 +103,10 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: git
-  repository: git@github.com:ggqshr/ggqshr.github.io.git
-  branch: main
+  - type: git
+    repository: git@github.com:ggqshr/ggqshr.github.io.git
+    branch: main
+  - type: leancloud_counter_security_sync
 
 
 # toc:
@@ -117,3 +118,11 @@ deploy:
 #     position: after
 #     symbol: '#'
 #     style: header-anchor
+
+leancloud_counter_security:
+  enable_sync: true
+  app_id: mNvxfq7jTtIwz6KBzIBydPA0-gzGzoHsz
+  app_key: RWymAFBUrxfn3eCPEh0DcjaO
+  username: ggq
+  password: 5515225gg5
+  server_url: https://leancloud.cn
