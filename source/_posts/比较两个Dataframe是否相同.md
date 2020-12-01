@@ -4,7 +4,7 @@ date: 2020-11-25 15:05:04
 tags:
     - DataFrame
     - pandas
-categories: 服务器环境
+categories: python
 ---
 
 经常会遇到比较两个Dataframe是否相同的问题，发现官方提供了一个方法用于比较是否相等，且能够输出不同的列
