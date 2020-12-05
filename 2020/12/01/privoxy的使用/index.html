@@ -20,21 +20,22 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="经常会遇到比较两个Dataframe是否相同的问题，发现官方提供了一个方法用于比较是否相等，且能够输出不同的列 123from pandas.testing import assert_frame_equalassert_frame_equal(df1,df2)  该方法会比对Df的value和index,如果不想比较index，也可以直接使用reset_index(drop&#x3D;True)将inde">
+  <meta name="description" content="今天新买了一个switch，但是switch链接eshop非常慢，于是想到是否可以使用代理来加速，但是尝试了一下，因为服务器上是使用的sslocal来做的代理，使用的是socks5代理，直接在wifi那里写代理的话，是无法使用的，switch这里只能使用http代理，于是搜索了一圈，发现可以使用privoxy来做一层包装，将socks5代理转为http， 进而了解到privoxy其实是类似与sha">
 <meta property="og:type" content="article">
-<meta property="og:title" content="比较两个Dataframe是否相同">
-<meta property="og:url" content="http://example.com/2020/11/25/%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AADataframe%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C/index.html">
+<meta property="og:title" content="privoxy的使用">
+<meta property="og:url" content="http://example.com/2020/12/01/privoxy%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="ggqshr&#39;s blog">
-<meta property="og:description" content="经常会遇到比较两个Dataframe是否相同的问题，发现官方提供了一个方法用于比较是否相等，且能够输出不同的列 123from pandas.testing import assert_frame_equalassert_frame_equal(df1,df2)  该方法会比对Df的value和index,如果不想比较index，也可以直接使用reset_index(drop&#x3D;True)将inde">
+<meta property="og:description" content="今天新买了一个switch，但是switch链接eshop非常慢，于是想到是否可以使用代理来加速，但是尝试了一下，因为服务器上是使用的sslocal来做的代理，使用的是socks5代理，直接在wifi那里写代理的话，是无法使用的，switch这里只能使用http代理，于是搜索了一圈，发现可以使用privoxy来做一层包装，将socks5代理转为http， 进而了解到privoxy其实是类似与sha">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-11-25T07:05:04.000Z">
-<meta property="article:modified_time" content="2020-12-01T06:15:15.078Z">
+<meta property="og:image" content="http://example.com/2020/12/01/privoxy%E7%9A%84%E4%BD%BF%E7%94%A8/privoxy%E7%9A%84%E4%BD%BF%E7%94%A8/image-20201201221115318.png">
+<meta property="article:published_time" content="2020-12-01T11:46:57.000Z">
+<meta property="article:modified_time" content="2020-12-05T01:41:11.281Z">
 <meta property="article:author" content="ggq">
-<meta property="article:tag" content="pandas">
-<meta property="article:tag" content="DataFrame">
+<meta property="article:tag" content="privoxu">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/12/01/privoxy%E7%9A%84%E4%BD%BF%E7%94%A8/privoxy%E7%9A%84%E4%BD%BF%E7%94%A8/image-20201201221115318.png">
 
-<link rel="canonical" href="http://example.com/2020/11/25/%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AADataframe%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C/">
+<link rel="canonical" href="http://example.com/2020/12/01/privoxy%E7%9A%84%E4%BD%BF%E7%94%A8/">
 
 
 <script id="page-configurations">
@@ -47,7 +48,7 @@
   };
 </script>
 
-  <title>比较两个Dataframe是否相同 | ggqshr's blog</title>
+  <title>privoxy的使用 | ggqshr's blog</title>
   
 
 
@@ -171,7 +172,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/25/%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AADataframe%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/01/privoxy%E7%9A%84%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -184,7 +185,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          比较两个Dataframe是否相同
+          privoxy的使用
         </h1>
 
         <div class="post-meta">
@@ -194,14 +195,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-25 15:05:04" itemprop="dateCreated datePublished" datetime="2020-11-25T15:05:04+08:00">2020-11-25</time>
+              <time title="创建时间：2020-12-01 19:46:57" itemprop="dateCreated datePublished" datetime="2020-12-01T19:46:57+08:00">2020-12-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-01 14:15:15" itemprop="dateModified" datetime="2020-12-01T14:15:15+08:00">2020-12-01</time>
+                <time title="修改时间：2020-12-05 09:41:11" itemprop="dateModified" datetime="2020-12-05T09:41:11+08:00">2020-12-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -209,7 +210,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8E%AF%E5%A2%83/" itemprop="url" rel="index"><span itemprop="name">服务器环境</span></a>
                 </span>
             </span>
 
@@ -226,14 +227,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>205</span>
+              <span>1.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -245,10 +246,37 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>经常会遇到比较两个Dataframe是否相同的问题，发现官方提供了一个方法用于比较是否相等，且能够输出不同的列</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pandas.testing <span class="keyword">import</span> assert_frame_equal</span><br><span class="line"></span><br><span class="line">assert_frame_equal(df1,df2)</span><br></pre></td></tr></table></figure>
+        <p>今天新买了一个switch，但是switch链接eshop非常慢，于是想到是否可以使用代理来加速，但是尝试了一下，因为服务器上是使用的sslocal来做的代理，使用的是socks5代理，直接在wifi那里写代理的话，是无法使用的，switch这里只能使用http代理，于是搜索了一圈，发现可以使用<em>privoxy</em>来做一层包装，将socks5代理转为http，</p>
+<p>进而了解到privoxy其实是类似与shadowsocks的一种工具，用来管理linux的全局代理，通过设置可以完成指定网站使用指定的代理的行为。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在ubuntu和centos上都可以直接使用yum或者apt-get直接安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install privoxy</span><br></pre></td></tr></table></figure>
 
-<p>该方法会比对Df的value和index,如果不想比较index，也可以直接使用reset_index(drop=True)将index重置，然后在进行比较</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>其实配置也是相对简单的，privoxy本身是一个服务，需要配置一个监听的端口，另外就是规则，哪些url需要使用代理，而那些Url不需要，privoxy的配置文件在/etc/privoxy/config</p>
+<h2 id="配置监听端口"><a href="#配置监听端口" class="headerlink" title="配置监听端口"></a>配置监听端口</h2><p>在配置文件中搜索 <code>listen-address</code> 如下图所示：</p>
+<p><img src="privoxy%E7%9A%84%E4%BD%BF%E7%94%A8/image-20201201221115318.png" alt="image-20201201221115318"></p>
+<p>将其改为想要使用的端口</p>
+<h2 id="配置规则"><a href="#配置规则" class="headerlink" title="配置规则"></a>配置规则</h2><p>其规则的配置也比较简单，利用以下的语法即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">forward  .google.com  127.0.0.1:8080　</span><br></pre></td></tr></table></figure>
+
+<p>上述语句的意思就是*.google.com下的所有网站都需要走本地8080的代理，这是针对比较简单的http转发</p>
+<p>如果是socks5或者socks4，则按照以下的形式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">forward-socks5   target_pattern  socks_proxy:port  http_proxy:port</span><br></pre></td></tr></table></figure>
+
+<p>前三条的意思同上，只不过第三条代表转发到那个socks5地址，最后的那个http地址是用来设置经过socks之后还需要经过哪个http代理，</p>
+<p>基于规则的配置可以直接写到config文件中，同时也可以写到<code>.action</code>文件中，同时在config中引入：</p>
+<p>引入的语法为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">actionsfile **.action</span><br></pre></td></tr></table></figure>
+
+<p>同时在action中的语法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;alias&#125;&#125;</span><br><span class="line">direct      &#x3D; +forward-override&#123;forward .&#125;</span><br><span class="line">ssh         &#x3D; +forward-override&#123;forward-socks5 127.0.0.1:7000 .&#125;</span><br><span class="line">gae         &#x3D; +forward-override&#123;forward 127.0.0.1:8000&#125; </span><br><span class="line">default     &#x3D; direct</span><br><span class="line">#&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;默认代理&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">&#123;default&#125;</span><br><span class="line">&#x2F;</span><br><span class="line">#&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;直接连接&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">&#123;direct&#125; </span><br><span class="line">.edu.cn</span><br><span class="line">202.117.255.</span><br><span class="line">222.24.211.70</span><br><span class="line">#&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SSH代理&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">&#123;ssh&#125;</span><br><span class="line">.launchpad.net</span><br><span class="line">#&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;GAE代理&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">&#123;gae&#125;</span><br><span class="line">.webupd8.org</span><br><span class="line">222.24.211.70</span><br></pre></td></tr></table></figure>
+
+<p>通过声明别名，然后下面每个别名后对应的规则就会使用对应的代理。这样就能够配置好了</p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>如果通过依赖管理软件来安装，可以直接使用以下命令来启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service privoxy start</span><br></pre></td></tr></table></figure>
+
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>通过配置，即可达到win10上shadowsocks软件的效果，在linux下将privoxy监听的端口设置为本机的全局代理地址：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> http_proxy=<span class="string">&#x27;http://0.0.0.0:8118&#x27;</span> <span class="comment"># 和config中对应</span></span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -258,8 +286,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/pandas/" rel="tag"># pandas</a>
-              <a href="/tags/DataFrame/" rel="tag"># DataFrame</a>
+              <a href="/tags/privoxu/" rel="tag"># privoxu</a>
           </div>
 
         
@@ -268,12 +295,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/11/23/mongodb-%E6%9F%A5%E8%AF%A2%E4%B8%A4%E4%B8%AA%E5%AD%97%E6%AE%B5%E7%9B%B8%E5%90%8C%E7%9A%84%E8%A1%8C/" rel="prev" title="mongodb 查询两个字段相同的行">
-      <i class="fa fa-chevron-left"></i> mongodb 查询两个字段相同的行
+    <a href="/2020/12/01/python%E7%9A%84%E6%8A%80%E5%B7%A7/" rel="prev" title="python的技巧">
+      <i class="fa fa-chevron-left"></i> python的技巧
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/12/01/python%E7%9A%84%E6%8A%80%E5%B7%A7/" rel="next" title="python的技巧">
-      python的技巧 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/12/01/win10-git-%E9%85%8D%E7%BD%AEssh%E4%BB%A3%E7%90%86/" rel="next" title="win10 git 配置ssh代理">
+      win10 git 配置ssh代理 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -333,6 +360,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3"><span class="nav-number">3.</span> <span class="nav-text">配置监听端口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%A7%84%E5%88%99"><span class="nav-number">4.</span> <span class="nav-text">配置规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8"><span class="nav-number">5.</span> <span class="nav-text">启动</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number"></span> <span class="nav-text">最后</span></a></div>
       </div>
       <!--/noindex-->
 
