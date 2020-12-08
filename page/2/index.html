@@ -22,26 +22,26 @@
 
   <meta property="og:type" content="website">
 <meta property="og:title" content="ggqshr&#39;s blog">
-<meta property="og:url" content="http://example.com/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8E%AF%E5%A2%83/index.html">
+<meta property="og:url" content="http://example.com/page/2/index.html">
 <meta property="og:site_name" content="ggqshr&#39;s blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="ggq">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8E%AF%E5%A2%83/">
+<link rel="canonical" href="http://example.com/page/2/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : false,
+    isHome : true,
     isPost : false,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>分类: 服务器环境 | ggqshr's blog</title>
+  <title>ggqshr's blog</title>
   
 
 
@@ -158,72 +158,132 @@
         <div class="content-wrap">
           
 
-          <div class="content category">
+          <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83/">
 
-  
-  
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">服务器环境
-          <small>分类</small>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ggq">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ggqshr's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83/" class="post-title-link" itemprop="url">服务器安装环境</a>
         </h2>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-15 18:02:11" itemprop="dateCreated datePublished" datetime="2020-11-15T18:02:11+08:00">2020-11-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-27 20:19:14" itemprop="dateModified" datetime="2020-11-27T20:19:14+08:00">2020-11-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8E%AF%E5%A2%83/" itemprop="url" rel="index"><span itemprop="name">服务器环境</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
+          <h1 id="本文环境"><a href="#本文环境" class="headerlink" title="本文环境"></a>本文环境</h1><ul>
+<li>CentOS 7.6 64bit</li>
+<li>root用户</li>
+</ul>
+<h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><p>新买了一个华为的云服务器，安装一些python开发常用的软件和环境，包括</p>
+<ul>
+<li>python环境</li>
+<li>安装最新的git</li>
+<li>zsh（神器，必备，建议没有了解过的小伙伴了解一下）</li>
+</ul>
+<h1 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h1><p>本文适用于Centos环境下，对Vim编辑器有一点了解能够完成简单的修改的操作的人群。</p>
+<h1 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>服务器中默认的ssh连接的过期时间有点短，可以设置长一点，省的在找一些资料的时候回去发现ssh连接断掉了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;ClientAliveCountMax 10&quot;</span> &gt;&gt; /etc/ssh/sshd_config</span><br><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
+
+<p>我这边设置的过期时间是10分钟，对应<code>ClientAliveCountMax 10</code>这里的10，可以根据自己的情况设置。</p>
+<h2 id="编译安装最新的git"><a href="#编译安装最新的git" class="headerlink" title="编译安装最新的git"></a>编译安装最新的git</h2><p><strong>本环节可跳过，直接使用<code>yum -y install git</code>安装git 即可</strong></p>
+<p>Centos使用<code>yum -y install git</code>安装的git是版本比较旧的，在后续使用时总会出现各种各样的问题，所以干脆我们一开始就安装一个比较新的git版本，省的后续再麻烦，虽说是编译安装，但是整体过程还是非常简单的，</p>
+<p>首先使用yum来安装我们编译需要使用的依赖</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc gcc-c++ curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-ExtUtils-MakeMaker autoconf</span><br></pre></td></tr></table></figure>
+
+<p>首先我们要先检查一些我们是否安装了git，</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
+
+<p>上面的命令可以查看当前是否安装了git，并可以查看git 的版本，我这边的结果是</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git version 1.8.3.1</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-12-01T19:46:57+08:00"
-              content="2020-12-01">
-          12-01
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/12/01/privoxy%E7%9A%84%E4%BD%BF%E7%94%A8/" itemprop="url">
-            <span itemprop="name">privoxy的使用</span>
-          </a>
-      </div>
-
-    </header>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
   </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-11-15T18:02:11+08:00"
-              content="2020-11-15">
-          11-15
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83/" itemprop="url">
-            <span itemprop="name">服务器安装环境</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-    </div>
-  </div>
   
   
   
 
+
   
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
 
 
 
