@@ -4,5 +4,11 @@
 {"title":"现代计算机网络","url":"/2020/11/19/现代计算机网络/"},
 {"title":"mongodb 查询两个字段相同的行","url":"/2020/11/23/mongodb-查询两个字段相同的行/"},
 {"title":"比较两个Dataframe是否相同","url":"/2020/11/25/比较两个Dataframe是否相同/"},
+{"title":"privoxy的使用","url":"/2020/12/01/privoxy的使用/"},
 {"title":"python的技巧","url":"/2020/12/01/python的技巧/"},
+{"title":"win10 git 配置ssh代理","url":"/2020/12/01/win10-git-配置ssh代理/"},
+{"title":"pandas写入excel多个sheet","url":"/2020/12/05/pandas写入excel多个sheet/"},
+{"title":"spring boot的redis cache失效问题","url":"/2020/12/08/spring-boot的redis-cache失效问题/"},
+{"title":"win10 使用cmd来设置环境变量","url":"/2020/12/08/win10-使用cmd来设置环境变量/"},
+{"title":"wireGuard安装和配置过程","url":"/2020/12/21/wireGuard安装和配置过程/"},
 ]
