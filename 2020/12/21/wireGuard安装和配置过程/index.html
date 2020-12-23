@@ -27,17 +27,18 @@
 <meta property="og:site_name" content="ggqshr&#39;s blog">
 <meta property="og:description" content="最近研究了一些vpn的技术，因为学校的服务器只能在内网环境下访问，之前已经配置过使用内网穿透，然后使用代理技术来访问的方式，但是内网穿透的方式比较麻烦，随着服务的增多需要配置更多的穿透，所以想要使用更加方便的技术来实现，即使用vpn，使用一个公网服务器用vpn技术来组建虚拟局域网，从而实现连接到VPN之后即可访问内网机器。 这里是用的是比较新的wireGuard，较新且性能较高的vpn，以下配置的">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2020/12/21/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B%5Cimage-20201221142923369.png">
-<meta property="og:image" content="http://example.com/2020/12/21/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B%5Cimage-20201221144141410.png">
-<meta property="og:image" content="http://example.com/2020/12/21/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B%5Cimage-20201221150441719.png">
+<meta property="og:image" content="http://example.com/2020/12/21/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B/image-20201221142923369.png">
+<meta property="og:image" content="http://example.com/2020/12/21/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B/image-20201221144141410.png">
+<meta property="og:image" content="http://example.com/2020/12/21/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B/image-20201221161542207.png">
+<meta property="og:image" content="http://example.com/2020/12/21/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B/image-20201221150441719.png">
 <meta property="article:published_time" content="2020-12-21T06:07:10.000Z">
-<meta property="article:modified_time" content="2020-12-21T07:38:39.012Z">
+<meta property="article:modified_time" content="2020-12-21T08:16:02.149Z">
 <meta property="article:author" content="ggq">
 <meta property="article:tag" content="wireGuard">
 <meta property="article:tag" content="内网互通">
 <meta property="article:tag" content="虚拟组网">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2020/12/21/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B%5Cimage-20201221142923369.png">
+<meta name="twitter:image" content="http://example.com/2020/12/21/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B/image-20201221142923369.png">
 
 <link rel="canonical" href="http://example.com/2020/12/21/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B/">
 
@@ -200,7 +201,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-12-21 14:07:10 / 修改时间：15:38:39" itemprop="dateCreated datePublished" datetime="2020-12-21T14:07:10+08:00">2020-12-21</time>
+              <time title="创建时间：2020-12-21 14:07:10 / 修改时间：16:16:02" itemprop="dateCreated datePublished" datetime="2020-12-21T14:07:10+08:00">2020-12-21</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -247,7 +248,7 @@
         <p>最近研究了一些vpn的技术，因为学校的服务器只能在内网环境下访问，之前已经配置过使用内网穿透，然后使用代理技术来访问的方式，但是内网穿透的方式比较麻烦，随着服务的增多需要配置更多的穿透，所以想要使用更加方便的技术来实现，即使用vpn，使用一个公网服务器用vpn技术来组建虚拟局域网，从而实现连接到VPN之后即可访问内网机器。</p>
 <p>这里是用的是比较新的wireGuard，较新且性能较高的vpn，以下配置的过程参考了大佬的文章，<a target="_blank" rel="noopener" href="https://gobomb.github.io/post/wireguard-notes/">https://gobomb.github.io/post/wireguard-notes/</a></p>
 <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>整个网络拓扑如下：</p>
-<p><img src="/2020/12/21/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B%5Cimage-20201221142923369.png" alt="image-20201221142923369"></p>
+<p><img src="/2020/12/21/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B/image-20201221142923369.png" alt="image-20201221142923369"></p>
 <p>想要实现的效果是：在ali上搭建wirdGuard服务，然后使得连入vpn的手机客户端phone能够通过node1访问到内网的服务器node2</p>
 <a id="more"></a>
 
@@ -268,10 +269,9 @@
 
 <p>则可能是由于iproute太旧导致的，直接使用<code>yum -y install iproute</code>升级一下iproute即可，</p>
 <p>正常启动客户端后，可以在ali上使用wg来查看当前连接到当前节点的节点，如果能够正常看到一个已经上线的客户端，</p>
-<p><img src="/2020/12/21/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B%5Cimage-20201221144141410.png" alt="image-20201221144141410"></p>
+<p><img src="/2020/12/21/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B/image-20201221144141410.png" alt="image-20201221144141410"></p>
 <h2 id="设置路由"><a href="#设置路由" class="headerlink" title="设置路由"></a>设置路由</h2><p>现在在wireGuard中，虚拟网络已经建立了起来，即从ali上直接ping node1的虚拟ip应该是能够ping的通的，因为这条通路是由WireGuard来保证，但是如果想要直接从ali上访问到node2的ip则需要配置路由才能做到，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">ali--&gt; node1</span><br><span class="line">node1--&gt;node2</span><br></pre></td></tr></table></figure>
-
+<p><img src="/2020/12/21/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B/image-20201221161542207.png" alt="image-20201221161542207"></p>
 <p>如果想要在phone访问node2则需要将数据先发往ali，然后由ali转给node1，由node1在内网内传给node2。</p>
 <p>则在ali这里需要开启ipv4的包的转发，</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 临时生效：</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;1&quot;</span> &gt; /proc/sys/net/ipv4/ip_forward</span><br><span class="line"></span><br><span class="line"><span class="comment"># 永久生效，修改sysctl.conf，增加以下语句</span></span><br><span class="line">$ net.ipv4.ip_forward = 1</span><br><span class="line"><span class="comment"># 重置设置</span></span><br><span class="line">$ sysctl -p</span><br></pre></td></tr></table></figure>
@@ -284,7 +284,7 @@
 
 <p>上面的 设置就是告诉机器目的地是192.168.1.0/24的包下一跳是10.77.77.3，且需要经过wg0转发</p>
 <p>这样设置后，由phone到达ali的包就被转发到了node1，在node1中同样需要包的转发， 需要开启系统的ipv4转发功能，然后同样设置iptables，这里如果node1的iptables中filter 表默认是accept的话，则不需要设置以下的语句，如果filter表默认是accpet的话，使用<code>iptables -t filter -L FORWARD -vn</code>的输出如下：</p>
-<p><img src="/2020/12/21/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B%5Cimage-20201221150441719.png" alt="image-20201221150441719"></p>
+<p><img src="/2020/12/21/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B/image-20201221150441719.png" alt="image-20201221150441719"></p>
 <p>如果不是accept的话，需要设置，同时下面的ens192需要替换成机器在ip在局域网中的网卡，下面设置是允许node1上从wg0进到ens192出的包能够流通，同时从ens192进到wg0出的包</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables  -t filter  -A FORWARD -i wg0 -o ens192 -j ACCEPT</span><br><span class="line">iptables  -t filter  -A FORWARD  -i ens192 -o wg0 -j ACCEPT</span><br></pre></td></tr></table></figure>
 
@@ -325,7 +325,10 @@
     <a href="/2020/12/08/win10-%E4%BD%BF%E7%94%A8cmd%E6%9D%A5%E8%AE%BE%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" rel="prev" title="win10 使用cmd来设置环境变量">
       <i class="fa fa-chevron-left"></i> win10 使用cmd来设置环境变量
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/23/python-requests-session-%E5%BC%80%E5%90%AFconnection-pool/" rel="next" title="python requests session 开启connection pool">
+      python requests session 开启connection pool <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -398,7 +401,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -411,7 +414,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -458,7 +461,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">14 分钟</span>
+    <span title="站点阅读时长">15 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>

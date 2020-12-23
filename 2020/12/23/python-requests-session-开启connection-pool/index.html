@@ -20,17 +20,21 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="标签">
-<meta property="og:url" content="http://example.com/tags/index.html">
+  <meta name="description" content="使用requets的session设置connection pool来提高连接的服用率，而不用一直开新的连接 核心的代码如下 1234sess &#x3D; requests.Session() # 构建 connections pooladapter &#x3D; requests.adapters.HTTPAdapter(pool_connections&#x3D;20,pool_maxsize&#x3D;20) # 分别自定连接池">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python requests session 开启connection pool">
+<meta property="og:url" content="http://example.com/2020/12/23/python-requests-session-%E5%BC%80%E5%90%AFconnection-pool/index.html">
 <meta property="og:site_name" content="ggqshr&#39;s blog">
+<meta property="og:description" content="使用requets的session设置connection pool来提高连接的服用率，而不用一直开新的连接 核心的代码如下 1234sess &#x3D; requests.Session() # 构建 connections pooladapter &#x3D; requests.adapters.HTTPAdapter(pool_connections&#x3D;20,pool_maxsize&#x3D;20) # 分别自定连接池">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-11-15T10:57:12.000Z">
-<meta property="article:modified_time" content="2020-11-15T11:10:49.616Z">
+<meta property="article:published_time" content="2020-12-23T08:16:32.000Z">
+<meta property="article:modified_time" content="2020-12-23T08:25:10.849Z">
 <meta property="article:author" content="ggq">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="requests">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/tags/">
+<link rel="canonical" href="http://example.com/2020/12/23/python-requests-session-%E5%BC%80%E5%90%AFconnection-pool/">
 
 
 <script id="page-configurations">
@@ -38,13 +42,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>标签 | ggqshr's blog
-</title>
+  <title>python requests session 开启connection pool | ggqshr's blog</title>
   
 
 
@@ -160,51 +163,118 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content post posts-expand">
             
 
     
-    
-    
-    <div class="post-block" lang="zh-CN">
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/23/python-requests-session-%E5%BC%80%E5%90%AFconnection-pool/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ggq">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ggqshr's blog">
+    </span>
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python requests session 开启connection pool
+        </h1>
 
-<h1 class="post-title" itemprop="name headline">标签
-</h1>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
 
-<div class="post-meta">
+              <time title="创建时间：2020-12-23 16:16:32 / 修改时间：16:25:10" itemprop="dateCreated datePublished" datetime="2020-12-23T16:16:32+08:00">2020-12-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>420</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>使用requets的session设置connection pool来提高连接的服用率，而不用一直开新的连接</p>
+<p>核心的代码如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sess = requests.Session() <span class="comment"># 构建 connections pool</span></span><br><span class="line">adapter = requests.adapters.HTTPAdapter(pool_connections=<span class="number">20</span>,pool_maxsize=<span class="number">20</span>) <span class="comment"># 分别自定连接池的cache的数量和最大数量</span></span><br><span class="line">sess.mount(<span class="string">&quot;https://&quot;</span>,adapter)</span><br><span class="line">sess.mount(<span class="string">&quot;http://&quot;</span>,adapter)</span><br></pre></td></tr></table></figure>
+
+<p>关于adapters.HTTPAdapter其他参数参见文档地址：<br><a target="_blank" rel="noopener" href="https://requests.readthedocs.io/en/master/api/?highlight=adapters.HTTPAdapter#requests.adapters.HTTPAdapter">https://requests.readthedocs.io/en/master/api/?highlight=adapters.HTTPAdapter#requests.adapters.HTTPAdapter</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/requests/" rel="tag"># requests</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/21/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B/" rel="prev" title="wireGuard安装和配置过程">
+      <i class="fa fa-chevron-left"></i> wireGuard安装和配置过程
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-              目前共计 16 个标签
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/DataFrame/" style="font-size: 12px; color: #ccc">DataFrame</a> <a href="/tags/cmd/" style="font-size: 12px; color: #ccc">cmd</a> <a href="/tags/git/" style="font-size: 30px; color: #111">git</a> <a href="/tags/java/" style="font-size: 12px; color: #ccc">java</a> <a href="/tags/mongodb/" style="font-size: 12px; color: #ccc">mongodb</a> <a href="/tags/pandas/" style="font-size: 30px; color: #111">pandas</a> <a href="/tags/privoxu/" style="font-size: 12px; color: #ccc">privoxu</a> <a href="/tags/python/" style="font-size: 30px; color: #111">python</a> <a href="/tags/requests/" style="font-size: 12px; color: #ccc">requests</a> <a href="/tags/springboot/" style="font-size: 12px; color: #ccc">springboot</a> <a href="/tags/win10/" style="font-size: 12px; color: #ccc">win10</a> <a href="/tags/wireGuard/" style="font-size: 12px; color: #ccc">wireGuard</a> <a href="/tags/%E5%86%85%E7%BD%91%E4%BA%92%E9%80%9A/" style="font-size: 12px; color: #ccc">内网互通</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8E%AF%E5%A2%83/" style="font-size: 12px; color: #ccc">服务器环境</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E7%BB%84%E7%BD%91/" style="font-size: 12px; color: #ccc">虚拟组网</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/" style="font-size: 12px; color: #ccc">计算机网络知识</a>
-            </div>
-          </div>
-        
-      </div>
-      
-      
-      
-    </div>
-    
-
-    
-    
-    
 
 
           </div>
