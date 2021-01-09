@@ -43,5 +43,6 @@ jobs:
           git config --local user.name "ggq"
           git config --local user.email "ggq18663278150@sina.com"
       - run: |
-          git log --all --graph
+          pwd
+          ls
           hexo d -g
