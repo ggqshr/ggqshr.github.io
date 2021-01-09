@@ -106,6 +106,8 @@ deploy:
   - type: git
     repository: https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/ggqshr.github.io.git
     branch: main
+    name: ggq
+    email: ggq18663278150@sina.com
   #- type: leancloud_counter_security_sync
 
 
