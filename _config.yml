@@ -104,7 +104,7 @@ theme: next
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: https://github.com/ggqshr/ggqshr.github.io.git
+  repo: https://ggqshr:@github.com/ggqshr/ggqshr.github.io.git
   branch: main
   name: ggqshr
   email: ggq18663278150@sina.com
