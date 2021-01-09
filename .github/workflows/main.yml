@@ -31,13 +31,22 @@ jobs:
         uses: actions/setup-node@v2.1.4
         with: 
           node-version: '12'
-
+      - name: generate_html
+        run: |
+          npm install
+          npm install -g hexo 
+          hexo g
+          
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: publish
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git push -n https://ggqshr:$GITHUB_TOKEN@github.com/ggqshr/ggqshr.github.io.git doc:doc
-          npm install
-          npm install -g hexo 
-          hexo d -g
+          mkdir .deploy
+          cp -r public/* .deploy/
+          cd .deploy
+          git init
+          git add .
+          date | git commit -a --author ggqshr_bot -F -
+          git push -n https://ggqshr:$GITHUB_TOKEN@github.com/ggqshr/ggqshr.github.io.git master:main
+      
