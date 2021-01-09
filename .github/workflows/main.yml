@@ -34,18 +34,7 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
         run: |
           npm install
           npm install -g hexo 
-          git config --local user.name "ggq"
-          git config --local user.email "ggq18663278150@sina.com"
-      - env:
-          GIT_AUTHOR_EMAIL: "ggq18663278150@sina.com"
-          GIT_AUTHOR_NAME: "Github Action"
-        run: |
-          pwd
-          ls
           hexo d -g
