@@ -33,11 +33,11 @@ jobs:
           node-version: '12'
 
       # Runs a set of commands using the runners shell
-      - uses: actions/checkout@v2
       - name: Run a multi-line script
         run: |
           npm install
           npm install -g hexo 
           git config --local user.name "ggq"
           git config --local user.email "ggq18663278150@sina.com"
+          git config --local --list
           hexo deploy -g
