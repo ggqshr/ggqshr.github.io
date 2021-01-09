@@ -24,7 +24,7 @@ yum -y install privoxy
 ## 配置监听端口
 在配置文件中搜索 `listen-address` 如下图所示：
 
-![image-20201201221115318](privoxy的使用/image-20201201221115318.png)
+[![privoxy的使用_0](https://s3.ax1x.com/2021/01/09/sQgMAs.png)](https://imgchr.com/i/sQgMAs)
 
 将其改为想要使用的端口
 
