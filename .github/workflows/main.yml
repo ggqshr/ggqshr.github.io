@@ -45,10 +45,9 @@ jobs:
           git clone -b main https://ggqshr:$GITHUB_TOKEN@github.com/ggqshr/ggqshr.github.io.git .deploy
           cp -r public/* .deploy/
           cd .deploy
-          git init
           git config --global user.email "action_bot@noreply.com"
           git config --global user.name "publish_action"
           git add .
           date | git commit -F -
-          git push https://ggqshr:$GITHUB_TOKEN@github.com/ggqshr/ggqshr.github.io.git master:main
+          git push https://ggqshr:$GITHUB_TOKEN@github.com/ggqshr/ggqshr.github.io.git main:main
       
