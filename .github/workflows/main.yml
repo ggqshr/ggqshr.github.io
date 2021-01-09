@@ -33,6 +33,7 @@ jobs:
           node-version: '12'
 
       # Runs a set of commands using the runners shell
+      - uses: actions/checkout@v2
       - name: Run a multi-line script
         run: |
           npm install
