@@ -104,11 +104,10 @@ theme: next
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   - type: git
-    repo: https://$GITHUB_TOKEN@github.com/ggqshr/ggqshr.github.io.git
+    repo: https://ggqshr:$GITHUB_TOKEN@github.com/ggqshr/ggqshr.github.io.git
     branch: main
     name: ggqshr
     email: ggq18663278150@sina.com
-    token: $GITHUB_TOKEN
   #- type: leancloud_counter_security_sync
 
 
