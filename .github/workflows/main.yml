@@ -37,6 +37,6 @@ jobs:
         run: |
           npm install
           npm install -g hexo 
-          git config user.name ggq
-          git config user.email ggq18663278150@sina.com
+          git config user.name "ggq"
+          git config user.email "ggq18663278150@sina.com"
           hexo d -g
