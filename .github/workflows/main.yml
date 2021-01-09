@@ -47,6 +47,6 @@ jobs:
           cd .deploy
           git init
           git add .
-          date | git commit -a --author 'ggqshr_bot <action_bot@noreply.com>' -F -
+          date | git commit -a --author='ggqshr_bot <action_bot@noreply.com>' -F -
           git push -n https://ggqshr:$GITHUB_TOKEN@github.com/ggqshr/ggqshr.github.io.git master:main
       
