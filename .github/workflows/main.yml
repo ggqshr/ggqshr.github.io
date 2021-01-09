@@ -46,7 +46,9 @@ jobs:
           cp -r public/* .deploy/
           cd .deploy
           git init
+          git config --global user.email "action_bot@noreply.com"
+          git config --global user.name "publish_action"
           git add .
-          date | git commit -a --author='ggqshr_bot <action_bot@noreply.com>' -F -
+          date | git commit -F -
           git push -n https://ggqshr:$GITHUB_TOKEN@github.com/ggqshr/ggqshr.github.io.git master:main
       
