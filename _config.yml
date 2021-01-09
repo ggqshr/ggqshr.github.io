@@ -106,7 +106,7 @@ deploy:
   - type: git
     repository: git@github.com:ggqshr/ggqshr.github.io.git
     branch: main
-  - type: leancloud_counter_security_sync
+  #- type: leancloud_counter_security_sync
 
 
 # toc:
