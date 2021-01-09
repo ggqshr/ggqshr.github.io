@@ -6,7 +6,7 @@ name: push_to_page
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ build ]
+    branches: [ doc,build ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -42,12 +42,13 @@ jobs:
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          export TZ='Asia/Shanghai'
           git clone -b main https://ggqshr:$GITHUB_TOKEN@github.com/ggqshr/ggqshr.github.io.git .deploy
           cp -r public/* .deploy/
           cd .deploy
           git config --global user.email "action_bot@noreply.com"
           git config --global user.name "publish_action"
           git add .
-          date | git commit -F -
+          date +"%Y-%m-%d %H:%M:%S" | git commit -F -
           git push https://ggqshr:$GITHUB_TOKEN@github.com/ggqshr/ggqshr.github.io.git main:main
       
