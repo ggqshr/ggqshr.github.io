@@ -42,5 +42,6 @@ jobs:
           npm install -g hexo 
           git config --local user.name "ggq"
           git config --local user.email "ggq18663278150@sina.com"
-          git config --local --list
-          hexo deploy -g
+      - run: |
+          git log --all --graph
+          hexo d -g
