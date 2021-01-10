@@ -44,7 +44,7 @@ jobs:
         run: |
           python -m pip install pqi
           pqi use pypi
-          python -m pip install replace_md_img==0.0.9
+          python -m pip install replace_md_img==0.0.10
           replace_img process -u $USER -p $PASS source/_posts
       
       - name: update_doc_branch
