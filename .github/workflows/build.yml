@@ -38,9 +38,12 @@ jobs:
           python-version: '3.6'
 
       - name: replace_all_images
+        env: 
+          PASS: ${{ secrets.LUGUO_PASSWD }}
+          USER: ${{ secrets.LUGUO_USER }}
         run: |
           python -m pip install replace_md_img
-          replace_img process source/_posts
+          replace_img process -u $USER -p $PASS source/_posts
       
       - name: update_doc_branch
         run: |
