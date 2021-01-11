@@ -41,12 +41,13 @@ jobs:
         env: 
           PASS: ${{ secrets.LUGUO_PASSWD }}
           USER: ${{ secrets.LUGUO_USER }}
-          HTTP_PROXY: ${{ secrets.PROXY_STRING }}
-          HTTPS_PROXY: ${{ secrets.PROXY_STRING }}
+          PROXY: ${{ secrets.PROXY_STRING }}
         run: |
           python -m pip install pqi
           pqi use pypi
           python -m pip install replace_md_img==0.0.10
+          export HTTP_PROXY=$PROXY
+          export HTTPS_PROXY=$PROXY
           replace_img process -u $USER -p $PASS source/_posts
       
       - name: update_doc_branch
