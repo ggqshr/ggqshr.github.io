@@ -42,6 +42,7 @@ jobs:
           PASS: ${{ secrets.LUGUO_PASSWD }}
           USER: ${{ secrets.LUGUO_USER }}
           HTTP_PROXY: "http://ggq:1129@47.100.229.248:18888"
+          HTTPS_PROXY: "http://ggq:1129@47.100.229.248:18888"
         run: |
           python -m pip install pqi
           pqi use pypi
