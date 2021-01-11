@@ -57,6 +57,7 @@ jobs:
           git add .
           git commit -m "upload images[bot]"
           git push https://ggqshr:$GITHUB_TOKEN@github.com/ggqshr/ggqshr.github.io.git doc:doc
+        continue-on-error: true
 
       - name: generate_html
         run: |
