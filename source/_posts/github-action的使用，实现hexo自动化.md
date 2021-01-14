@@ -109,7 +109,7 @@ jobs:
 
 可以看到action的文件中有一个Jobs，主要分为以下几个工作
 
-![image-20210114153219252](github-action的使用，实现hexo自动化/image-20210114153219252.png)
+[![github-action的使用，实现hexo自动化_0](https://s3.ax1x.com/2021/01/14/sas5z4.png)](https://imgchr.com/i/sas5z4)
 
 其中有几个点需要注意，
 
@@ -121,7 +121,7 @@ git clone https://username:token@github.com/username/repo.git
 
 2. 可以使用github的secrets功能，来保存一些私密的信息，比如用户名和密码等，因为这个脚本是要放到github项目目录下的，是公开的，如果直接明文的写容易有安全问题，另外一方面，硬编码也不够灵活，可以通过以下步骤来设置
 
-   ![image-20210114120712357](github-action的使用，实现hexo自动化/image-20210114120712357.png)
+   [![github-action的使用，实现hexo自动化_1](https://s3.ax1x.com/2021/01/14/sasoQJ.png)](https://imgchr.com/i/sasoQJ)
 
    按照图上1,2,3的位置分别设置，然后就能在4的位置看到设置的值。这样设置之后就可以在action脚本当中取值，使用`${{ secrets.SERETS_NAME }}`
 
