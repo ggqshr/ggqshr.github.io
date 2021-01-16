@@ -164,6 +164,102 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/16/python-%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%97%E7%AC%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ggq">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ggqshr's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/16/python-%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%97%E7%AC%A6/" class="post-title-link" itemprop="url">python 正则匹配重复的字符</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-01-16 16:42:12 / 修改时间：08:52:02" itemprop="dateCreated datePublished" datetime="2021-01-16T16:42:12+00:00">2021-01-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>442</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>使用python的正则来匹配连续的重复字符，比如</p>
+<blockquote>
+<p>111111111</p>
+<p>aaaaaaaaaaaaaaaaaaaaaaa</p>
+<p>bbbbbbbbbbb</p>
+<p>哈哈哈哈哈哈哈</p>
+</blockquote>
+<p>可以使用以下的代码来匹配</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">re.search(<span class="string">&quot;(.)\1&#123;5,&#125;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>(.)</code>这就是匹配任何字符，<code>\1</code>是引用第一个分组，就是<code>(.)</code>，<code>&#123;5,&#125;</code>的含义是一个字符至少重复五次，但是加上<code>\1</code>的引用，则整体的含义是匹配至少出现6次的重复字符</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.search(<span class="string">r&quot;(.)\1&#123;5,&#125;&quot;</span>,<span class="string">&#x27;aaaaaa&#x27;</span>) <span class="comment"># 6个</span></span><br><span class="line">&lt;re.Match <span class="built_in">object</span>; span=(<span class="number">0</span>, <span class="number">6</span>), match=<span class="string">&#x27;aaaaaa&#x27;</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.search(<span class="string">r&quot;(.)\1&#123;5,&#125;&quot;</span>,<span class="string">&#x27;aaaaa&#x27;</span>)</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/14/github-action%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E5%AE%9E%E7%8E%B0hexo%E8%87%AA%E5%8A%A8%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -187,10 +283,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-01-14 11:39:35 / 修改时间：07:33:39" itemprop="dateCreated datePublished" datetime="2021-01-14T11:39:35+00:00">2021-01-14</time>
+              <time title="创建时间：2021-01-14 11:39:35" itemprop="dateCreated datePublished" datetime="2021-01-14T11:39:35+00:00">2021-01-14</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-01-16 08:52:02" itemprop="dateModified" datetime="2021-01-16T08:52:02+00:00">2021-01-16</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -227,28 +329,14 @@
 
       
           <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>github Action是一个github提供的实现持续集成的工具，能够方便的分享和使用他人分享的持续集成的脚本，且github提供一些机器的运行环境来方便的打包运行代码，从而完成我们想要的操作，比方说hexo博客，可以实现推送到指定分支时，就将md编译成html并推送到指定的github page上，当然也可以附加一些其他的内容，比方将所有的md中的图片上传到图床等。</p>
-<h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><p>实现一个github action能够自动实现当推送新的post到指定分支时，能够自动将图片上传图床并替换md中的连接为图床链接，以及将md内容编译成html然后传到github page上，实现更新。</p>
-<h2 id="替换图片"><a href="#替换图片" class="headerlink" title="替换图片"></a>替换图片</h2><p>写了一个简单的脚本，使用python实现，可以将md中的图片批量上传到图床（目前仅支持路过图床），然后将md文件中的图片链接替换成图床的链接，</p>
-<p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/ggqshr/replace_img_md">https://github.com/ggqshr/replace_img_md</a></p>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>最后版本的action脚本如下：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># This is a basic workflow to help you get started with Actions</span></span><br><span class="line"></span><br><span class="line"><span class="attr">name:</span> <span class="string">push_to_page</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Controls when the action will run. </span></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="comment"># Triggers the workflow on push or pull request events but only for the main branch</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span> [ <span class="string">doc</span>,<span class="string">build</span> ]</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Allows you to run this workflow manually from the Actions tab</span></span><br><span class="line">  <span class="attr">workflow_dispatch:</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># A workflow run is made up of one or more jobs that can run sequentially or in parallel</span></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="comment"># This workflow contains a single job called &quot;build&quot;</span></span><br><span class="line">  <span class="attr">build:</span></span><br><span class="line">    <span class="comment"># The type of runner that the job will run on</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Steps represent a sequence of tasks that will be executed as part of the job</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="comment"># Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line">        <span class="attr">with:</span> </span><br><span class="line">          <span class="attr">ref:</span> <span class="string">doc</span></span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">      <span class="comment"># Runs a single command using the runners shell</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">setup_nodejs</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/setup-node@v2.1.4</span></span><br><span class="line">        <span class="attr">with:</span> </span><br><span class="line">          <span class="attr">node-version:</span> <span class="string">&#x27;12&#x27;</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">setup_python</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/setup-python@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">python-version:</span> <span class="string">&#x27;3.6&#x27;</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">replace_all_images</span></span><br><span class="line">        <span class="attr">env:</span> </span><br><span class="line">          <span class="attr">PASS:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.LUGUO_PASSWD</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">USER:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.LUGUO_USER</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">PROXY:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.PROXY_STRING</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line">          <span class="string">python</span> <span class="string">-m</span> <span class="string">pip</span> <span class="string">install</span> <span class="string">pqi</span></span><br><span class="line">          <span class="string">pqi</span> <span class="string">use</span> <span class="string">pypi</span></span><br><span class="line">          <span class="string">python</span> <span class="string">-m</span> <span class="string">pip</span> <span class="string">install</span> <span class="string">replace_md_img==0.0.10</span></span><br><span class="line">          <span class="string">export</span> <span class="string">HTTP_PROXY=$PROXY</span></span><br><span class="line">          <span class="string">export</span> <span class="string">HTTPS_PROXY=$PROXY</span></span><br><span class="line">          <span class="string">replace_img</span> <span class="string">process</span> <span class="string">-u</span> <span class="string">$USER</span> <span class="string">-p</span> <span class="string">$PASS</span> <span class="string">source/_posts</span></span><br><span class="line">      </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">update_doc_branch</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line">          <span class="string">git</span> <span class="string">config</span> <span class="string">--global</span> <span class="string">user.email</span> <span class="string">&quot;action_bot@noreply.com&quot;</span></span><br><span class="line">          <span class="string">git</span> <span class="string">config</span> <span class="string">--global</span> <span class="string">user.name</span> <span class="string">&quot;publish_action&quot;</span></span><br><span class="line">          <span class="string">git</span> <span class="string">add</span> <span class="string">.</span></span><br><span class="line">          <span class="string">git</span> <span class="string">commit</span> <span class="string">-m</span> <span class="string">&quot;upload images[bot]&quot;</span></span><br><span class="line">          <span class="string">git</span> <span class="string">push</span> <span class="string">https://ggqshr:$GITHUB_TOKEN@github.com/ggqshr/ggqshr.github.io.git</span> <span class="string">doc:doc</span></span><br><span class="line">        <span class="attr">continue-on-error:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">generate_html</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line">          <span class="string">npm</span> <span class="string">install</span></span><br><span class="line">          <span class="string">npm</span> <span class="string">install</span> <span class="string">-g</span> <span class="string">hexo</span> </span><br><span class="line">          <span class="string">hexo</span> <span class="string">g</span></span><br><span class="line">          </span><br><span class="line">      <span class="comment"># Runs a set of commands using the runners shell</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">publish</span></span><br><span class="line">        <span class="attr">env:</span> </span><br><span class="line">          <span class="attr">GITHUB_TOKEN:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.GITHUB_TOKEN</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line">          <span class="string">export</span> <span class="string">TZ=&#x27;Asia/Shanghai&#x27;</span></span><br><span class="line">          <span class="string">git</span> <span class="string">clone</span> <span class="string">-b</span> <span class="string">main</span> <span class="string">https://ggqshr:$GITHUB_TOKEN@github.com/ggqshr/ggqshr.github.io.git</span> <span class="string">.deploy</span></span><br><span class="line">          <span class="string">cp</span> <span class="string">-r</span> <span class="string">public/*</span> <span class="string">.deploy/</span></span><br><span class="line">          <span class="string">cd</span> <span class="string">.deploy</span></span><br><span class="line">          <span class="string">git</span> <span class="string">add</span> <span class="string">.</span></span><br><span class="line">          <span class="string">date</span> <span class="string">+&quot;%Y-%m-%d</span> <span class="string">%H:%M:%S&quot;</span> <span class="string">|</span> <span class="string">git</span> <span class="string">commit</span> <span class="string">-F</span> <span class="bullet">-</span></span><br><span class="line">          <span class="string">git</span> <span class="string">push</span> <span class="string">https://ggqshr:$GITHUB_TOKEN@github.com/ggqshr/ggqshr.github.io.git</span> <span class="string">main:main</span></span><br><span class="line">      </span><br></pre></td></tr></table></figure>
-
-<p>可以看到action的文件中有一个Jobs，主要分为以下几个工作</p>
-<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/sas5z4"><img src="https://s3.ax1x.com/2021/01/14/sas5z4.png" alt="github-action的使用，实现hexo自动化_0"></a></p>
-<p>其中有几个点需要注意，</p>
-<ol>
-<li>在推送代码和拉去代码时，可以使用以下的形式来，即token认证的形式来验证身份，而不用重复登陆</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://username:token@github.com/username/repo.git</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li><p>可以使用github的secrets功能，来保存一些私密的信息，比如用户名和密码等，因为这个脚本是要放到github项目目录下的，是公开的，如果直接明文的写容易有安全问题，另外一方面，硬编码也不够灵活，可以通过以下步骤来设置</p>
-<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/sasoQJ"><img src="https://s3.ax1x.com/2021/01/14/sasoQJ.png" alt="github-action的使用，实现hexo自动化_1"></a></p>
-<p>按照图上1,2,3的位置分别设置，然后就能在4的位置看到设置的值。这样设置之后就可以在action脚本当中取值，使用<code>$&#123;&#123; secrets.SERETS_NAME &#125;&#125;</code></p>
-</li>
-</ol>
-<p>按照以上的步骤即可完成需求，实现自动化。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/14/github-action%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E5%AE%9E%E7%8E%B0hexo%E8%87%AA%E5%8A%A8%E5%8C%96/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -298,7 +386,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-14 07:33:16" itemprop="dateModified" datetime="2021-01-14T07:33:16+00:00">2021-01-14</time>
+                <time title="修改时间：2021-01-16 08:52:02" itemprop="dateModified" datetime="2021-01-16T08:52:02+00:00">2021-01-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -390,7 +478,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-14 07:33:16" itemprop="dateModified" datetime="2021-01-14T07:33:16+00:00">2021-01-14</time>
+                <time title="修改时间：2021-01-16 08:52:02" itemprop="dateModified" datetime="2021-01-16T08:52:02+00:00">2021-01-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -489,7 +577,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-14 07:33:16" itemprop="dateModified" datetime="2021-01-14T07:33:16+00:00">2021-01-14</time>
+                <time title="修改时间：2021-01-16 08:52:02" itemprop="dateModified" datetime="2021-01-16T08:52:02+00:00">2021-01-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -577,7 +665,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-14 07:33:16" itemprop="dateModified" datetime="2021-01-14T07:33:16+00:00">2021-01-14</time>
+                <time title="修改时间：2021-01-16 08:52:02" itemprop="dateModified" datetime="2021-01-16T08:52:02+00:00">2021-01-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -680,7 +768,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-14 07:33:16" itemprop="dateModified" datetime="2021-01-14T07:33:16+00:00">2021-01-14</time>
+                <time title="修改时间：2021-01-16 08:52:02" itemprop="dateModified" datetime="2021-01-16T08:52:02+00:00">2021-01-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -771,7 +859,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-14 07:33:16" itemprop="dateModified" datetime="2021-01-14T07:33:16+00:00">2021-01-14</time>
+                <time title="修改时间：2021-01-16 08:52:02" itemprop="dateModified" datetime="2021-01-16T08:52:02+00:00">2021-01-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -866,7 +954,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-14 07:33:16" itemprop="dateModified" datetime="2021-01-14T07:33:16+00:00">2021-01-14</time>
+                <time title="修改时间：2021-01-16 08:52:02" itemprop="dateModified" datetime="2021-01-16T08:52:02+00:00">2021-01-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -984,7 +1072,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-14 07:33:16" itemprop="dateModified" datetime="2021-01-14T07:33:16+00:00">2021-01-14</time>
+                <time title="修改时间：2021-01-16 08:52:02" itemprop="dateModified" datetime="2021-01-16T08:52:02+00:00">2021-01-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1025,97 +1113,6 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> inspect</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">a,b,c</span>):</span></span><br><span class="line">    print(a,b,c)</span><br><span class="line"></span><br><span class="line">print(inspect.getfullargspec(test).args) <span class="comment"># [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]</span></span><br></pre></td></tr></table></figure>
 
 <p>部分转载自 <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/431725755/answer/1592193887">https://www.zhihu.com/question/431725755/answer/1592193887</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/25/%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AADataframe%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ggq">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ggqshr's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/25/%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AADataframe%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C/" class="post-title-link" itemprop="url">比较两个Dataframe是否相同</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-11-25 15:05:04" itemprop="dateCreated datePublished" datetime="2020-11-25T15:05:04+00:00">2020-11-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-14 07:33:16" itemprop="dateModified" datetime="2021-01-14T07:33:16+00:00">2021-01-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>205</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>经常会遇到比较两个Dataframe是否相同的问题，发现官方提供了一个方法用于比较是否相等，且能够输出不同的列</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pandas.testing <span class="keyword">import</span> assert_frame_equal</span><br><span class="line"></span><br><span class="line">assert_frame_equal(df1,df2)</span><br></pre></td></tr></table></figure>
-
-<p>该方法会比对Df的value和index,如果不想比较index，也可以直接使用reset_index(drop=True)将index重置，然后在进行比较</p>
 
       
     </div>
@@ -1200,7 +1197,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1213,7 +1210,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1260,7 +1257,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">17 分钟</span>
+    <span title="站点阅读时长">18 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
