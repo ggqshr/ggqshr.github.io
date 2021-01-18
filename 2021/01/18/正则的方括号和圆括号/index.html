@@ -20,15 +20,22 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="ggqshr&#39;s blog">
-<meta property="og:url" content="http://example.com/tags/%E8%99%9A%E6%8B%9F%E7%BB%84%E7%BD%91/index.html">
+  <meta name="description" content="使用正则在匹配整个单词时，需要使用圆括号来匹配 比如以下字符串  nihaonihao  想要匹配nihao，则需要使用圆括号来做(nihao), 代码执行的截图如下:  原因是因为圆括号把里面的内容当作一个整体，而方括号则表达的是里面的内容都作为可选，即[nihao]的意思是匹配n或者i或者h或者a或者o，而不是nihao">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则的方括号和圆括号">
+<meta property="og:url" content="http://example.com/2021/01/18/%E6%AD%A3%E5%88%99%E7%9A%84%E6%96%B9%E6%8B%AC%E5%8F%B7%E5%92%8C%E5%9C%86%E6%8B%AC%E5%8F%B7/index.html">
 <meta property="og:site_name" content="ggqshr&#39;s blog">
+<meta property="og:description" content="使用正则在匹配整个单词时，需要使用圆括号来匹配 比如以下字符串  nihaonihao  想要匹配nihao，则需要使用圆括号来做(nihao), 代码执行的截图如下:  原因是因为圆括号把里面的内容当作一个整体，而方括号则表达的是里面的内容都作为可选，即[nihao]的意思是匹配n或者i或者h或者a或者o，而不是nihao">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/18/s6tUT1.png">
+<meta property="article:published_time" content="2021-01-18T15:04:41.000Z">
+<meta property="article:modified_time" content="2021-01-18T08:00:12.858Z">
 <meta property="article:author" content="ggq">
+<meta property="article:tag" content="正则">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s3.ax1x.com/2021/01/18/s6tUT1.png">
 
-<link rel="canonical" href="http://example.com/tags/%E8%99%9A%E6%8B%9F%E7%BB%84%E7%BD%91/">
+<link rel="canonical" href="http://example.com/2021/01/18/%E6%AD%A3%E5%88%99%E7%9A%84%E6%96%B9%E6%8B%AC%E5%8F%B7%E5%92%8C%E5%9C%86%E6%8B%AC%E5%8F%B7/">
 
 
 <script id="page-configurations">
@@ -36,12 +43,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>标签: 虚拟组网 | ggqshr's blog</title>
+  <title>正则的方括号和圆括号 | ggqshr's blog</title>
   
 
 
@@ -158,51 +165,118 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">虚拟组网
-          <small>标签</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/18/%E6%AD%A3%E5%88%99%E7%9A%84%E6%96%B9%E6%8B%AC%E5%8F%B7%E5%92%8C%E5%9C%86%E6%8B%AC%E5%8F%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ggq">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ggqshr's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          正则的方括号和圆括号
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-01-18 15:04:41 / 修改时间：08:00:12" itemprop="dateCreated datePublished" datetime="2021-01-18T15:04:41+00:00">2021-01-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%AD%A3%E5%88%99/" itemprop="url" rel="index"><span itemprop="name">正则</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>155</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
+        <p>使用正则在匹配整个单词时，需要使用圆括号来匹配</p>
+<p>比如以下字符串</p>
+<blockquote>
+<p>nihaonihao</p>
+</blockquote>
+<p>想要匹配nihao，则需要使用圆括号来做<code>(nihao)</code>,</p>
+<p>代码执行的截图如下:</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s6tUT1"><img src="https://s3.ax1x.com/2021/01/18/s6tUT1.png" alt="正则的方括号和圆括号_0"></a></p>
+<p>原因是因为圆括号把里面的内容当作一个整体，而方括号则表达的是里面的内容都作为可选，即<code>[nihao]</code>的意思是匹配<code>n或者i或者h或者a或者o</code>，而不是<code>nihao</code></p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-12-21T14:07:10+00:00"
-              content="2020-12-21">
-          12-21
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%AD%A3%E5%88%99/" rel="tag"># 正则</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/12/21/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B/" itemprop="url">
-            <span itemprop="name">wireGuard安装和配置过程</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/16/python-%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%97%E7%AC%A6/" rel="prev" title="python 正则匹配重复的字符">
+      <i class="fa fa-chevron-left"></i> python 正则匹配重复的字符
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
   </article>
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
