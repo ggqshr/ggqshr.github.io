@@ -30,37 +30,37 @@ categories: flutter
 
 使用参考的文章中作者编写的[工具](https://pratheeshrussell.github.io/IOS-Code-Sign-Helper/)，来生成一个证书，下载该工具，然后点击新建项目
 
-![image-20210119153555749](github-action编译flutter-ios应用实践/image-20210119153555749.png)
+[![github-action编译flutter-ios应用实践_0](https://s3.ax1x.com/2021/01/19/s2CSb9.png)](https://imgchr.com/i/s2CSb9)
 
 随便输入一个项目名，然后选择创建的项目，然后email处可以换成自己的苹果开发者账号对应的邮箱（不知道是否需要这么做），点击Generate Sign Requests按钮，可以选择将生成的证书放到桌面，名字如下图所示：
 
-![image-20210119153756895](github-action编译flutter-ios应用实践/image-20210119153756895.png)
+[![github-action编译flutter-ios应用实践_1](https://s3.ax1x.com/2021/01/19/s2CP4x.png)](https://imgchr.com/i/s2CP4x)
 
 然后需要登录apple的开发者账号，https://developer.apple.com/membercenter
 
 然后选择Certificates, Identifiers & Profiles
 
-![image-20210119153334345](github-action编译flutter-ios应用实践/image-20210119153334345.png)
+[![github-action编译flutter-ios应用实践_2](https://s3.ax1x.com/2021/01/19/s2CZKe.png)](https://imgchr.com/i/s2CZKe)
 
 然后点击如图所示的加号
 
-![image-20210119153858354](github-action编译flutter-ios应用实践/image-20210119153858354.png)
+[![github-action编译flutter-ios应用实践_3](https://s3.ax1x.com/2021/01/19/s2CeDH.png)](https://imgchr.com/i/s2CeDH)
 
 选择Apple Development 然后continue，然后会有一步让你上传一个文件，这时就把我们之前得到的证书文件上传
 
-![image-20210119153954711](github-action编译flutter-ios应用实践/image-20210119153954711.png)
+[![github-action编译flutter-ios应用实践_4](https://s3.ax1x.com/2021/01/19/s2CuVA.png)](https://imgchr.com/i/s2CuVA)
 
 最后完成后点击Download，下载到桌面，没有意外的话应该是这个样子的一个文件
 
-![image-20210119154116920](github-action编译flutter-ios应用实践/image-20210119154116920.png)
+[![github-action编译flutter-ios应用实践_5](https://s3.ax1x.com/2021/01/19/s2CKUI.png)](https://imgchr.com/i/s2CKUI)
 
 然后将我们之前使用的软件关闭，再打开，如果不关闭再重新打开的话 其他的tab无法检测到我们新建的项目，重新打开后，打开第二个tab，并选中我们之前创建的项目，**注意**：这里必须要创建一个密码，否则后面会有问题，可以创建一个简单的密码。
 
-![image-20210119154227288](github-action编译flutter-ios应用实践/image-20210119154227288.png)
+[![github-action编译flutter-ios应用实践_6](https://s3.ax1x.com/2021/01/19/s2CM5t.png)](https://imgchr.com/i/s2CM5t)
 
 然后点击Locate选择我们刚刚的`development.cer`，然后点击generate p12，生成完成后，点击copy p12将p12文件拷贝到桌面，最后得到的文件如下：
 
-![image-20210119154449292](github-action编译flutter-ios应用实践/image-20210119154449292.png)
+[![github-action编译flutter-ios应用实践_7](https://s3.ax1x.com/2021/01/19/s2ClPP.png)](https://imgchr.com/i/s2ClPP)
 
 至此，得到了一个p12文件
 
@@ -70,35 +70,35 @@ categories: flutter
 
 然后回到开发者账号的Certificates, Identifiers & Profiles处，点击如下图所示的地方，生成一个Profiles
 
-![image-20210119154859435](github-action编译flutter-ios应用实践/image-20210119154859435.png)
+[![github-action编译flutter-ios应用实践_8](https://s3.ax1x.com/2021/01/19/s2Ctbj.png)](https://imgchr.com/i/s2Ctbj)
 
 然后选中ios app development
 
-![image-20210119154926573](github-action编译flutter-ios应用实践/image-20210119154926573.png)
+[![github-action编译flutter-ios应用实践_9](https://s3.ax1x.com/2021/01/19/s2CUVs.png)](https://imgchr.com/i/s2CUVs)
 
 然后选择我们刚刚创建的App ID
 
-![image-20210119155023236](github-action编译flutter-ios应用实践/image-20210119155023236.png)
+[![github-action编译flutter-ios应用实践_10](https://s3.ax1x.com/2021/01/19/s2Cd5q.png)](https://imgchr.com/i/s2Cd5q)
 
 然后选择我们刚刚在生成`.p12`文件时生成的对应的`development.cer`，**一定要对应！**
 
-![image-20210119155219436](github-action编译flutter-ios应用实践/image-20210119155219436.png)
+[![github-action编译flutter-ios应用实践_11](https://s3.ax1x.com/2021/01/19/s2C0P0.png)](https://imgchr.com/i/s2C0P0)
 
 然后device这里可以全选
 
-![image-20210119155204768](github-action编译flutter-ios应用实践/image-20210119155204768.png)
+[![github-action编译flutter-ios应用实践_12](https://s3.ax1x.com/2021/01/19/s2CD2T.png)](https://imgchr.com/i/s2CD2T)
 
 最后一步，給这个profile起一个名字
 
-![image-20210119155339661](github-action编译flutter-ios应用实践/image-20210119155339661.png)
+[![github-action编译flutter-ios应用实践_13](https://s3.ax1x.com/2021/01/19/s2CrxU.png)](https://imgchr.com/i/s2CrxU)
 
 最后点击下载即可
 
-![image-20210119155401282](github-action编译flutter-ios应用实践/image-20210119155401282.png)
+[![github-action编译flutter-ios应用实践_14](https://s3.ax1x.com/2021/01/19/s2CyMF.png)](https://imgchr.com/i/s2CyMF)
 
 最后就能得到一个下图的文件
 
-![image-20210119155425091](github-action编译flutter-ios应用实践/image-20210119155425091.png)
+[![github-action编译flutter-ios应用实践_15](https://s3.ax1x.com/2021/01/19/s2C6r4.png)](https://imgchr.com/i/s2C6r4)
 
 ### 准备github action 编译
 
@@ -106,15 +106,15 @@ categories: flutter
 
 首先需要将项目上传到github上面，然后在repository的Settings中找到Secrets，增加对应的Secrets，这里增加的变量可以在github action中通过`{{ secrets.name }}`引用到，从而防止将密码明文的写在github action文件中。
 
-![image-20210119155917323](github-action编译flutter-ios应用实践/image-20210119155917323.png)
+[![github-action编译flutter-ios应用实践_16](https://s3.ax1x.com/2021/01/19/s2CcqJ.png)](https://imgchr.com/i/s2CcqJ)
 
 CERT_PASSWORD是我们之前设置的密码
 
-![image-20210119154227288](github-action编译flutter-ios应用实践/image-20210119154227288.png)
+[![github-action编译flutter-ios应用实践_17](https://s3.ax1x.com/2021/01/19/s2C2Z9.png)](https://imgchr.com/i/s2C2Z9)
 
 MOBILEPROVISION_BASE64是我们的`.mobileprovision`文件的base64编码，可以使用这个[网站](https://www.base64encode.org/)来将其编码成base64格式，此举是为了解决Secrets不能上传文件的问题，找到https://www.base64encode.org/网站的Encode files to Base64 format部分，上传文件，然后点击ENCODE，然后点击CLICK OR TAP HERE 复制其编码，并添加到repository的Secrets中，
 
-![image-20210119160250763](github-action编译flutter-ios应用实践/image-20210119160250763.png)
+[![github-action编译flutter-ios应用实践_18](https://s3.ax1x.com/2021/01/19/s2CWI1.png)](https://imgchr.com/i/s2CWI1)
 
 P12_BASE64的过程可以参照MOBILEPROVISION_BASE64的过程，只不过需要base64编码的文件是`.p12`文件。
 
@@ -208,14 +208,14 @@ jobs:
 
 将commit推到github上，在项目的action tab中，就可以看到对应的action，
 
-![image-20210119160944488](github-action编译flutter-ios应用实践/image-20210119160944488.png)
+[![github-action编译flutter-ios应用实践_19](https://s3.ax1x.com/2021/01/19/s2C5RK.png)](https://imgchr.com/i/s2C5RK)
 
 点击run workflow即可，全部完成后既可找到对应的ipa文件
 
-![image-20210119161017858](github-action编译flutter-ios应用实践/image-20210119161017858.png)
+[![github-action编译flutter-ios应用实践_20](https://s3.ax1x.com/2021/01/19/s2CTMD.png)](https://imgchr.com/i/s2CTMD)
 
 可以在下图的页面中找到对应的ipa文件，并可以点击下载。
 
-![image-20210119161057896](github-action编译flutter-ios应用实践/image-20210119161057896.png)
+[![github-action编译flutter-ios应用实践_21](https://s3.ax1x.com/2021/01/19/s2C7se.png)](https://imgchr.com/i/s2C7se)
 
 至此，全部的打包工作就已经完成，可以使用github action提供的mac环境来编译flutter的ios版本。
