@@ -12,11 +12,11 @@ categories: 资源
 
 点击
 
-![image-20210130104807153](申请微软office-e5开发者账号并续期/image-20210130104807153.png)
+[![申请微软office-e5开发者账号并续期_0](https://s3.ax1x.com/2021/01/30/yFwOxI.png)](https://imgchr.com/i/yFwOxI)
 
 然后点击立即加入
 
-![image-20210130104824448](申请微软office-e5开发者账号并续期/image-20210130104824448.png)
+[![申请微软office-e5开发者账号并续期_1](https://s3.ax1x.com/2021/01/30/yFwvsP.png)](https://imgchr.com/i/yFwvsP)
 
 截下来是填写一些个人信息的阶段，随便填写，
 
@@ -24,13 +24,13 @@ categories: 资源
 
 完成后，即可达到设置订阅的阶段，这里需要指定自己的主账号的名字以及后面的邮箱的域名
 
-![image-20210130104932062](申请微软office-e5开发者账号并续期/image-20210130104932062.png)
+[![申请微软office-e5开发者账号并续期_2](https://s3.ax1x.com/2021/01/30/yFwxqf.png)](https://imgchr.com/i/yFwxqf)
 
 然后是设置手机号等。
 
 完成后，显示的界面大概是这个样子
 
-![image-20210130105004479](申请微软office-e5开发者账号并续期/image-20210130105004479.png)
+[![申请微软office-e5开发者账号并续期_3](https://s3.ax1x.com/2021/01/30/yF0SZ8.png)](https://imgchr.com/i/yF0SZ8)
 
 这时登陆 https://portal.office.com/AdminPortal/Home 管理页面，创建一个新的子账号，赋予权限
 
