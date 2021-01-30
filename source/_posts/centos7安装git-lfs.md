@@ -16,7 +16,7 @@ https://github.com/git-lfs/git-lfs/releases/tag/v2.13.2
 
 如下图位置
 
-![image-20210130101550357](centos7安装git-lfs/image-20210130101550357.png)
+[![centos7安装git-lfs_0](https://s3.ax1x.com/2021/01/30/yFthWt.png)](https://imgchr.com/i/yFthWt)
 
 点击下载，然后传到服务器上，使用命令
 
