@@ -45,7 +45,7 @@ jobs:
         run: |
           python -m pip install pqi
           pqi use pypi
-          python -m pip install replace_md_img==0.0.10
+          python -m pip install replace_md_img
           export HTTP_PROXY=$PROXY
           export HTTPS_PROXY=$PROXY
           replace_img process -u $USER -p $PASS source/_posts
