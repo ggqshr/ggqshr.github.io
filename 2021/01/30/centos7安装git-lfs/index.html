@@ -20,15 +20,23 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="ggqshr&#39;s blog">
-<meta property="og:url" content="http://example.com/archives/2020/index.html">
+  <meta name="description" content="centos7上安装git-lfs的方式，不想win10版本的git，安装时就有lfs的支持，而是需要手动安装 首先到lfs的github上找到对应版本的rpm文件 https:&#x2F;&#x2F;github.com&#x2F;git-lfs&#x2F;git-lfs&#x2F;releases&#x2F;tag&#x2F;v2.13.2 如下图位置  点击下载，然后传到服务器上，使用命令 1rpm -ivh lfs.rpm  即可完成安装">
+<meta property="og:type" content="article">
+<meta property="og:title" content="centos7安装git-lfs">
+<meta property="og:url" content="http://example.com/2021/01/30/centos7%E5%AE%89%E8%A3%85git-lfs/index.html">
 <meta property="og:site_name" content="ggqshr&#39;s blog">
+<meta property="og:description" content="centos7上安装git-lfs的方式，不想win10版本的git，安装时就有lfs的支持，而是需要手动安装 首先到lfs的github上找到对应版本的rpm文件 https:&#x2F;&#x2F;github.com&#x2F;git-lfs&#x2F;git-lfs&#x2F;releases&#x2F;tag&#x2F;v2.13.2 如下图位置  点击下载，然后传到服务器上，使用命令 1rpm -ivh lfs.rpm  即可完成安装">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/30/yFthWt.png">
+<meta property="article:published_time" content="2021-01-30T10:12:11.000Z">
+<meta property="article:modified_time" content="2021-01-30T02:17:28.477Z">
 <meta property="article:author" content="ggq">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="git-lfs">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s3.ax1x.com/2021/01/30/yFthWt.png">
 
-<link rel="canonical" href="http://example.com/archives/2020/">
+<link rel="canonical" href="http://example.com/2021/01/30/centos7%E5%AE%89%E8%A3%85git-lfs/">
 
 
 <script id="page-configurations">
@@ -36,12 +44,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | ggqshr's blog</title>
+  <title>centos7安装git-lfs | ggqshr's blog</title>
   
 
 
@@ -158,234 +166,120 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 20 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/30/centos7%E5%AE%89%E8%A3%85git-lfs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ggq">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ggqshr's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          centos7安装git-lfs
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-01-30 10:12:11 / 修改时间：02:17:28" itemprop="dateCreated datePublished" datetime="2021-01-30T10:12:11+00:00">2021-01-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>180</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
-    </div>
+        <p>centos7上安装git-lfs的方式，不想win10版本的git，安装时就有lfs的支持，而是需要手动安装</p>
+<p>首先到lfs的github上找到对应版本的rpm文件</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/git-lfs/git-lfs/releases/tag/v2.13.2">https://github.com/git-lfs/git-lfs/releases/tag/v2.13.2</a></p>
+<p>如下图位置</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/yFthWt"><img src="https://s3.ax1x.com/2021/01/30/yFthWt.png" alt="centos7安装git-lfs_0"></a></p>
+<p>点击下载，然后传到服务器上，使用命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh lfs.rpm</span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-12-23T16:16:32+00:00"
-              content="2020-12-23">
-          12-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/12/23/python-requests-session-%E5%BC%80%E5%90%AFconnection-pool/" itemprop="url">
-            <span itemprop="name">python requests session 开启connection pool</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-12-21T14:07:10+00:00"
-              content="2020-12-21">
-          12-21
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/12/21/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B/" itemprop="url">
-            <span itemprop="name">wireGuard安装和配置过程</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-12-08T16:25:28+00:00"
-              content="2020-12-08">
-          12-08
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/12/08/win10-%E4%BD%BF%E7%94%A8cmd%E6%9D%A5%E8%AE%BE%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" itemprop="url">
-            <span itemprop="name">win10 使用cmd来设置环境变量</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-12-08T16:12:02+00:00"
-              content="2020-12-08">
-          12-08
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/12/08/spring-boot%E7%9A%84redis-cache%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98/" itemprop="url">
-            <span itemprop="name">spring boot的redis cache失效问题</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-12-05T09:42:06+00:00"
-              content="2020-12-05">
-          12-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/12/05/pandas%E5%86%99%E5%85%A5excel%E5%A4%9A%E4%B8%AAsheet/" itemprop="url">
-            <span itemprop="name">pandas写入excel多个sheet</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-12-01T22:39:53+00:00"
-              content="2020-12-01">
-          12-01
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/12/01/win10-git-%E9%85%8D%E7%BD%AEssh%E4%BB%A3%E7%90%86/" itemprop="url">
-            <span itemprop="name">win10 git 配置ssh代理</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-12-01T19:46:57+00:00"
-              content="2020-12-01">
-          12-01
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/12/01/privoxy%E7%9A%84%E4%BD%BF%E7%94%A8/" itemprop="url">
-            <span itemprop="name">privoxy的使用</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-12-01T14:14:39+00:00"
-              content="2020-12-01">
-          12-01
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/12/01/python%E7%9A%84%E6%8A%80%E5%B7%A7/" itemprop="url">
-            <span itemprop="name">python的技巧</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-11-25T15:05:04+00:00"
-              content="2020-11-25">
-          11-25
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/11/25/%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AADataframe%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C/" itemprop="url">
-            <span itemprop="name">比较两个Dataframe是否相同</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-11-23T11:54:27+00:00"
-              content="2020-11-23">
-          11-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/11/23/mongodb-%E6%9F%A5%E8%AF%A2%E4%B8%A4%E4%B8%AA%E5%AD%97%E6%AE%B5%E7%9B%B8%E5%90%8C%E7%9A%84%E8%A1%8C/" itemprop="url">
-            <span itemprop="name">mongodb 查询两个字段相同的行</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+<p>即可完成安装</p>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"># git</a>
+              <a href="/tags/git-lfs/" rel="tag"># git-lfs</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/29/python%E5%AF%BC%E5%85%A5%E5%90%8C%E7%BA%A7%E7%9B%AE%E5%BD%95%E6%88%96%E8%80%85%E4%B8%8A%E7%BA%A7%E7%9B%AE%E5%BD%95%E7%9A%84%E5%8C%85/" rel="prev" title="python导入同级目录或者上级目录的包">
+      <i class="fa fa-chevron-left"></i> python导入同级目录或者上级目录的包
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2020/page/2/">2</a><a class="extend next" rel="next" href="/archives/2020/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
+  
+  
 
 
 
