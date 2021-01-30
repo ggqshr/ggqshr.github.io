@@ -15,7 +15,7 @@ categories: flutter
 原文章的链接如下：https://medium.com/@pratheeshrussell/building-a-flutter-ios-app-with-codemagic-and-github-actions-9cd61321119b
 
 作者还提供了另外一个编译ios应用的办法， 使用`codemagic`，这是一个移动应用CI网站，可以提供一些移动应用的在线编译环境，另外一种就是使用github action，两种方式我都进行了实践，都可以成功将flutter应用打包成ipa文件。
-
+<!-- more -->
 ## 前言
 
 要编译成ipa文件的flutter项目原来就在mac真机上成功编译过，也就是说已经解决了一些小问题，另外，此过程还是需要一个付费的开发者账号才能够完成，另外该流程假设您有一定的开发ios的基础，知道开发ios需要的各种中间步骤，比如申请各种苹果的证书等。
