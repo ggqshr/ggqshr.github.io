@@ -21,6 +21,26 @@ Host github.com
 
 如果没有nc，则需要安装netcat
 
+centos7 可以使用
+```bash
+yum -y install nc
+```
+但是这个版本的nc好像不能指定-X的参数
+所以如果在centos7上，想要使用socks5代理的话，可以使用`connect-proxy`
+可以直接使用
+```bash
+yum -y install connect-proxy
+```
+
+然后在.ssh/config下配置
+```bash
+Host github.com
+    User git
+    Hostname github.com
+    ProxyCommand connect-proxy -S 127.0.0.1:1089 %h %p
+    ServerAliveInterval 30
+```
+
 ## win10下
 
 ```bash
