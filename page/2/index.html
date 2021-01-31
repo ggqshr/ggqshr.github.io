@@ -195,7 +195,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-30 03:14:39" itemprop="dateModified" datetime="2021-01-30T03:14:39+00:00">2021-01-30</time>
+                <time title="修改时间：2021-01-31 13:13:30" itemprop="dateModified" datetime="2021-01-31T13:13:30+00:00">2021-01-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -294,7 +294,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-30 03:14:39" itemprop="dateModified" datetime="2021-01-30T03:14:39+00:00">2021-01-30</time>
+                <time title="修改时间：2021-01-31 13:13:30" itemprop="dateModified" datetime="2021-01-31T13:13:30+00:00">2021-01-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -382,7 +382,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-30 03:14:39" itemprop="dateModified" datetime="2021-01-30T03:14:39+00:00">2021-01-30</time>
+                <time title="修改时间：2021-01-31 13:13:30" itemprop="dateModified" datetime="2021-01-31T13:13:30+00:00">2021-01-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -485,7 +485,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-30 03:14:39" itemprop="dateModified" datetime="2021-01-30T03:14:39+00:00">2021-01-30</time>
+                <time title="修改时间：2021-01-31 13:13:30" itemprop="dateModified" datetime="2021-01-31T13:13:30+00:00">2021-01-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -576,7 +576,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-30 03:14:39" itemprop="dateModified" datetime="2021-01-30T03:14:39+00:00">2021-01-30</time>
+                <time title="修改时间：2021-01-31 13:13:30" itemprop="dateModified" datetime="2021-01-31T13:13:30+00:00">2021-01-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -594,7 +594,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>330</span>
+              <span>581</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -618,6 +618,14 @@
 <h2 id="linux下"><a href="#linux下" class="headerlink" title="linux下"></a>linux下</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">    User git</span><br><span class="line">    Hostname github.com</span><br><span class="line">    ProxyCommand nc -X 5 -x 127.0.0.1:1089 %h %p</span><br><span class="line">    ServerAliveInterval 30</span><br></pre></td></tr></table></figure>
 
 <p>如果没有nc，则需要安装netcat</p>
+<p>centos7 可以使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install nc</span><br></pre></td></tr></table></figure>
+<p>但是这个版本的nc好像不能指定-X的参数<br>所以如果在centos7上，想要使用socks5代理的话，可以使用<code>connect-proxy</code><br>可以直接使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install connect-proxy</span><br></pre></td></tr></table></figure>
+
+<p>然后在.ssh/config下配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">    User git</span><br><span class="line">    Hostname github.com</span><br><span class="line">    ProxyCommand connect-proxy -S 127.0.0.1:1089 %h %p</span><br><span class="line">    ServerAliveInterval 30</span><br></pre></td></tr></table></figure>
+
 <h2 id="win10下"><a href="#win10下" class="headerlink" title="win10下"></a>win10下</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">    User git</span><br><span class="line">    Hostname github.com</span><br><span class="line">    ProxyCommand connect -S 127.0.0.1:1080 %h %p</span><br><span class="line">    ServerAliveInterval 30</span><br></pre></td></tr></table></figure>
 
 <p>其中connect也是一个代理软件，如果没有netcat 即可使用这个命令。（没搞清是那里带的，可能是mingw64带的？）</p>
@@ -671,7 +679,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-30 03:14:39" itemprop="dateModified" datetime="2021-01-30T03:14:39+00:00">2021-01-30</time>
+                <time title="修改时间：2021-01-31 13:13:30" itemprop="dateModified" datetime="2021-01-31T13:13:30+00:00">2021-01-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -789,7 +797,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-30 03:14:39" itemprop="dateModified" datetime="2021-01-30T03:14:39+00:00">2021-01-30</time>
+                <time title="修改时间：2021-01-31 13:13:30" itemprop="dateModified" datetime="2021-01-31T13:13:30+00:00">2021-01-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -880,7 +888,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-30 03:14:39" itemprop="dateModified" datetime="2021-01-30T03:14:39+00:00">2021-01-30</time>
+                <time title="修改时间：2021-01-31 13:13:30" itemprop="dateModified" datetime="2021-01-31T13:13:30+00:00">2021-01-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -971,7 +979,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-30 03:14:39" itemprop="dateModified" datetime="2021-01-30T03:14:39+00:00">2021-01-30</time>
+                <time title="修改时间：2021-01-31 13:13:30" itemprop="dateModified" datetime="2021-01-31T13:13:30+00:00">2021-01-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1067,7 +1075,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-30 03:14:39" itemprop="dateModified" datetime="2021-01-30T03:14:39+00:00">2021-01-30</time>
+                <time title="修改时间：2021-01-31 13:13:30" itemprop="dateModified" datetime="2021-01-31T13:13:30+00:00">2021-01-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
