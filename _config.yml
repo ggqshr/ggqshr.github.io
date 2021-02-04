@@ -4,8 +4,8 @@
 
 # Site
 title: ggqshr's blog
-subtitle: ''
-description: ''
+subtitle: 'just for record'
+description: '用来记录一些技术的小问题和研究新技术的记录'
 keywords:
 author: ggq
 language: zh-CN
@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://example.com/child' and root as '/child/'
-url: http://example.com
+url: https://ggqshr.github.io/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -129,3 +129,8 @@ leancloud_counter_security:
   username: ggq
   password: 5515225gg5
   server_url: https://leancloud.cn
+
+sitemap: 
+    path: sitemap.xml
+baidusitemap:
+    path: baidusitemap.xml
