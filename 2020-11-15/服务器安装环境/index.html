@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NRM4BSHMED"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NRM4BSHMED');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ggqshr.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本文环境 CentOS 7.6 64bit root用户  目的新买了一个华为的云服务器，安装一些python开发常用的软件和环境，包括  python环境 安装最新的git zsh（神器，必备，建议没有了解过的小伙伴了解一下）  前提本文适用于Centos环境下，对Vim编辑器有一点了解能够完成简单的修改的操作的人群。 安装过程准备服务器中默认的ssh连接的过期时间有点短，可以设置长一点，省的在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="服务器安装环境">
+<meta property="og:url" content="https://ggqshr.github.io/2020-11-15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83/index.html">
+<meta property="og:site_name" content="ggqshr&#39;s blog">
+<meta property="og:description" content="本文环境 CentOS 7.6 64bit root用户  目的新买了一个华为的云服务器，安装一些python开发常用的软件和环境，包括  python环境 安装最新的git zsh（神器，必备，建议没有了解过的小伙伴了解一下）  前提本文适用于Centos环境下，对Vim编辑器有一点了解能够完成简单的修改的操作的人群。 安装过程准备服务器中默认的ssh连接的过期时间有点短，可以设置长一点，省的在">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/21/8fexbT.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/21/8fpgat.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/21/8fnmyq.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/21/8fn61A.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/21/8fGP0A.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/21/8f18fO.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/21/8fJ93T.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/21/8fJoZ9.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/21/8fX6Tf.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/21/8fHbDK.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/21/8fv6JS.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/21/8fzJjH.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/21/8h95PP.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/21/8hCKMD.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/21/8hCTF1.png">
+<meta property="article:published_time" content="2020-11-15T18:02:11.000Z">
+<meta property="article:modified_time" content="2021-02-04T14:53:08.401Z">
+<meta property="article:author" content="ggq">
+<meta property="article:tag" content="服务器环境">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/03/21/8fexbT.png">
+
+<link rel="canonical" href="https://ggqshr.github.io/2020-11-15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>服务器安装环境 | ggqshr's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ggqshr's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">just for record</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/ggqshr" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2020-11-15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ggq">
+      <meta itemprop="description" content="用来记录一些技术的小问题和研究新技术的记录">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ggqshr's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          服务器安装环境
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-15 18:02:11" itemprop="dateCreated datePublished" datetime="2020-11-15T18:02:11+00:00">2020-11-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-02-04 14:53:08" itemprop="dateModified" datetime="2021-02-04T14:53:08+00:00">2021-02-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8E%AF%E5%A2%83/" itemprop="url" rel="index"><span itemprop="name">服务器环境</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="本文环境"><a href="#本文环境" class="headerlink" title="本文环境"></a>本文环境</h1><ul>
+<li>CentOS 7.6 64bit</li>
+<li>root用户</li>
+</ul>
+<h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><p>新买了一个华为的云服务器，安装一些python开发常用的软件和环境，包括</p>
+<ul>
+<li>python环境</li>
+<li>安装最新的git</li>
+<li>zsh（神器，必备，建议没有了解过的小伙伴了解一下）</li>
+</ul>
+<h1 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h1><p>本文适用于Centos环境下，对Vim编辑器有一点了解能够完成简单的修改的操作的人群。</p>
+<h1 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>服务器中默认的ssh连接的过期时间有点短，可以设置长一点，省的在找一些资料的时候回去发现ssh连接断掉了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;ClientAliveCountMax 10&quot;</span> &gt;&gt; /etc/ssh/sshd_config</span><br><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
+
+<p>我这边设置的过期时间是10分钟，对应<code>ClientAliveCountMax 10</code>这里的10，可以根据自己的情况设置。</p>
+<h2 id="编译安装最新的git"><a href="#编译安装最新的git" class="headerlink" title="编译安装最新的git"></a>编译安装最新的git</h2><p><strong>本环节可跳过，直接使用<code>yum -y install git</code>安装git 即可</strong></p>
+<p>Centos使用<code>yum -y install git</code>安装的git是版本比较旧的，在后续使用时总会出现各种各样的问题，所以干脆我们一开始就安装一个比较新的git版本，省的后续再麻烦，虽说是编译安装，但是整体过程还是非常简单的，</p>
+<p>首先使用yum来安装我们编译需要使用的依赖</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc gcc-c++ curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-ExtUtils-MakeMaker autoconf</span><br></pre></td></tr></table></figure>
+
+<p>首先我们要先检查一些我们是否安装了git，</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
+
+<p>上面的命令可以查看当前是否安装了git，并可以查看git 的版本，我这边的结果是</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git version 1.8.3.1</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>说明已经安装了git，但是是比较旧的版本，如果是<code>-bash: aria2c: command not found</code> 则说明没有安装git，如果已经安装了git，可以使用<code>yum remove git</code>来卸载掉。</p>
+<p>完成依赖的安装后，使用<code>wget</code>命令来下载git的源码包，我这边最新的版本为2.25.2，</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.kernel.org/pub/software/scm/git/git-2.25.2.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>完成下载后，使用tar命令解压压缩包，然后进入到解压后的文件夹里，</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf git-2.25.2.tar.gz</span><br><span class="line">cd git-2.25.2</span><br></pre></td></tr></table></figure>
+
+<p>然后依次使用以下命令进行编译和安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;configure --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;git</span><br><span class="line">make profix&#x3D;&#x2F;usr&#x2F;local&#x2F;git</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<p>其中make过程较慢，需要稍微等待一下，完成后就成功的将git安装到了/usr/local/git下，下面需要将这个path加入到环境变量中</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;export PATH=$PATH:/usr/local/git/bin&quot; &gt;&gt; /etc/profile &amp;&amp; source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<p>这时使用<code>git --version</code>即可查看安装的git版本，如下图</p>
+<p><img src="https://s1.ax1x.com/2020/03/21/8fexbT.png" alt="git结果图"></p>
+<p>到此为止，就完成了git的安装，另外可将原来的安装文件删除</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm git-2.25.2.tar.gz git-2.25.2 -rf</span><br></pre></td></tr></table></figure>
+
+<h2 id="zsh安装-1"><a href="#zsh安装-1" class="headerlink" title="zsh安装[^ 1]"></a>zsh安装[^ 1]</h2><p>先放成果图</p>
+<p><img src="https://s1.ax1x.com/2020/03/21/8fpgat.png" alt="成果" title="成果图"></p>
+<h3 id="安装zsh和oh-my-zsh"><a href="#安装zsh和oh-my-zsh" class="headerlink" title="安装zsh和oh-my-zsh"></a>安装zsh和oh-my-zsh</h3><p>关于zsh的介绍，这里就不多说，介绍部分大家可以查看<a target="_blank" rel="noopener" href="http://www.zsh.org/">zsh官网</a>，</p>
+<p>安装的过程非常简单，（我们默认是在root下的，不需要使用sudo，如果不是root，则需要sudo）</p>
+<ul>
+<li>对于Centos 使用 <code>yum -y install zsh</code></li>
+<li>对于Ubuntu 使用<code>apt-get -y install zsh</code></li>
+</ul>
+<p>完成zsh的安装之后，可以使用<code>cat /etc/shells</code>查看当前系统下有哪些shell，会发现多了一个zsh，</p>
+<p>使用<code>chsh -s /bin/zsh root</code>命令为root用户更换shell到zsh</p>
+<p>但是这时zsh还是没有配置的状态，而zsh最强大的地方就是它可以经过配置，安装许多对应功能的插件，以提供各种各样的功能，</p>
+<p>但是zsh的配置是比较复杂的，想要全部了解还是比较难的，可以使用一下公用的配置，即<a target="_blank" rel="noopener" href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh</a>，</p>
+<p>使用以下命令进行安装oh-my-zsh</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh</span><br></pre></td></tr></table></figure>
+
+<p>众所周知的原因，后面的<code>git clone</code>会比较慢，等待即可，安装完成后显示</p>
+<p><img src="https://s1.ax1x.com/2020/03/21/8fnmyq.png" alt="oh-my-zsh结果"></p>
+<p>这时使用<code>exit</code>退出连接，然后再重连，即可看到变化，如下图，可以看到shell指示符变成了一个箭头，</p>
+<p><img src="https://s1.ax1x.com/2020/03/21/8fn61A.png" alt="结果"></p>
+<p><em>其他问题</em>：安装后会遇到Home和End键失灵的情况，对应的键改为,如果使用不习惯，可以通过配置解决，可以参考 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/volqiu/p/4670157.html">配置失灵修复</a>，但是个人感觉笔记本Ctrl a Ctrl e 比较好按，按照个人情况选择吧。</p>
+<blockquote>
+<p>Home = Ctrl + a</p>
+<p>End = Ctrl + e</p>
+</blockquote>
+<h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><p>安装过oh-my-zsh后，在本地个人的工作目录下，会有一个.zshrc文件（<code>~/.zshrc</code>）</p>
+<p>该文件即为oh-my-zsh的配置文件，可以文件中配置一些主题和插件，首先配置一些插件，下面都是我比较常用的，</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins=(</span><br><span class="line">   git  zsh-autosuggestions zsh-syntax-highlighting</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>对于插件安装的方法，在使用命令安装完成后，只需要在<code>~/.zshrc</code>中添加即可，使用vim打开<code>~/.zshrc</code>，找到如图所示的位置，添加对应的插件名，下面是我已经添加了三个插件的结果，添加完使用命令<code>source ~/.zshrc</code>即可让配置生效</p>
+<p><img src="https://s1.ax1x.com/2020/03/21/8fGP0A.png" alt="插件的位置"></p>
+<ul>
+<li>git插件，可以在命令行中显示当前本地Repo的一些信息，包括当前所在的分支等，效果如下<ul>
+<li><img src="https://s1.ax1x.com/2020/03/21/8f18fO.png" alt="git效果"></li>
+<li>这个插件是默认自带</li>
+</ul>
+</li>
+<li>zsh-syntax-highlighting<ul>
+<li>这个插件的功能是，如果你的命令输入正确了，会提供一个高亮显示，显示为绿色，否则为红色</li>
+<li>使用以下命令安装即可，并在.zshrc中加入<code>zsh-syntax-highlighting</code>即可使用</li>
+<li><code>git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-syntax-highlighting</code></li>
+<li>效果如下</li>
+<li><img src="https://s1.ax1x.com/2020/03/21/8fJ93T.png"></li>
+</ul>
+</li>
+<li>zsh-autosuggestions<ul>
+<li>该插件的功能是可以根据历史输入的命令，对当前输入的命令进行补全，安装命令如下,安装后在.zshrc中加入<code>zsh-autosuggestions</code>即可</li>
+<li><code>git clone https://github.com/zsh-users/zsh-autosuggestions $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-autosuggestions</code></li>
+<li>效果如下</li>
+<li><img src="https://s1.ax1x.com/2020/03/21/8fJoZ9.png"></li>
+<li>注意看光标的位置，只是输入了tar，这个命令非常方便，且非常常用</li>
+</ul>
+</li>
+</ul>
+<p>我只安装了这几个，所有的插件参考 <a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins">所有插件</a> ，喜欢折腾的可以自己选择</p>
+<h3 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h3><p>同样oh-my-zsh提供了许多主题，所有的主题和其预览可以查看 <a target="_blank" rel="noopener" href="https://github.com/robbyrussell/oh-my-zsh/wiki/Themes">https://github.com/robbyrussell/oh-my-zsh/wiki/Themes</a></p>
+<p>我这里使用的是<a target="_blank" rel="noopener" href="https://github.com/Powerlevel9k/powerlevel9k">powerlevel9k/powerlevel9k</a>，下面是安装步骤[^ 2]</p>
+<p>使用命令<code>git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k</code>下载主题对应的文件，</p>
+<p>在文件的对应位置，如下图</p>
+<p><img src="https://s1.ax1x.com/2020/03/21/8fX6Tf.png"></p>
+<p>将ZSH_THEME设置为如下内容即可：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZSH_THEME=&quot;powerlevel9k/powerlevel9k&quot;</span><br></pre></td></tr></table></figure>
+
+<p>另外在文件开头，加入以下语句</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export TERM=&quot;xterm-256color&quot;</span><br></pre></td></tr></table></figure>
+
+<p>然后执行<code>source ~/.zshrc</code>命令即可 ，退出vim编辑器即可看到shell已经变啦</p>
+<p><img src="https://s1.ax1x.com/2020/03/21/8fHbDK.png"></p>
+<h2 id="python安装-3"><a href="#python安装-3" class="headerlink" title="python安装[^ 3]"></a>python安装[^ 3]</h2><h3 id="安装python环境"><a href="#安装python环境" class="headerlink" title="安装python环境"></a>安装python环境</h3><p>前面安装了一些基础的部分，下面开始安装python环境，本文使用Pyenv来进行python环境的管理，</p>
+<p>首先使用以下命令安装Pyenv</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash</span><br></pre></td></tr></table></figure>
+
+<p>安装结束后，执行以下命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;export PYENV_ROOT=&quot;$HOME/.pyenv&quot;&#x27; &gt;&gt; ~/.zshrc</span><br><span class="line">echo &#x27;export PATH=&quot;$PYENV_ROOT/bin:$PATH&quot;&#x27; &gt;&gt; ~/.zshrc</span><br><span class="line">echo -e &#x27;if command -v pyenv 1&gt;/dev/null 2&gt;&amp;1; then\n eval &quot;$(pyenv init -)&quot;\nfi&#x27; &gt;&gt; ~/.zshrc</span><br><span class="line">source ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+<p>接下来就可以开始使用Pyenv的命令啦，如果对pyenv不了解的话，可以看一下简单教程，使用还是非常简单的</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/3e93311fe6cb">教程链接</a>，这里就不再赘述了</p>
+<p>首先安装一些编译安装python所需的依赖，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum -y groupinstall <span class="string">&quot;Development tools&quot;</span></span><br><span class="line">yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel</span><br><span class="line">yum install -y libffi-devel zlib1g-dev</span><br><span class="line">yum install zlib* -y</span><br></pre></td></tr></table></figure>
+
+<p>下面安装python环境，这里使用pyenv的淘宝镜像来安装python，下载对应的文件放到<code>~/.pyenv/cache</code>中，并使用pyenv进行安装，下面是一个傻瓜脚本，参考自<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000006174123">使用pyenv安装python</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v=3.7.3;wget https://npm.taobao.org/mirrors/python/$v/Python-$v.tar.xz -P ~/.pyenv/cache/;pyenv install $v </span><br></pre></td></tr></table></figure>
+
+<p>其中<code>v=3.7.3</code>代表我们想要安装3.7.3版本，如果想要安装其他版本只需修改此部分即可。</p>
+<p><img src="https://s1.ax1x.com/2020/03/21/8fv6JS.png"></p>
+<p>如果安装过程中出现如上图所示的错误，使用<code>yum -y install libffi-devel xz-devel </code>安装缺少的依赖，再次执行<code>v=3.7.3;pyenv install $v</code>继续安装即可</p>
+<p>由于安装python需要编译，所以需要花费一点时间，</p>
+<ol>
+<li>安装完成后，使用<code>pyenv versions</code>查看当前所有的python环境的版本，可以看到有我们刚刚安装的3.7.3，</li>
+<li>使用命令<code>pyenv global 3.7.3</code>即可设置全局的python版本为3.7.3，</li>
+<li>最后再使用<code>source ~/.zshrc</code>即可，如下图所示可以看到python的版本为对应的3.7.3</li>
+</ol>
+<p><img src="https://s1.ax1x.com/2020/03/21/8fzJjH.png"></p>
+<h3 id="pip换源"><a href="#pip换源" class="headerlink" title="pip换源"></a>pip换源</h3><p>完成python环境安装后，还有一步，就是对pip换源，pip原本的源在国外，在安装一些大的依赖时非常慢，所以我们需要换成国内速度比较快的源，</p>
+<p>这是换源使用的也是一个python的库，叫pqi，使用下面的命令安装即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pqi</span><br></pre></td></tr></table></figure>
+
+<p>安装成功后，使用<code>pqi ls</code>可以显示当前有哪些源可以使用，可以使用<code>pqi show</code>显示当前使用的源，如下图：</p>
+<p><img src="https://s1.ax1x.com/2020/03/21/8h95PP.png"></p>
+<p>一般在非教育网的环境下可以使用aliyun或者douban，在教育网环境下可以使用tuna或者ustc</p>
+<p>使用以下命令可以使用aliyun的源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pqi use aliyun</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>pqi show</code>查看当前源发现已经换成了aliyun的源了，速度比之前pypi的要快上不少。</p>
+<p><img src="https://s1.ax1x.com/2020/03/21/8hCKMD.png"></p>
+<p>换源之后安装numpy，速度还是很快的</p>
+<p><img src="https://s1.ax1x.com/2020/03/21/8hCTF1.png"></p>
+<p><strong>参考链接</strong>：</p>
+<ol>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010138906/article/details/78778627">https://blog.csdn.net/u010138906/article/details/78778627</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/Powerlevel9k/powerlevel9k/wiki/Install-Instructions#step-1-install-powerlevel9k">https://github.com/Powerlevel9k/powerlevel9k/wiki/Install-Instructions#step-1-install-powerlevel9k</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000006174123">https://segmentfault.com/a/1190000006174123</a></p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8E%AF%E5%A2%83/" rel="tag"># 服务器环境</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020-11-15/%E8%AE%BE%E7%BD%AEgit%E7%9A%84%E7%89%B9%E5%AE%9A%E7%BD%91%E7%AB%99%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86/" rel="next" title="设置git的特定网站使用代理">
+      设置git的特定网站使用代理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">本文环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84"><span class="nav-number">2.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%8F%90"><span class="nav-number">3.</span> <span class="nav-text">前提</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">安装过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87"><span class="nav-number">4.1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E6%9C%80%E6%96%B0%E7%9A%84git"><span class="nav-number">4.2.</span> <span class="nav-text">编译安装最新的git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zsh%E5%AE%89%E8%A3%85-1"><span class="nav-number">4.3.</span> <span class="nav-text">zsh安装[^ 1]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85zsh%E5%92%8Coh-my-zsh"><span class="nav-number">4.3.1.</span> <span class="nav-text">安装zsh和oh-my-zsh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="nav-number">4.3.2.</span> <span class="nav-text">安装插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98"><span class="nav-number">4.3.3.</span> <span class="nav-text">安装主题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python%E5%AE%89%E8%A3%85-3"><span class="nav-number">4.4.</span> <span class="nav-text">python安装[^ 3]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85python%E7%8E%AF%E5%A2%83"><span class="nav-number">4.4.1.</span> <span class="nav-text">安装python环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pip%E6%8D%A2%E6%BA%90"><span class="nav-number">4.4.2.</span> <span class="nav-text">pip换源</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ggq</p>
+  <div class="site-description" itemprop="description">用来记录一些技术的小问题和研究新技术的记录</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ggqshr" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ggqshr" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ggq</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">31k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">28 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("11/15/2020 18:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

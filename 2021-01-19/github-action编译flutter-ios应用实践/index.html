@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NRM4BSHMED"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NRM4BSHMED');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ggqshr.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="由于实验室的项目需要将flutter开发的应用做一个ios的版本，虽然flutter本身是跨平台的，但是需要编译成Ios的应用还是long way to go, 而且由于我使用的电脑是win，而开发ios应用必须要用到mac的环境，每次借电脑也不是那么方便，则在网上看到了一种可以使用github action来编译flutter ios应用的文章（github action牛逼，免费还提供mac环">
+<meta property="og:type" content="article">
+<meta property="og:title" content="github action编译flutter ios应用实践">
+<meta property="og:url" content="https://ggqshr.github.io/2021-01-19/github-action%E7%BC%96%E8%AF%91flutter-ios%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/index.html">
+<meta property="og:site_name" content="ggqshr&#39;s blog">
+<meta property="og:description" content="由于实验室的项目需要将flutter开发的应用做一个ios的版本，虽然flutter本身是跨平台的，但是需要编译成Ios的应用还是long way to go, 而且由于我使用的电脑是win，而开发ios应用必须要用到mac的环境，每次借电脑也不是那么方便，则在网上看到了一种可以使用github action来编译flutter ios应用的文章（github action牛逼，免费还提供mac环">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/19/s2CSb9.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/19/s2CP4x.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/19/s2CZKe.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/19/s2CeDH.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/19/s2CuVA.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/19/s2CKUI.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/19/s2CM5t.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/19/s2ClPP.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/19/s2Ctbj.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/19/s2CUVs.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/19/s2Cd5q.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/19/s2C0P0.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/19/s2CD2T.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/19/s2CrxU.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/19/s2CyMF.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/19/s2C6r4.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/19/s2CcqJ.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/19/s2C2Z9.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/19/s2CWI1.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/19/s2C5RK.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/19/s2CTMD.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/19/s2C7se.png">
+<meta property="article:published_time" content="2021-01-19T15:21:44.000Z">
+<meta property="article:modified_time" content="2021-02-04T14:53:08.385Z">
+<meta property="article:author" content="ggq">
+<meta property="article:tag" content="github action">
+<meta property="article:tag" content="flutter">
+<meta property="article:tag" content="ios">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s3.ax1x.com/2021/01/19/s2CSb9.png">
+
+<link rel="canonical" href="https://ggqshr.github.io/2021-01-19/github-action%E7%BC%96%E8%AF%91flutter-ios%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>github action编译flutter ios应用实践 | ggqshr's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ggqshr's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">just for record</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/ggqshr" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2021-01-19/github-action%E7%BC%96%E8%AF%91flutter-ios%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ggq">
+      <meta itemprop="description" content="用来记录一些技术的小问题和研究新技术的记录">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ggqshr's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          github action编译flutter ios应用实践
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-19 15:21:44" itemprop="dateCreated datePublished" datetime="2021-01-19T15:21:44+00:00">2021-01-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-02-04 14:53:08" itemprop="dateModified" datetime="2021-02-04T14:53:08+00:00">2021-02-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flutter/" itemprop="url" rel="index"><span itemprop="name">flutter</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>由于实验室的项目需要将flutter开发的应用做一个ios的版本，虽然flutter本身是跨平台的，但是需要编译成Ios的应用还是long way to go,</p>
+<p>而且由于我使用的电脑是win，而开发ios应用必须要用到mac的环境，每次借电脑也不是那么方便，则在网上看到了一种可以使用github action来编译flutter ios应用的文章（github action牛逼，免费还提供mac环境）。</p>
+<p>原文章的链接如下：<a target="_blank" rel="noopener" href="https://medium.com/@pratheeshrussell/building-a-flutter-ios-app-with-codemagic-and-github-actions-9cd61321119b">https://medium.com/@pratheeshrussell/building-a-flutter-ios-app-with-codemagic-and-github-actions-9cd61321119b</a></p>
+<p>作者还提供了另外一个编译ios应用的办法， 使用<code>codemagic</code>，这是一个移动应用CI网站，可以提供一些移动应用的在线编译环境，另外一种就是使用github action，两种方式我都进行了实践，都可以成功将flutter应用打包成ipa文件。</p>
+<a id="more"></a>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>要编译成ipa文件的flutter项目原来就在mac真机上成功编译过，也就是说已经解决了一些小问题，另外，此过程还是需要一个付费的开发者账号才能够完成，另外该流程假设您有一定的开发ios的基础，知道开发ios需要的各种中间步骤，比如申请各种苹果的证书等。</p>
+<p>关于苹果的各种证书可以参考这篇文章 <a target="_blank" rel="noopener" href="https://ask.dcloud.net.cn/article/152">https://ask.dcloud.net.cn/article/152</a></p>
+<h3 id="准备证书"><a href="#准备证书" class="headerlink" title="准备证书"></a>准备证书</h3><p>最后需要的有两个证书文件，一个后缀为<code>.p12</code>另外一个是<code>.mobileprovision</code>，</p>
+<h4 id="生成p12文件"><a href="#生成p12文件" class="headerlink" title="生成p12文件"></a>生成p12文件</h4><p>使用参考的文章中作者编写的<a target="_blank" rel="noopener" href="https://pratheeshrussell.github.io/IOS-Code-Sign-Helper/">工具</a>，来生成一个证书，下载该工具，然后点击新建项目</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s2CSb9"><img src="https://s3.ax1x.com/2021/01/19/s2CSb9.png" alt="github-action编译flutter-ios应用实践_0"></a></p>
+<p>随便输入一个项目名，然后选择创建的项目，然后email处可以换成自己的苹果开发者账号对应的邮箱（不知道是否需要这么做），点击Generate Sign Requests按钮，可以选择将生成的证书放到桌面，名字如下图所示：</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s2CP4x"><img src="https://s3.ax1x.com/2021/01/19/s2CP4x.png" alt="github-action编译flutter-ios应用实践_1"></a></p>
+<p>然后需要登录apple的开发者账号，<a target="_blank" rel="noopener" href="https://developer.apple.com/membercenter">https://developer.apple.com/membercenter</a></p>
+<p>然后选择Certificates, Identifiers &amp; Profiles</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s2CZKe"><img src="https://s3.ax1x.com/2021/01/19/s2CZKe.png" alt="github-action编译flutter-ios应用实践_2"></a></p>
+<p>然后点击如图所示的加号</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s2CeDH"><img src="https://s3.ax1x.com/2021/01/19/s2CeDH.png" alt="github-action编译flutter-ios应用实践_3"></a></p>
+<p>选择Apple Development 然后continue，然后会有一步让你上传一个文件，这时就把我们之前得到的证书文件上传</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s2CuVA"><img src="https://s3.ax1x.com/2021/01/19/s2CuVA.png" alt="github-action编译flutter-ios应用实践_4"></a></p>
+<p>最后完成后点击Download，下载到桌面，没有意外的话应该是这个样子的一个文件</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s2CKUI"><img src="https://s3.ax1x.com/2021/01/19/s2CKUI.png" alt="github-action编译flutter-ios应用实践_5"></a></p>
+<p>然后将我们之前使用的软件关闭，再打开，如果不关闭再重新打开的话 其他的tab无法检测到我们新建的项目，重新打开后，打开第二个tab，并选中我们之前创建的项目，<strong>注意</strong>：这里必须要创建一个密码，否则后面会有问题，可以创建一个简单的密码。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s2CM5t"><img src="https://s3.ax1x.com/2021/01/19/s2CM5t.png" alt="github-action编译flutter-ios应用实践_6"></a></p>
+<p>然后点击Locate选择我们刚刚的<code>development.cer</code>，然后点击generate p12，生成完成后，点击copy p12将p12文件拷贝到桌面，最后得到的文件如下：</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s2ClPP"><img src="https://s3.ax1x.com/2021/01/19/s2ClPP.png" alt="github-action编译flutter-ios应用实践_7"></a></p>
+<p>至此，得到了一个p12文件</p>
+<h4 id="生成mobileprovision文件"><a href="#生成mobileprovision文件" class="headerlink" title="生成mobileprovision文件"></a>生成mobileprovision文件</h4><p>这一步首先需要申请一个App ID （App的唯一标识），详情可以参考<a target="_blank" rel="noopener" href="https://ask.dcloud.net.cn/article/152">这篇文章</a>，</p>
+<p>然后回到开发者账号的Certificates, Identifiers &amp; Profiles处，点击如下图所示的地方，生成一个Profiles</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s2Ctbj"><img src="https://s3.ax1x.com/2021/01/19/s2Ctbj.png" alt="github-action编译flutter-ios应用实践_8"></a></p>
+<p>然后选中ios app development</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s2CUVs"><img src="https://s3.ax1x.com/2021/01/19/s2CUVs.png" alt="github-action编译flutter-ios应用实践_9"></a></p>
+<p>然后选择我们刚刚创建的App ID</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s2Cd5q"><img src="https://s3.ax1x.com/2021/01/19/s2Cd5q.png" alt="github-action编译flutter-ios应用实践_10"></a></p>
+<p>然后选择我们刚刚在生成<code>.p12</code>文件时生成的对应的<code>development.cer</code>，<strong>一定要对应！</strong></p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s2C0P0"><img src="https://s3.ax1x.com/2021/01/19/s2C0P0.png" alt="github-action编译flutter-ios应用实践_11"></a></p>
+<p>然后device这里可以全选</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s2CD2T"><img src="https://s3.ax1x.com/2021/01/19/s2CD2T.png" alt="github-action编译flutter-ios应用实践_12"></a></p>
+<p>最后一步，給这个profile起一个名字</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s2CrxU"><img src="https://s3.ax1x.com/2021/01/19/s2CrxU.png" alt="github-action编译flutter-ios应用实践_13"></a></p>
+<p>最后点击下载即可</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s2CyMF"><img src="https://s3.ax1x.com/2021/01/19/s2CyMF.png" alt="github-action编译flutter-ios应用实践_14"></a></p>
+<p>最后就能得到一个下图的文件</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s2C6r4"><img src="https://s3.ax1x.com/2021/01/19/s2C6r4.png" alt="github-action编译flutter-ios应用实践_15"></a></p>
+<h3 id="准备github-action-编译"><a href="#准备github-action-编译" class="headerlink" title="准备github action 编译"></a>准备github action 编译</h3><h4 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h4><p>首先需要将项目上传到github上面，然后在repository的Settings中找到Secrets，增加对应的Secrets，这里增加的变量可以在github action中通过<code>&#123;&#123; secrets.name &#125;&#125;</code>引用到，从而防止将密码明文的写在github action文件中。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s2CcqJ"><img src="https://s3.ax1x.com/2021/01/19/s2CcqJ.png" alt="github-action编译flutter-ios应用实践_16"></a></p>
+<p>CERT_PASSWORD是我们之前设置的密码</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s2C2Z9"><img src="https://s3.ax1x.com/2021/01/19/s2C2Z9.png" alt="github-action编译flutter-ios应用实践_17"></a></p>
+<p>MOBILEPROVISION_BASE64是我们的<code>.mobileprovision</code>文件的base64编码，可以使用这个<a target="_blank" rel="noopener" href="https://www.base64encode.org/">网站</a>来将其编码成base64格式，此举是为了解决Secrets不能上传文件的问题，找到<a target="_blank" rel="noopener" href="https://www.base64encode.org/%E7%BD%91%E7%AB%99%E7%9A%84Encode">https://www.base64encode.org/网站的Encode</a> files to Base64 format部分，上传文件，然后点击ENCODE，然后点击CLICK OR TAP HERE 复制其编码，并添加到repository的Secrets中，</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s2CWI1"><img src="https://s3.ax1x.com/2021/01/19/s2CWI1.png" alt="github-action编译flutter-ios应用实践_18"></a></p>
+<p>P12_BASE64的过程可以参照MOBILEPROVISION_BASE64的过程，只不过需要base64编码的文件是<code>.p12</code>文件。</p>
+<h4 id="准备action文件"><a href="#准备action文件" class="headerlink" title="准备action文件"></a>准备action文件</h4><p>在项目的.github/workflows文件夹下新建一个build.yml文件，其中的内容如下所示，这里直接使用的是<a target="_blank" rel="noopener" href="https://medium.com/@pratheeshrussell/building-a-flutter-ios-app-with-codemagic-and-github-actions-9cd61321119b">文章</a>的action文件的内容，做了一点点更改，更改了代码的分支以及使用的action插件的版本</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set the name of your workflow</span></span><br><span class="line"><span class="attr">name:</span> <span class="string">IOSBuilder</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Controls when the action will run.</span></span><br><span class="line"><span class="comment"># [workflow_dispatch] --&gt; allows to run the workflow manually</span></span><br><span class="line"><span class="comment"># you may use the following to build on each push</span></span><br><span class="line"><span class="comment"># on:</span></span><br><span class="line"><span class="comment"># push:</span></span><br><span class="line"><span class="comment"># branches: [ master ]</span></span><br><span class="line"><span class="attr">on:</span> [<span class="string">workflow_dispatch</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># A workflow run is made up of one or more jobs that can run sequentially or in parallel</span></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="comment"># In this workflow we use a single job called &quot;build&quot;</span></span><br><span class="line">  <span class="attr">build:</span></span><br><span class="line">    <span class="comment"># The type of runner ie, the OS that the job will run on. apart from mac windows and ubuntu are also available</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">macos-latest</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Steps represent a sequence of tasks that will be executed as part of the job</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="comment"># Checks-out your repository under $GITHUB_WORKSPACE, so our job can access it</span></span><br><span class="line">     <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line">       <span class="attr">with:</span> </span><br><span class="line">          <span class="attr">ref:</span> <span class="string">ios</span></span><br><span class="line"></span><br><span class="line">     <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Create</span> <span class="string">Folder</span> <span class="string">for</span> <span class="string">certificates</span> <span class="string">and</span> <span class="string">profiles</span></span><br><span class="line">       <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line">         <span class="string">mkdir</span> <span class="string">-p</span> <span class="string">~/Library/MobileDevice/Provisioning\</span> <span class="string">Profiles</span></span><br><span class="line">         <span class="string">mkdir</span> <span class="string">-p</span> <span class="string">~/Library/MobileDevice/Certificates/</span></span><br><span class="line">       </span><br><span class="line">       <span class="comment"># decode and save the p12 and provisioning files stored as secrets</span></span><br><span class="line">     <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Get</span> <span class="string">Certificate</span></span><br><span class="line">       <span class="attr">id:</span> <span class="string">certFileDecode</span></span><br><span class="line">       <span class="attr">uses:</span> <span class="string">timheuer/base64-to-file@v1.0.3</span></span><br><span class="line">       <span class="attr">with:</span></span><br><span class="line">        <span class="attr">fileName:</span> <span class="string">&#x27;certificate.p12&#x27;</span></span><br><span class="line">        <span class="attr">encodedString:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.P12_BASE64</span> <span class="string">&#125;&#125;</span></span><br><span class="line">     <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Copy</span> <span class="string">Certificate</span></span><br><span class="line">       <span class="attr">run:</span> <span class="string">mv</span> <span class="string">$&#123;&#123;</span> <span class="string">steps.certFileDecode.outputs.filePath</span> <span class="string">&#125;&#125;</span> <span class="string">~/Library/MobileDevice/Certificates/certificate.p12</span></span><br><span class="line">       </span><br><span class="line">     <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Get</span> <span class="string">Profile</span></span><br><span class="line">       <span class="attr">id:</span> <span class="string">profFileDecode</span></span><br><span class="line">       <span class="attr">uses:</span> <span class="string">timheuer/base64-to-file@v1.0.3</span></span><br><span class="line">       <span class="attr">with:</span></span><br><span class="line">        <span class="attr">fileName:</span> <span class="string">&#x27;decoded.mobileprovision&#x27;</span></span><br><span class="line">        <span class="attr">encodedString:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.MOBILEPROVISION_BASE64</span> <span class="string">&#125;&#125;</span></span><br><span class="line">     <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Copy</span> <span class="string">Profiles</span></span><br><span class="line">       <span class="attr">run:</span> <span class="string">mv</span> <span class="string">$&#123;&#123;</span> <span class="string">steps.profFileDecode.outputs.filePath</span> <span class="string">&#125;&#125;</span> <span class="string">~/Library/MobileDevice/Provisioning\</span> <span class="string">Profiles/decoded.mobileprovision</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#install the necessary dependencies</span></span><br><span class="line">     <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">python</span> <span class="string">and</span> <span class="string">codemagic</span> <span class="string">tools</span></span><br><span class="line">       <span class="attr">uses:</span> <span class="string">actions/setup-python@v2</span></span><br><span class="line">       <span class="attr">with:</span></span><br><span class="line">         <span class="attr">python-version:</span> <span class="number">3.7</span></span><br><span class="line">     <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">python</span> <span class="string">dependencies</span></span><br><span class="line">       <span class="attr">run:</span>  <span class="string">python</span> <span class="string">-m</span> <span class="string">pip</span> <span class="string">install</span> <span class="string">codemagic-cli-tools</span></span><br><span class="line">     <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Initialize</span> <span class="string">Keychain</span> <span class="string">with</span> <span class="string">certificate</span></span><br><span class="line">       <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line">         <span class="string">keychain</span> <span class="string">initialize</span></span><br><span class="line">         <span class="string">keychain</span> <span class="string">add-certificates</span> <span class="string">--certificate</span> <span class="string">~/Library/MobileDevice/Certificates/certificate.p12</span> <span class="string">--certificate-password</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.cert_password</span> <span class="string">&#125;&#125;</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">#install flutter</span></span><br><span class="line">     <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Flutter</span> <span class="string">get</span></span><br><span class="line">       <span class="attr">uses:</span> <span class="string">subosito/flutter-action@v1.4.0</span></span><br><span class="line">       <span class="attr">with:</span></span><br><span class="line">         <span class="attr">flutter-version:</span> <span class="string">&#x27;1.12.13+hotfix.9&#x27;</span></span><br><span class="line">     <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">flutter</span> <span class="string">pub</span> <span class="string">get</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#build and sign the ipa</span></span><br><span class="line">     <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Building</span> <span class="string">IPA</span></span><br><span class="line">       <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line">         <span class="string">xcode-project</span> <span class="string">use-profiles</span></span><br><span class="line">         <span class="string">flutter</span> <span class="string">build</span> <span class="string">ios</span> <span class="string">--release</span> <span class="string">--no-codesign</span></span><br><span class="line">         <span class="string">xcode-project</span> <span class="string">build-ipa</span> <span class="string">--workspace</span> <span class="string">ios/Runner.xcworkspace</span> <span class="string">--scheme</span> <span class="string">Runner</span> <span class="string">--config</span> <span class="string">Release</span></span><br><span class="line"><span class="comment">#collect the files            </span></span><br><span class="line">     <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">collect</span> <span class="string">ipa</span> <span class="string">artifacts</span></span><br><span class="line">       <span class="attr">uses:</span> <span class="string">actions/upload-artifact@v2</span></span><br><span class="line">       <span class="attr">with:</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">adhoc-ipa</span></span><br><span class="line">        <span class="comment"># Path to the release files</span></span><br><span class="line">        <span class="attr">path:</span> <span class="string">build/ios/ipa/*.ipa</span></span><br></pre></td></tr></table></figure>
+
+<p>将commit推到github上，在项目的action tab中，就可以看到对应的action，</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s2C5RK"><img src="https://s3.ax1x.com/2021/01/19/s2C5RK.png" alt="github-action编译flutter-ios应用实践_19"></a></p>
+<p>点击run workflow即可，全部完成后既可找到对应的ipa文件</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s2CTMD"><img src="https://s3.ax1x.com/2021/01/19/s2CTMD.png" alt="github-action编译flutter-ios应用实践_20"></a></p>
+<p>可以在下图的页面中找到对应的ipa文件，并可以点击下载。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s2C7se"><img src="https://s3.ax1x.com/2021/01/19/s2C7se.png" alt="github-action编译flutter-ios应用实践_21"></a></p>
+<p>至此，全部的打包工作就已经完成，可以使用github action提供的mac环境来编译flutter的ios版本。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/github-action/" rel="tag"># github action</a>
+              <a href="/tags/flutter/" rel="tag"># flutter</a>
+              <a href="/tags/ios/" rel="tag"># ios</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021-01-18/%E6%AD%A3%E5%88%99%E7%9A%84%E6%96%B9%E6%8B%AC%E5%8F%B7%E5%92%8C%E5%9C%86%E6%8B%AC%E5%8F%B7/" rel="prev" title="正则的方括号和圆括号">
+      <i class="fa fa-chevron-left"></i> 正则的方括号和圆括号
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021-01-23/pandas%E6%9B%B4%E6%96%B0%E5%A4%9A%E5%88%97/" rel="next" title="pandas更新多列">
+      pandas更新多列 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E8%AF%81%E4%B9%A6"><span class="nav-number">1.1.</span> <span class="nav-text">准备证书</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90p12%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.1.</span> <span class="nav-text">生成p12文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90mobileprovision%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.2.</span> <span class="nav-text">生成mobileprovision文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%86%E5%A4%87github-action-%E7%BC%96%E8%AF%91"><span class="nav-number">1.2.</span> <span class="nav-text">准备github action 编译</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E7%8E%AF%E5%A2%83"><span class="nav-number">1.2.1.</span> <span class="nav-text">准备环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%86%E5%A4%87action%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.2.</span> <span class="nav-text">准备action文件</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ggq</p>
+  <div class="site-description" itemprop="description">用来记录一些技术的小问题和研究新技术的记录</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ggqshr" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ggqshr" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ggq</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">31k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">28 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("11/15/2020 18:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
