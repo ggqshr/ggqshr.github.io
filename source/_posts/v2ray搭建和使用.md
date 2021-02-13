@@ -70,11 +70,11 @@ win10客户端使用的是https://github.com/2dust/v2rayN/
 
 使用起来非常简单，只需下载，然后按照配置项填写即可，有一点需要注意的是，v2rayN客户端无法手动设置本地http代理的端口，按照以下的设置开起本地的http代理后，
 
-![image-20210213220807558](v2ray搭建和使用/image-20210213220807558.png)
+[![v2ray搭建和使用_0](https://s3.ax1x.com/2021/02/13/ys1EuD.png)](https://imgchr.com/i/ys1EuD)
 
 默认的端口时socks端口的下一个，比如socks的端口是1079，那么http的代理端口就是1080，socks的端口在下图中的地方
 
-![image-20210213220826786](v2ray搭建和使用/image-20210213220826786.png)
+[![v2ray搭建和使用_1](https://s3.ax1x.com/2021/02/13/ys1nUA.png)](https://imgchr.com/i/ys1nUA)
 
 设置成1079那么本地http代理的端口就是1080，这样原来一些软件的设置就可以不用改变。
 
