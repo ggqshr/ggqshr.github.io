@@ -176,6 +176,121 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2021-05-11/ubuntu16-04-%E6%90%AD%E5%BB%BAhadoop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ggq">
+      <meta itemprop="description" content="用来记录一些技术的小问题和研究新技术的记录">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ggqshr's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021-05-11/ubuntu16-04-%E6%90%AD%E5%BB%BAhadoop/" class="post-title-link" itemprop="url">ubuntu16.04 搭建hadoop</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-05-11 11:39:21 / 修改时间：03:40:33" itemprop="dateCreated datePublished" datetime="2021-05-11T11:39:21+00:00">2021-05-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hadoop%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index"><span itemprop="name">hadoop相关</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-设置主机名"><a href="#1-设置主机名" class="headerlink" title="1. 设置主机名"></a>1. 设置主机名</h1><p>【4台机器都要修改】</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostnamectl set-hostname cd001</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-配置DNS"><a href="#2-配置DNS" class="headerlink" title="2. 配置DNS"></a>2. 配置DNS</h1><p>【配置本地hosts映射】</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;hosts</span><br><span class="line"></span><br><span class="line">主机IP 主机名</span><br><span class="line">172.20.46.89 cdh001</span><br><span class="line">172.20.46.90 cdh002</span><br><span class="line">172.20.46.93 chd003</span><br><span class="line">172.20.46.94 cdh004</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-关闭防火墙"><a href="#3-关闭防火墙" class="headerlink" title="3. 关闭防火墙"></a>3. 关闭防火墙</h1><p>【4台机器都要做】</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 关闭服务</span><br><span class="line">systemctl stop firewalld</span><br><span class="line"># 关闭开机自启动</span><br><span class="line">systemctl disable firewalld</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-配置免密登陆"><a href="#4-配置免密登陆" class="headerlink" title="4. 配置免密登陆"></a>4. 配置免密登陆</h1><p>【4台机器都要做】</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 生成ssh密钥【会在~&#x2F;ssh文件夹下生成id_rsa和id_rsa.pub两个文件】</span><br><span class="line">ssh-keygen -t rsa</span><br><span class="line"># 将私钥拷贝到其他机器</span><br><span class="line">ssh-copy-id root@cdh002</span><br><span class="line">ssh-copy-id root@cdh003</span><br><span class="line">ssh-copy-id root@cdh004</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-下载Java和hadoop包"><a href="#5-下载Java和hadoop包" class="headerlink" title="5. 下载Java和hadoop包"></a>5. 下载Java和hadoop包</h1><p>【放在/root/opt/文件夹下】</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># cd到&#x2F;opt下，下载hadoop</span><br><span class="line">wget https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;apache&#x2F;hadoop&#x2F;common&#x2F;hadoop-2.10.1&#x2F;hadoop-2.10.1.tar.gz</span><br><span class="line"></span><br><span class="line"># 下载java的jdk</span><br><span class="line">wget https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;AdoptOpenJDK&#x2F;9&#x2F;jdk&#x2F;x64&#x2F;linux&#x2F;OpenJDK9-OPENJ9_x64_Linux_jdk-9.0.4.12_openj9-0.9.0.tar.gz</span><br><span class="line"></span><br><span class="line"># 解压</span><br><span class="line">tar -zxvf jdk....tar.gz</span><br><span class="line">tar -zxvf hadoop....tar.gz</span><br><span class="line"></span><br><span class="line"># 配置环境变量</span><br><span class="line">vim &#x2F;etc&#x2F;profile</span><br><span class="line"># 追加下面内容</span><br><span class="line">export JAVA_HOME&#x3D;&#x2F;opt&#x2F;jdk... # jdk安装路径</span><br><span class="line">export CLASSPATH&#x3D;$JAVA_HOME&#x2F;lib</span><br><span class="line">export PATH&#x3D;$PATH:$JAVA_HOME&#x2F;bin</span><br><span class="line"></span><br><span class="line">export HADOOP_HOME&#x3D;&#x2F;opt&#x2F;hadoop.. #hadoop安装路径</span><br><span class="line">export PATH&#x3D;$PATH:$HADOOP_HOME&#x2F;bin</span><br><span class="line">export PATH&#x3D;$PATH:$HADOOP_HOME&#x2F;sbin</span><br><span class="line">export HADOOP_CONF_DIR&#x3D;$&#123;HADOOP_HOME&#125;&#x2F;etc&#x2F;hadoop</span><br><span class="line"></span><br><span class="line"># 使得配置文件生效</span><br><span class="line">source &#x2F;etc&#x2F;profile</span><br><span class="line"></span><br><span class="line"># 将Jdk和环境配置文件拷贝到其他机器</span><br><span class="line">scp -r &#x2F;opt&#x2F;jdk... root@cdh002&#x2F;003&#x2F;004:&#x2F;opt&#x2F;</span><br><span class="line">scp -r &#x2F;etc&#x2F;profile root@cdh002&#x2F;003&#x2F;004:&#x2F;etc&#x2F;profile</span><br><span class="line">【-r:文件夹】</span><br></pre></td></tr></table></figure>
+
+<h1 id="6-配置hadoop环境脚本文件中的JAVA-HOME参数"><a href="#6-配置hadoop环境脚本文件中的JAVA-HOME参数" class="headerlink" title="6. 配置hadoop环境脚本文件中的JAVA_HOME参数"></a>6. 配置hadoop环境脚本文件中的JAVA_HOME参数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 进入hadoop安装目录下的&#x2F;etc&#x2F;hadoop文件夹下</span><br><span class="line"># 分别在hadoop_env.sh\mapred_env.sh\yarn_env.sh文件中添加或修改参数</span><br><span class="line">export JAVA_HOME&#x3D;&quot;&#x2F;opt&#x2F;jdk...&quot; # jdk安装文件夹</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>此处修改的JAVA_HOME的地址不能用${JAVA_HOME},会报错，一定要修改成绝对路径</strong></li>
+</ul>
+<h1 id="7-修改hadoop配置文件"><a href="#7-修改hadoop配置文件" class="headerlink" title="7. 修改hadoop配置文件"></a>7. 修改hadoop配置文件</h1><ol>
+<li>core-site.xml<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;fs.defaultFS&lt;&#x2F;name&gt;</span><br><span class="line">                &lt;value&gt;hdfs:&#x2F;&#x2F;cdh001:9000&lt;&#x2F;value&gt;</span><br><span class="line">        &lt;&#x2F;property&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;hadoop.tmp.dir&lt;&#x2F;name&gt;</span><br><span class="line">                &lt;value&gt;&#x2F;home&#x2F;hadoop&#x2F;data&#x2F;hadoopdata&lt;&#x2F;value&gt;</span><br><span class="line">        &lt;&#x2F;property&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure></li>
+<li>hdfs-site.xml<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;dfs.namenode.name.dir&lt;&#x2F;name&gt;</span><br><span class="line">                &lt;value&gt;&#x2F;home&#x2F;hadoop&#x2F;data&#x2F;hadoopdata&#x2F;name&lt;&#x2F;value&gt;</span><br><span class="line">                &lt;description&gt;为了保证元数据的安全一般配置多个不同目录&lt;&#x2F;description&gt;</span><br><span class="line">        &lt;&#x2F;property&gt;</span><br><span class="line"></span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;dfs.datanode.data.dir&lt;&#x2F;name&gt;</span><br><span class="line">                &lt;value&gt;&#x2F;home&#x2F;hadoop&#x2F;data&#x2F;hadoopdata&#x2F;data&lt;&#x2F;value&gt;</span><br><span class="line">                &lt;description&gt;datanode 的数据存储目录&lt;&#x2F;description&gt;</span><br><span class="line">        &lt;&#x2F;property&gt;</span><br><span class="line"></span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;dfs.replication&lt;&#x2F;name&gt;</span><br><span class="line">                &lt;value&gt;2&lt;&#x2F;value&gt;</span><br><span class="line">                &lt;description&gt;HDFS 的数据块的副本存储个数, 默认是3&lt;&#x2F;description&gt;</span><br><span class="line">        &lt;&#x2F;property&gt;</span><br><span class="line"></span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;dfs.secondary.http.address&lt;&#x2F;name&gt;</span><br><span class="line">                &lt;value&gt;cdh001:50090&lt;&#x2F;value&gt;</span><br><span class="line">                &lt;description&gt;secondarynamenode 运行节点的信息，和 namenode 不同节点&lt;&#x2F;description&gt;</span><br><span class="line">        &lt;&#x2F;property&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure></li>
+<li>mapred-site.xml<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cp mapred-site.xml.template mapred-site.xml</span><br><span class="line"> vi mapred-site.xml</span><br><span class="line"> # 修改内容如下</span><br><span class="line"> &lt;configuration&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;mapreduce.framework.name&lt;&#x2F;name&gt;</span><br><span class="line">                &lt;value&gt;yarn&lt;&#x2F;value&gt;</span><br><span class="line">        &lt;&#x2F;property&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure></li>
+<li>yarn-site.xml<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- Site specific YARN configuration properties --&gt;</span><br><span class="line"></span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;yarn.resourcemanager.hostname&lt;&#x2F;name&gt;</span><br><span class="line">                &lt;value&gt;hadoop4&lt;&#x2F;value&gt;</span><br><span class="line">        &lt;&#x2F;property&gt;</span><br><span class="line">        </span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;yarn.nodemanager.aux-services&lt;&#x2F;name&gt;</span><br><span class="line">                &lt;value&gt;mapreduce_shuffle&lt;&#x2F;value&gt;</span><br><span class="line">                &lt;description&gt;YARN 集群为 MapReduce 程序提供的 shuffle 服务&lt;&#x2F;description&gt;</span><br><span class="line">        &lt;&#x2F;property&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure></li>
+<li>slaves<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cdh001</span><br><span class="line">cdh002</span><br><span class="line">cdh003</span><br><span class="line">cdh004</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="8-将配置好的hadoop文件夹拷贝至其他机器"><a href="#8-将配置好的hadoop文件夹拷贝至其他机器" class="headerlink" title="8. 将配置好的hadoop文件夹拷贝至其他机器"></a>8. 将配置好的hadoop文件夹拷贝至其他机器</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r &#x2F;opt&#x2F;hadoop... root@cdh002&#x2F;003&#x2F;004:&#x2F;opt&#x2F;</span><br></pre></td></tr></table></figure>
+
+<h1 id="9-格式化和启动"><a href="#9-格式化和启动" class="headerlink" title="9. 格式化和启动"></a>9. 格式化和启动</h1><p>【只有cdh001需要格式化和启动】</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 格式化（去hadoop安装目录下）</span><br><span class="line">bin&#x2F;hdfs namenode -format</span><br><span class="line"></span><br><span class="line"># 启动</span><br><span class="line">sbin&#x2F;start-dfs.sh</span><br><span class="line">sbin&#x2F;start-yarn.sh</span><br></pre></td></tr></table></figure>
+
+<h1 id="10-验证"><a href="#10-验证" class="headerlink" title="10. 验证"></a>10. 验证</h1><p>每个机器输入jps命令查看</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2021-05-06/shell-%E6%8C%89%E7%85%A7%E6%8C%87%E5%AE%9A%E7%AC%A6%E5%8F%B7%E5%88%87%E5%89%B2%E5%AD%97%E7%AC%A6%E4%B8%B2-%E6%AF%94%E5%AF%B9%E4%B8%A4%E4%B8%AA%E6%96%87%E4%BB%B6%E7%9A%84%E5%B7%AE%E9%9B%86%E5%92%8C%E4%BA%A4%E9%9B%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -199,10 +314,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-05-06 09:30:27 / 修改时间：01:42:14" itemprop="dateCreated datePublished" datetime="2021-05-06T09:30:27+00:00">2021-05-06</time>
+              <time title="创建时间：2021-05-06 09:30:27" itemprop="dateCreated datePublished" datetime="2021-05-06T09:30:27+00:00">2021-05-06</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-11 03:40:33" itemprop="dateModified" datetime="2021-05-11T03:40:33+00:00">2021-05-11</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -295,7 +416,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-06 01:42:14" itemprop="dateModified" datetime="2021-05-06T01:42:14+00:00">2021-05-06</time>
+                <time title="修改时间：2021-05-11 03:40:33" itemprop="dateModified" datetime="2021-05-11T03:40:33+00:00">2021-05-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -383,7 +504,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-06 01:42:14" itemprop="dateModified" datetime="2021-05-06T01:42:14+00:00">2021-05-06</time>
+                <time title="修改时间：2021-05-11 03:40:33" itemprop="dateModified" datetime="2021-05-11T03:40:33+00:00">2021-05-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -472,7 +593,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-06 01:42:14" itemprop="dateModified" datetime="2021-05-06T01:42:14+00:00">2021-05-06</time>
+                <time title="修改时间：2021-05-11 03:40:33" itemprop="dateModified" datetime="2021-05-11T03:40:33+00:00">2021-05-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -564,7 +685,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-06 01:42:14" itemprop="dateModified" datetime="2021-05-06T01:42:14+00:00">2021-05-06</time>
+                <time title="修改时间：2021-05-11 03:40:33" itemprop="dateModified" datetime="2021-05-11T03:40:33+00:00">2021-05-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -657,7 +778,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-06 01:42:14" itemprop="dateModified" datetime="2021-05-06T01:42:14+00:00">2021-05-06</time>
+                <time title="修改时间：2021-05-11 03:40:33" itemprop="dateModified" datetime="2021-05-11T03:40:33+00:00">2021-05-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -752,7 +873,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-06 01:42:14" itemprop="dateModified" datetime="2021-05-06T01:42:14+00:00">2021-05-06</time>
+                <time title="修改时间：2021-05-11 03:40:33" itemprop="dateModified" datetime="2021-05-11T03:40:33+00:00">2021-05-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -848,7 +969,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-06 01:42:14" itemprop="dateModified" datetime="2021-05-06T01:42:14+00:00">2021-05-06</time>
+                <time title="修改时间：2021-05-11 03:40:33" itemprop="dateModified" datetime="2021-05-11T03:40:33+00:00">2021-05-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -948,7 +1069,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-06 01:42:14" itemprop="dateModified" datetime="2021-05-06T01:42:14+00:00">2021-05-06</time>
+                <time title="修改时间：2021-05-11 03:40:33" itemprop="dateModified" datetime="2021-05-11T03:40:33+00:00">2021-05-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -994,102 +1115,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2021-01-30/centos7%E5%AE%89%E8%A3%85git-lfs/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ggq">
-      <meta itemprop="description" content="用来记录一些技术的小问题和研究新技术的记录">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ggqshr's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021-01-30/centos7%E5%AE%89%E8%A3%85git-lfs/" class="post-title-link" itemprop="url">centos7安装git-lfs</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-30 10:12:11" itemprop="dateCreated datePublished" datetime="2021-01-30T10:12:11+00:00">2021-01-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-06 01:42:14" itemprop="dateModified" datetime="2021-05-06T01:42:14+00:00">2021-05-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>180</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>centos7上安装git-lfs的方式，不想win10版本的git，安装时就有lfs的支持，而是需要手动安装</p>
-<p>首先到lfs的github上找到对应版本的rpm文件</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/git-lfs/git-lfs/releases/tag/v2.13.2">https://github.com/git-lfs/git-lfs/releases/tag/v2.13.2</a></p>
-<p>如下图位置</p>
-<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/yFthWt"><img src="https://s3.ax1x.com/2021/01/30/yFthWt.png" alt="centos7安装git-lfs_0"></a></p>
-<p>点击下载，然后传到服务器上，使用命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh lfs.rpm</span><br></pre></td></tr></table></figure>
-
-<p>即可完成安装</p>
-
       
     </div>
 
@@ -1173,20 +1198,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1227,13 +1252,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">34k</span>
+    <span title="站点总字数">38k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">31 分钟</span>
+    <span title="站点阅读时长">34 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
