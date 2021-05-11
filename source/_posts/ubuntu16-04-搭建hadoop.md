@@ -13,6 +13,7 @@ categories: hadoop相关
 hostnamectl set-hostname cd001
 ```
 
+<!-- more -->
 # 2. 配置DNS
 【配置本地hosts映射】
 ```
