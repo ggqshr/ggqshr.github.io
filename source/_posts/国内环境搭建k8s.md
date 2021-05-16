@@ -110,7 +110,7 @@ sudo kubeadm init --config kubeadm.conf
 
 最后看到如下的页面，就代表配置成功了
 
-![image-20210514192410698](Cenots7国内环境搭建k8s/image-20210514192410698.png)
+[![国内环境搭建k8s_0](https://z3.ax1x.com/2021/05/16/gcR2sP.png)](https://imgtu.com/i/gcR2sP)
 
 在其他机器上只需要使用其输出的命令即可加入到主节点当中
 
