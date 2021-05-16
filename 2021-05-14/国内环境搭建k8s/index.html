@@ -38,7 +38,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://z3.ax1x.com/2021/05/16/gcR2sP.png">
 <meta property="article:published_time" content="2021-05-14T16:30:21.000Z">
-<meta property="article:modified_time" content="2021-05-16T05:20:24.101Z">
+<meta property="article:modified_time" content="2021-05-16T05:59:30.471Z">
 <meta property="article:author" content="ggq">
 <meta property="article:tag" content="k8s">
 <meta name="twitter:card" content="summary">
@@ -212,7 +212,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-16 05:20:24" itemprop="dateModified" datetime="2021-05-16T05:20:24+00:00">2021-05-16</time>
+                <time title="修改时间：2021-05-16 05:59:30" itemprop="dateModified" datetime="2021-05-16T05:59:30+00:00">2021-05-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -292,6 +292,7 @@
 <p>在其他机器上只需要使用其输出的命令即可加入到主节点当中</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubeadm join 主机ip:6443 --token abcdef.0123456789abcdef \</span><br><span class="line">        --discovery-token-ca-cert-hash sha256:fcccd18a50172222ac630af392f2b196da4690c70b2298e18657e30105933</span><br></pre></td></tr></table></figure>
 
+<p>另外也可以参考这种方式，自己搭建gcr的代理镜像，但是我在搭建k8s的1.21.0版本时，发现有些镜像使用这种方式下载不到</p>
 
     </div>
 
@@ -313,7 +314,10 @@
     <a href="/2021-05-11/ubuntu16-04-%E6%90%AD%E5%BB%BAhadoop/" rel="prev" title="ubuntu16.04 搭建hadoop">
       <i class="fa fa-chevron-left"></i> ubuntu16.04 搭建hadoop
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021-05-16/requests%E5%8F%91%E9%80%81post%E8%AF%B7%E6%B1%82%E7%9A%84Content-type%E7%9B%B8%E5%85%B3/" rel="next" title="requests发送post请求的Content-type相关">
+      requests发送post请求的Content-type相关 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -386,20 +390,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -440,13 +444,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">40k</span>
+    <span title="站点总字数">41k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">36 分钟</span>
+    <span title="站点阅读时长">38 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
