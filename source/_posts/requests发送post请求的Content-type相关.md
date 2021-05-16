@@ -20,7 +20,7 @@ requests.post("http://httpbin.org/post",data={"test":1})
 
 这样即可发送Content-type为application/x-www-form-urlencoded的请求，结果如下图：
 
-![image-20210516132701604](requests发送post请求的Content-type相关/image-20210516132701604.png)
+[![requests发送post请求的Content-type相关_0](https://z3.ax1x.com/2021/05/16/gchLLt.png)](https://imgtu.com/i/gchLLt)
 
 ## Content-type为multipart/form-data
 
@@ -32,9 +32,9 @@ requests.post("http://httpbin.org/post",files={"test":(None,1)})
 
 这样的结果如下图：可以看到form字段为我们对应传入的数据，
 
-![image-20210516133512535](requests发送post请求的Content-type相关/image-20210516133512535.png)
+[![requests发送post请求的Content-type相关_1](https://z3.ax1x.com/2021/05/16/gchXeP.png)](https://imgtu.com/i/gchXeP)
 
 如果不采用`{test:(None,1)}`的写法， 直接将`{test:1}`传入到files字段中的话，结果如下图，对应的数据跑到了files字段当中，这意味着把数据当作文件去传输了，在某些情况下，就会导致服务端收不到数据且爬虫的情况下，请求不到想要的数据。
 
-![image-20210516133756806](requests发送post请求的Content-type相关/image-20210516133756806.png)
+[![requests发送post请求的Content-type相关_2](https://z3.ax1x.com/2021/05/16/gchjdf.png)](https://imgtu.com/i/gchjdf)
 
