@@ -48,7 +48,7 @@ wget https://raw.githubusercontent.com/yobabyshark/wireguard/master/wireguard_in
 wg-quick up wg0
 ```
 
-将node1的配置文件拷贝到node1上，然后同样安装wireGuard，修改一下服务器的端口等信息，启动客户端，如果启动有问题,出现如下日志：
+将ali的配置文件拷贝到node1上，然后同样安装wireGuard，修改一下服务器的端口等信息，启动客户端，如果启动有问题,出现如下日志：
 
 ```
 argument "suppress_prefixlength" is wrong: Failed to parse rule type
