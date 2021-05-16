@@ -119,3 +119,4 @@ kubeadm join 主机ip:6443 --token abcdef.0123456789abcdef \
         --discovery-token-ca-cert-hash sha256:fcccd18a50172222ac630af392f2b196da4690c70b2298e18657e30105933
 ```
 
+另外也可以参考这种方式，自己搭建gcr的代理镜像，但是我在搭建k8s的1.21.0版本时，发现有些镜像使用这种方式下载不到
