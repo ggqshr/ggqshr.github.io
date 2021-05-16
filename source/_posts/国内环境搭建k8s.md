@@ -16,6 +16,7 @@ categories: k8s
 
 按照官方的文档，[链接](https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
 
+<!-- more -->
 首先设置允许桥接流量
 
 ```bash

@@ -12,7 +12,7 @@ categories: openssl
 在服务端设置了自己生成的证书，在客户端只需要手动的信任这个证书。
 
 使用下列命令来生成临时的证书
-
+<!-- more -->
 ```bash
 signdomain=*.webmaster.me
 openssl req -nodes \

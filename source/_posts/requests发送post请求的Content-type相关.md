@@ -13,7 +13,7 @@ categories: python
 ## Content-type为application/x-www-form-urlencoded
 
 这应该是用的最多的一种情况，如果在发送post请求时，需要Content-type为application/x-www-form-urlencoded，则使用一下代码即可
-
+<!-- more -->
 ```python
 requests.post("http://httpbin.org/post",data={"test":1})
 ```
