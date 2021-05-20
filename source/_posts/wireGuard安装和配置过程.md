@@ -24,13 +24,14 @@ categories: wireGuard
 
 ## 安装
 
-wireGuard需要运行在内核态，虽然配置较为简单，但是安装过程相对来说比较复杂一些，因为需要更新内核，这里使用的是一键安装脚本：
+wireGuard需要运行在内核态，这里使用的是一键安装脚本
 
 ```bash
-wget https://raw.githubusercontent.com/yobabyshark/wireguard/master/wireguard_install.sh && chmod +x wireguard_install.sh && ./wireguard_install.sh
+curl -O https://raw.githubusercontent.com/angristan/wireguard-install/master/wireguard-install.sh
+chmod +x wireguard-install.sh
+./wireguard-install.sh
 ```
-
-首先选择升级内核，然后重启机器，然后在安装wireGuard，
+安装过程中一些ip地址之类的可以随便填写，随后需要修改配置文件
 
 完成安装后，wireGuard的配置文件默认是在/etc/wireguard/wg0.conf
 
@@ -133,6 +134,16 @@ tcpdump -i wg0 icmp -nn
 如果能够看到`192.168.1.193` 到`192.168.1.194`的icmp报文，且`192.168.1.194`能够正常回复，则说明node1的SNAT的配置是成功的，则node1->node2的路也是通的，这样就完成了整体的配置。
 
 这时在手机上下载wirdGuard的客户端，并且导入phone的配置文件，同样设置一下ali上的wirdguard监听的端口，连接vpn，然后输入node2的ip访问node2的服务，如果能够访问成功，则说明整体搭建完毕。
+
+## 错误处理
+
+如果安装结束之后发现，主机能够ping通各个peer，而各个peer之间无法互相ping通，则检查一下iptables
+```bash
+iptables -t filter -L
+```
+检查一下filter表，看看是不是配置的网段被drop了,下图这样就是被drop了，如果你的网段是`10.77.77.0/24`，就会发现peer之间无法ping通
+
+![image-20210520114419047](wireGuard安装和配置过程/image-20210520114419047.png)
 
 
 
