@@ -143,7 +143,7 @@ iptables -t filter -L
 ```
 检查一下filter表，看看是不是配置的网段被drop了,下图这样就是被drop了，如果你的网段是`10.77.77.0/24`，就会发现peer之间无法ping通
 
-![image-20210520114419047](wireGuard安装和配置过程/image-20210520114419047.png)
+[![wireGuard安装和配置过程_4](https://z3.ax1x.com/2021/05/20/gokOWd.png)](https://imgtu.com/i/gokOWd)
 
 
 
