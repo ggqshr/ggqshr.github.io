@@ -159,6 +159,6 @@ spec:
   - 192.168.0.10
 ```
 
-![image-20210521175921556](国内环境搭建k8s/image-20210521175921556.png)
+[![国内环境搭建k8s_2](https://z3.ax1x.com/2021/05/21/gHIgxJ.png)](https://imgtu.com/i/gHIgxJ)
 
 参考链接 https://stackoverflow.com/questions/44110876/kubernetes-service-external-ip-pending
