@@ -123,7 +123,7 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documen
 
 最后在master节点上使用`kubectl get nodes` 看到master节点的状态是ready就可以了,如果不行的话执行一下输出中的如下部分，将配置文件复制并改一下权限
 
-![image-20210521175140638](国内环境搭建k8s/image-20210521175140638.png)
+[![国内环境搭建k8s_1](https://z3.ax1x.com/2021/05/21/gH581J.png)](https://imgtu.com/i/gH581J)
 
 在其他机器上只需要使用其输出的命令即可加入到主节点当中
 
