@@ -145,3 +145,20 @@ kubectl taint node localhost.localdomain node-role.kubernetes.io/master-
 可以参考这个的解决方案  https://github.com/kubernetes/kubernetes/issues/70202#issuecomment-481173403
 
 另外也可以参考[这种方式](https://segmentfault.com/a/1190000022369750)，自己搭建gcr的代理镜像服务器，但是我在搭建k8s的1.21.0版本时，发现有些镜像使用这种方式下载不到
+
+
+## 其他问题
+如果自己安装的k8s 是无法使用LoadBalance类型的service的，需要自己指定一个外部的ip，如果不指定的话，
+使用`kubectl get svc` 查看对应LoadBalancer的外部IP一直是pending
+在yml文件中指定 externalIPs字段
+```yaml
+...
+spec:
+  type: LoadBalancer
+  externalIPs:
+  - 192.168.0.10
+```
+
+![image-20210521175921556](国内环境搭建k8s/image-20210521175921556.png)
+
+参考链接 https://stackoverflow.com/questions/44110876/kubernetes-service-external-ip-pending
