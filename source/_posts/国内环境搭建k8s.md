@@ -81,13 +81,15 @@ sudo systemctl enable kubelet
 kubeadm config print init-defaults > kubeadm.conf
 ```
 
-然后修改kubeadm.conf中的两个地方，
+然后修改kubeadm.conf中的三个地方，
 
 ```yaml
 改成阿里的镜像
 imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers 
 将1.1.1.1改成自己主机的ip
 advertiseAddress: 1.1.1.1
+nenetworking:
+ podSubnet: 10.244.0.0/16 # 添加这个，为以后的flannel做准备
 ```
 
 然后使用以下命令来拉取需要的镜像
@@ -119,7 +121,9 @@ sudo kubeadm init --config kubeadm.conf
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 ```
 
-最后在master节点上使用`kubectl get nodes` 看到master节点的状态是ready就可以了
+最后在master节点上使用`kubectl get nodes` 看到master节点的状态是ready就可以了,如果不行的话执行一下输出中的如下部分，将配置文件复制并改一下权限
+
+![image-20210521175140638](国内环境搭建k8s/image-20210521175140638.png)
 
 在其他机器上只需要使用其输出的命令即可加入到主节点当中
 
@@ -127,5 +131,17 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documen
 kubeadm join 主机ip:6443 --token abcdef.0123456789abcdef \
         --discovery-token-ca-cert-hash sha256:fcccd18a50172222ac630af392f2b196da4690c70b2298e18657e30105933
 ```
+
+如果只想搭建一个单节点的k8s，想在master上面运行pods，则需要以下命令
+
+```bash
+kubectl taint node localhost.localdomain node-role.kubernetes.io/master-
+```
+
+如果在运行pod时，使用describe 发现pods有如下日志：
+
+> Flannel (NetworkPlugin cni) error: /run/flannel/subnet.env: no such file or directory
+
+可以参考这个的解决方案  https://github.com/kubernetes/kubernetes/issues/70202#issuecomment-481173403
 
 另外也可以参考[这种方式](https://segmentfault.com/a/1190000022369750)，自己搭建gcr的代理镜像服务器，但是我在搭建k8s的1.21.0版本时，发现有些镜像使用这种方式下载不到
