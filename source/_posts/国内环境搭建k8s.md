@@ -113,6 +113,14 @@ sudo kubeadm init --config kubeadm.conf
 
 [![国内环境搭建k8s_0](https://z3.ax1x.com/2021/05/16/gcR2sP.png)](https://imgtu.com/i/gcR2sP)
 
+然后设置网络相关，使用以下命令
+
+```bash
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+```
+
+最后在master节点上使用`kubectl get nodes` 看到master节点的状态是ready就可以了
+
 在其他机器上只需要使用其输出的命令即可加入到主节点当中
 
 ```bash
