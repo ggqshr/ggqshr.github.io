@@ -162,3 +162,5 @@ spec:
 [![国内环境搭建k8s_2](https://z3.ax1x.com/2021/05/21/gHIgxJ.png)](https://imgtu.com/i/gHIgxJ)
 
 参考链接 https://stackoverflow.com/questions/44110876/kubernetes-service-external-ip-pending
+
+如果下载不了镜像也可以采取这种方式，自己通过阿里云的服务来构建https://mp.weixin.qq.com/s/kf0SrktAze3bT7LcIveDYw
