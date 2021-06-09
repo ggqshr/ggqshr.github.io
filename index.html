@@ -176,6 +176,96 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2021-06-09/drone%E4%BD%BF%E7%94%A8vault%E4%BD%9C%E4%B8%BA%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E5%AD%98%E5%82%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ggq">
+      <meta itemprop="description" content="用来记录一些技术的小问题和研究新技术的记录">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ggqshr's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021-06-09/drone%E4%BD%BF%E7%94%A8vault%E4%BD%9C%E4%B8%BA%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E5%AD%98%E5%82%A8/" class="post-title-link" itemprop="url">drone使用vault作为敏感信息存储</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-06-09 14:12:37 / 修改时间：06:23:22" itemprop="dateCreated datePublished" datetime="2021-06-09T14:12:37+00:00">2021-06-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/drone/" itemprop="url" rel="index"><span itemprop="name">drone</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>使用vault来存储secret，需要使用drone的drone-vault插件<br>docker-compose文件内容如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&quot;2&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">gitea:</span></span><br><span class="line">    <span class="attr">external:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">drone:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">drone/drone</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">DRONE_GITEA_SERVER=http://1.2.3.4:18080</span>  <span class="comment"># gitea的地址</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">DRONE_GITEA_CLIENT_ID=ff1a8b12-d53d-40f6-8352-168e22a430d0</span> </span><br><span class="line">    <span class="bullet">-</span> <span class="string">DRONE_GITEA_CLIENT_SECRET=xQCLpsvFPhw7-FBQBTEbPtODvTBsD5pPO4n4f0q9oxA=</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">DRONE_RPC_SECRET=123456789</span> </span><br><span class="line">    <span class="bullet">-</span> <span class="string">DRONE_SERVER_HOST=1.2.3.4:10000</span> <span class="comment"># 写外部能访问到的地址</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">DRONE_SERVER_PROTO=http</span> </span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">gitea</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">$HOME/data/drone:/data</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;10000:80&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">ssh_runner:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">drone/drone-runner-ssh</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">DRONE_RPC_SECRET=123456789</span> </span><br><span class="line">    <span class="bullet">-</span> <span class="string">DRONE_RPC_HOST=drone:80</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">DRONE_RPC_PROTO=http</span> </span><br><span class="line">    <span class="bullet">-</span> <span class="string">DRONE_RUNNER_CAPACITY=3</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">DRONE_RUNNER_NAME=ssh_tx</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">DRONE_SECRET_PLUGIN_ENDPOINT=http://drone_vault:3000</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">DRONE_SECRET_PLUGIN_TOKEN=7890bcce69bb685a9a424767fe9d1be1</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">gitea</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">docker_runner:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">drone/drone-runner-docker</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">DRONE_RPC_SECRET=123456789</span> </span><br><span class="line">    <span class="bullet">-</span> <span class="string">DRONE_RPC_HOST=drone:80</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">DRONE_RPC_PROTO=http</span> </span><br><span class="line">    <span class="bullet">-</span> <span class="string">DRONE_RUNNER_CAPACITY=2</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">DRONE_RUNNER_NAME=docker_tx</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">DRONE_SECRET_PLUGIN_ENDPOINT=http://drone_vault:3000</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">DRONE_SECRET_PLUGIN_TOKEN=7890bcce69bb685a9a424767fe9d1be1</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">gitea</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">vault:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">vault:latest</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">vault</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">gitea</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">$HOME/data/vault/file:/vault/file</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">$HOME/data/vault/config:/vault/config</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">$HOME/data/vault/logs:/vault/logs</span></span><br><span class="line">    <span class="attr">cap_add:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">IPC_LOCK</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">VAULT_API_ADDR=http://127.0.0.1:8200</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">VAULT_ADDR=http://127.0.0.1:8200</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">VAULT_LOCAL_CONFIG=&#123;&quot;backend&quot;:&#123;&quot;file&quot;:&#123;&quot;path&quot;:&quot;/vault/file&quot;&#125;&#125;,&quot;default_lease_ttl&quot;:&quot;168h&quot;,&quot;max_lease_ttl&quot;:&quot;720h&quot;,&quot;ui&quot;:true,&quot;listener&quot;:&#123;&quot;tcp&quot;:&#123;&quot;address&quot;:&quot;0.0.0.0:8200&quot;,&quot;tls_disable&quot;:1&#125;&#125;&#125;</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">10001</span><span class="string">:8200</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">vault</span> <span class="string">server</span> <span class="string">-config=/vault/config/local.json</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">drone-vault:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">drone/vault</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">drone_vault</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">gitea</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">DRONE_SECRET=7890bcce69bb685a9a424767fe9d1be1</span> <span class="comment">#和ssh_runner以及docker_runner相同</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">DEBUG=true</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">VAULT_ADDR=http://vault:8200</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">VAULT_TOKEN_RENEWAL=84h</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">VAULT_TOKEN_TTL=168h</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">VAULT_TOKEN=s.CQye7biA8bvF8YybOIiaTZtF</span> </span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">3000</span><span class="string">:3000</span></span><br></pre></td></tr></table></figure>
+<p>部署完成后，可以使用drone的cli来测试一下能不能取的到值，需要指定环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> DRONE_SECRET_SECRET=7890bcce69bb685a9a424767fe9d1be1 <span class="comment"># 和和ssh_runner以及docker_runner以及drone-vault相同</span></span><br><span class="line"><span class="built_in">export</span> DRONE_SECRET_ENDPOINT=http://127.0.0.1:3000 <span class="comment"># 指定drone-vault对外映射的地址</span></span><br></pre></td></tr></table></figure>
+
+<p>设置完成后，即可使用命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drone plugins secret get crawl/data/server user --repo octocat/hello-world</span><br></pre></td></tr></table></figure>
+<p>假如在vault中设定的kv secret是crawl/server，那么在drone cli中需要写crawl/data/server，在build.yml中也是同理。后面的user是crawl/server路径下的key名  –repo 随便指定即可</p>
+<p>在build.yml中取vault的值采取以下形式</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">pipeline</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">ssh</span></span><br><span class="line"><span class="attr">name:</span> <span class="string">deploy_to_server</span></span><br><span class="line"></span><br><span class="line"><span class="attr">trigger:</span></span><br><span class="line">  <span class="attr">branch:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">master</span></span><br><span class="line">  <span class="attr">event:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">push</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">custom</span></span><br><span class="line"></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">host:</span> </span><br><span class="line">    <span class="attr">from_secret:</span> <span class="string">host</span></span><br><span class="line">  <span class="attr">user:</span></span><br><span class="line">    <span class="attr">from_secret:</span> <span class="string">user</span></span><br><span class="line">  <span class="attr">password:</span></span><br><span class="line">    <span class="attr">from_secret:</span> <span class="string">passwd</span></span><br><span class="line"></span><br><span class="line"><span class="attr">steps:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">submodules</span></span><br><span class="line">  <span class="attr">commands:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">git</span> <span class="string">submodule</span> <span class="string">update</span> <span class="string">--init</span> <span class="string">--recursive</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">greeting</span></span><br><span class="line">  <span class="attr">commands:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">docker</span> <span class="string">build</span> <span class="string">-t</span> <span class="string">test:test</span> <span class="string">.</span></span><br><span class="line"><span class="string">---</span> <span class="comment"># 每取一个值都需要一个yaml的分隔符</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">secret</span></span><br><span class="line"><span class="attr">name:</span> <span class="string">host</span></span><br><span class="line"><span class="attr">get:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">crawl/data/server</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">host</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">secret</span></span><br><span class="line"><span class="attr">name:</span> <span class="string">passwd</span></span><br><span class="line"><span class="attr">get:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">crawl/data/server</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">password</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">secret</span></span><br><span class="line"><span class="attr">name:</span> <span class="string">user</span></span><br><span class="line"><span class="attr">get:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">crawl/data/server</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">user</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2021-06-08/%E4%BD%BF%E7%94%A8docker%E8%BF%90%E8%A1%8Cselenium%E7%9A%84chrome-webdriver/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -199,10 +289,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-06-08 10:35:39 / 修改时间：02:38:33" itemprop="dateCreated datePublished" datetime="2021-06-08T10:35:39+00:00">2021-06-08</time>
+              <time title="创建时间：2021-06-08 10:35:39" itemprop="dateCreated datePublished" datetime="2021-06-08T10:35:39+00:00">2021-06-08</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-06-09 06:23:22" itemprop="dateModified" datetime="2021-06-09T06:23:22+00:00">2021-06-09</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -294,7 +390,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-08 02:38:33" itemprop="dateModified" datetime="2021-06-08T02:38:33+00:00">2021-06-08</time>
+                <time title="修改时间：2021-06-09 06:23:22" itemprop="dateModified" datetime="2021-06-09T06:23:22+00:00">2021-06-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -391,7 +487,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-08 02:38:33" itemprop="dateModified" datetime="2021-06-08T02:38:33+00:00">2021-06-08</time>
+                <time title="修改时间：2021-06-09 06:23:22" itemprop="dateModified" datetime="2021-06-09T06:23:22+00:00">2021-06-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -487,7 +583,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-08 02:38:33" itemprop="dateModified" datetime="2021-06-08T02:38:33+00:00">2021-06-08</time>
+                <time title="修改时间：2021-06-09 06:23:22" itemprop="dateModified" datetime="2021-06-09T06:23:22+00:00">2021-06-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -584,7 +680,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-08 02:38:33" itemprop="dateModified" datetime="2021-06-08T02:38:33+00:00">2021-06-08</time>
+                <time title="修改时间：2021-06-09 06:23:22" itemprop="dateModified" datetime="2021-06-09T06:23:22+00:00">2021-06-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -680,7 +776,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-08 02:38:33" itemprop="dateModified" datetime="2021-06-08T02:38:33+00:00">2021-06-08</time>
+                <time title="修改时间：2021-06-09 06:23:22" itemprop="dateModified" datetime="2021-06-09T06:23:22+00:00">2021-06-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -774,7 +870,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-08 02:38:33" itemprop="dateModified" datetime="2021-06-08T02:38:33+00:00">2021-06-08</time>
+                <time title="修改时间：2021-06-09 06:23:22" itemprop="dateModified" datetime="2021-06-09T06:23:22+00:00">2021-06-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -862,7 +958,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-08 02:38:33" itemprop="dateModified" datetime="2021-06-08T02:38:33+00:00">2021-06-08</time>
+                <time title="修改时间：2021-06-09 06:23:22" itemprop="dateModified" datetime="2021-06-09T06:23:22+00:00">2021-06-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -951,7 +1047,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-08 02:38:33" itemprop="dateModified" datetime="2021-06-08T02:38:33+00:00">2021-06-08</time>
+                <time title="修改时间：2021-06-09 06:23:22" itemprop="dateModified" datetime="2021-06-09T06:23:22+00:00">2021-06-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -993,99 +1089,6 @@
 <p>在这个位置下找到对应的dump.rdb文件</p>
 <p>对于另外一台redis，要导入之前，首先关闭要导入的redis，否则就算把数据复制到了指定文件夹，也会被redis关闭时的内容覆盖掉。将dump.rdb复制到其备份目录下，然后启动redis，即可完成数据的导入</p>
 <p>在redis-cli中可以使用 <code>config set appendonly no</code>  来设置appendonly的开启与否。<br>其余命令的设置是相同的格式</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2021-02-28/ssh%E5%85%8D%E5%AF%86%E7%99%BB%E9%99%86%E5%A4%B1%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ggq">
-      <meta itemprop="description" content="用来记录一些技术的小问题和研究新技术的记录">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ggqshr's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021-02-28/ssh%E5%85%8D%E5%AF%86%E7%99%BB%E9%99%86%E5%A4%B1%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">ssh免密登陆失效的问题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-02-28 20:37:04" itemprop="dateCreated datePublished" datetime="2021-02-28T20:37:04+00:00">2021-02-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-08 02:38:33" itemprop="dateModified" datetime="2021-06-08T02:38:33+00:00">2021-06-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ssh/" itemprop="url" rel="index"><span itemprop="name">ssh</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>218</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>服务器重启后，发现原来配置过免密登陆的sftp需要输入密码，且ssh登陆也需要密码，明明配置过免密登陆，却需要输入密码，后经过确认是因为selinux的设置问题，重启后，防火墙开了起来，将其关闭即可</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/selinux/config</span><br></pre></td></tr></table></figure>
-<p>将SELINUX=enforcing 修改为 SELINUX=disabled，然后保存退出,在使用关闭防火墙</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setenforce 0</span><br></pre></td></tr></table></figure>
-<p>最后重启sshd服务即可</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service sshd restart </span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1170,20 +1173,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1224,13 +1227,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">43k</span>
+    <span title="站点总字数">46k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">39 分钟</span>
+    <span title="站点阅读时长">42 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
