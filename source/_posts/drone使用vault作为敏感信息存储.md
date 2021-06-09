@@ -160,3 +160,8 @@ get:
   path: crawl/data/server
   name: user
 ```
+
+参考:
+  - https://discourse.drone.io/t/drone-vault-plugin-not-quite-working/3641/12 官方人员的回答
+  - https://learnku.com/articles/50294  参考的博客
+  - https://docs.drone.io/runner/extensions/vault/ 官方文档
