@@ -176,6 +176,98 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2021-03-18/redis%E4%BD%BF%E7%94%A8rdb%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E5%A4%87%E4%BB%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ggq">
+      <meta itemprop="description" content="用来记录一些技术的小问题和研究新技术的记录">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ggqshr's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021-03-18/redis%E4%BD%BF%E7%94%A8rdb%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E5%A4%87%E4%BB%BD/" class="post-title-link" itemprop="url">redis使用rdb文件进行备份</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-18 15:58:00" itemprop="dateCreated datePublished" datetime="2021-03-18T15:58:00+00:00">2021-03-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-08 14:38:50" itemprop="dateModified" datetime="2021-07-08T14:38:50+00:00">2021-07-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>283</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>使用redis的rdb文件来备份redis数据库的内容</p>
+<p>首先在redis-cli中使用save后者bgsave来导出rdb数据，<br>然后使用<code>config get dir</code> 来查看数据导出的位置</p>
+<p>在这个位置下找到对应的dump.rdb文件</p>
+<p>对于另外一台redis，要导入之前，首先关闭要导入的redis，否则就算把数据复制到了指定文件夹，也会被redis关闭时的内容覆盖掉。将dump.rdb复制到其备份目录下，然后启动redis，即可完成数据的导入</p>
+<p>在redis-cli中可以使用 <code>config set appendonly no</code>  来设置appendonly的开启与否。<br>其余命令的设置是相同的格式</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2021-02-28/ssh%E5%85%8D%E5%AF%86%E7%99%BB%E9%99%86%E5%A4%B1%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -207,7 +299,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-09 06:25:47" itemprop="dateModified" datetime="2021-06-09T06:25:47+00:00">2021-06-09</time>
+                <time title="修改时间：2021-07-08 14:38:50" itemprop="dateModified" datetime="2021-07-08T14:38:50+00:00">2021-07-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -300,7 +392,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-09 06:25:47" itemprop="dateModified" datetime="2021-06-09T06:25:47+00:00">2021-06-09</time>
+                <time title="修改时间：2021-07-08 14:38:50" itemprop="dateModified" datetime="2021-07-08T14:38:50+00:00">2021-07-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -395,7 +487,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-09 06:25:47" itemprop="dateModified" datetime="2021-06-09T06:25:47+00:00">2021-06-09</time>
+                <time title="修改时间：2021-07-08 14:38:50" itemprop="dateModified" datetime="2021-07-08T14:38:50+00:00">2021-07-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -491,7 +583,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-09 06:25:47" itemprop="dateModified" datetime="2021-06-09T06:25:47+00:00">2021-06-09</time>
+                <time title="修改时间：2021-07-08 14:38:50" itemprop="dateModified" datetime="2021-07-08T14:38:50+00:00">2021-07-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -591,7 +683,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-09 06:25:47" itemprop="dateModified" datetime="2021-06-09T06:25:47+00:00">2021-06-09</time>
+                <time title="修改时间：2021-07-08 14:38:50" itemprop="dateModified" datetime="2021-07-08T14:38:50+00:00">2021-07-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -686,7 +778,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-09 06:25:47" itemprop="dateModified" datetime="2021-06-09T06:25:47+00:00">2021-06-09</time>
+                <time title="修改时间：2021-07-08 14:38:50" itemprop="dateModified" datetime="2021-07-08T14:38:50+00:00">2021-07-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -782,7 +874,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-09 06:25:47" itemprop="dateModified" datetime="2021-06-09T06:25:47+00:00">2021-06-09</time>
+                <time title="修改时间：2021-07-08 14:38:50" itemprop="dateModified" datetime="2021-07-08T14:38:50+00:00">2021-07-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -875,7 +967,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-09 06:25:47" itemprop="dateModified" datetime="2021-06-09T06:25:47+00:00">2021-06-09</time>
+                <time title="修改时间：2021-07-08 14:38:50" itemprop="dateModified" datetime="2021-07-08T14:38:50+00:00">2021-07-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -965,7 +1057,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-09 06:25:47" itemprop="dateModified" datetime="2021-06-09T06:25:47+00:00">2021-06-09</time>
+                <time title="修改时间：2021-07-08 14:38:50" itemprop="dateModified" datetime="2021-07-08T14:38:50+00:00">2021-07-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1014,102 +1106,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2021-01-18/%E6%AD%A3%E5%88%99%E7%9A%84%E6%96%B9%E6%8B%AC%E5%8F%B7%E5%92%8C%E5%9C%86%E6%8B%AC%E5%8F%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ggq">
-      <meta itemprop="description" content="用来记录一些技术的小问题和研究新技术的记录">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ggqshr's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021-01-18/%E6%AD%A3%E5%88%99%E7%9A%84%E6%96%B9%E6%8B%AC%E5%8F%B7%E5%92%8C%E5%9C%86%E6%8B%AC%E5%8F%B7/" class="post-title-link" itemprop="url">正则的方括号和圆括号</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-18 15:04:41" itemprop="dateCreated datePublished" datetime="2021-01-18T15:04:41+00:00">2021-01-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-09 06:25:47" itemprop="dateModified" datetime="2021-06-09T06:25:47+00:00">2021-06-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%AD%A3%E5%88%99/" itemprop="url" rel="index"><span itemprop="name">正则</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>155</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>使用正则在匹配整个单词时，需要使用圆括号来匹配</p>
-<p>比如以下字符串</p>
-<blockquote>
-<p>nihaonihao</p>
-</blockquote>
-<p>想要匹配nihao，则需要使用圆括号来做<code>(nihao)</code>,</p>
-<p>代码执行的截图如下:</p>
-<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/s6tUT1"><img src="https://s3.ax1x.com/2021/01/18/s6tUT1.png" alt="正则的方括号和圆括号_0"></a></p>
-<p>原因是因为圆括号把里面的内容当作一个整体，而方括号则表达的是里面的内容都作为可选，即<code>[nihao]</code>的意思是匹配<code>n或者i或者h或者a或者o</code>，而不是<code>nihao</code></p>
-
       
     </div>
 
@@ -1193,7 +1189,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1247,13 +1243,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">47k</span>
+    <span title="站点总字数">48k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">42 分钟</span>
+    <span title="站点阅读时长">43 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
