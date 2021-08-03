@@ -13,7 +13,7 @@ dmesg -T | egrep -i 'killed process'
 ```
 来查询因为oom被杀掉的应用
 
-![image-20210803213437797](linux查询因为oom被杀掉的进程/image-20210803213437797.png)
+[![linux查询因为oom被杀掉的进程_0](https://z3.ax1x.com/2021/08/03/fFMI1I.png)](https://imgtu.com/i/fFMI1I)
 
 如果有被杀掉的应用，那么显示就会如上图
 
