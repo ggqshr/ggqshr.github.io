@@ -176,6 +176,94 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2021-08-03/linux%E6%9F%A5%E8%AF%A2%E5%9B%A0%E4%B8%BAoom%E8%A2%AB%E6%9D%80%E6%8E%89%E7%9A%84%E8%BF%9B%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ggq">
+      <meta itemprop="description" content="用来记录一些技术的小问题和研究新技术的记录">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ggqshr's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021-08-03/linux%E6%9F%A5%E8%AF%A2%E5%9B%A0%E4%B8%BAoom%E8%A2%AB%E6%9D%80%E6%8E%89%E7%9A%84%E8%BF%9B%E7%A8%8B/" class="post-title-link" itemprop="url">linux查询因为oom被杀掉的进程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-03 21:30:58 / 修改时间：13:44:32" itemprop="dateCreated datePublished" datetime="2021-08-03T21:30:58+00:00">2021-08-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>365</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在linux上可以使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmesg -T | egrep -i <span class="string">&#x27;killed process&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>来查询因为oom被杀掉的应用</p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/fFMI1I"><img src="https://z3.ax1x.com/2021/08/03/fFMI1I.png" alt="linux查询因为oom被杀掉的进程_0"></a></p>
+<p>如果有被杀掉的应用，那么显示就会如上图</p>
+<p>同时也可以使用<code>journalctl -k </code>命令来查询系统的日志，如果有的话那么会在日志中显示完整的oom被杀掉的过程。</p>
+<p>其中<code>dmesg</code>命令是用来在Unix-like系统中显示内核的相关信息的。dmesg全称是display message (or display driver)，即显示信息。实际上，dmesg命令是从内核环形缓冲区中获取数据的。当我们在Linux上排除故障时，dmesg命令会十分方便，它能很好地帮我们鉴别硬件相关的error和warning。除此之外，dmesg命令还能打印出守护进程相关的信息，已帮助我们debug。因此OOM相关的信息可以在这里看到。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2021-07-17/clash%E5%9C%A8%E7%BA%BF%E8%BD%AC%E6%8D%A2%E6%9C%8D%E5%8A%A1%EF%BC%8C%E8%87%AA%E5%B7%B1%E6%90%AD%E5%BB%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -199,10 +287,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-07-17 19:01:10 / 修改时间：11:03:14" itemprop="dateCreated datePublished" datetime="2021-07-17T19:01:10+00:00">2021-07-17</time>
+              <time title="创建时间：2021-07-17 19:01:10" itemprop="dateCreated datePublished" datetime="2021-07-17T19:01:10+00:00">2021-07-17</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-03 13:44:13" itemprop="dateModified" datetime="2021-08-03T13:44:13+00:00">2021-08-03</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -291,7 +385,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-17 11:03:14" itemprop="dateModified" datetime="2021-07-17T11:03:14+00:00">2021-07-17</time>
+                <time title="修改时间：2021-08-03 13:44:13" itemprop="dateModified" datetime="2021-08-03T13:44:13+00:00">2021-08-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -381,7 +475,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-17 11:03:14" itemprop="dateModified" datetime="2021-07-17T11:03:14+00:00">2021-07-17</time>
+                <time title="修改时间：2021-08-03 13:44:13" itemprop="dateModified" datetime="2021-08-03T13:44:13+00:00">2021-08-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -485,7 +579,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-17 11:03:14" itemprop="dateModified" datetime="2021-07-17T11:03:14+00:00">2021-07-17</time>
+                <time title="修改时间：2021-08-03 13:44:13" itemprop="dateModified" datetime="2021-08-03T13:44:13+00:00">2021-08-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -578,7 +672,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-17 11:03:14" itemprop="dateModified" datetime="2021-07-17T11:03:14+00:00">2021-07-17</time>
+                <time title="修改时间：2021-08-03 13:44:13" itemprop="dateModified" datetime="2021-08-03T13:44:13+00:00">2021-08-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -675,7 +769,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-17 11:03:14" itemprop="dateModified" datetime="2021-07-17T11:03:14+00:00">2021-07-17</time>
+                <time title="修改时间：2021-08-03 13:44:13" itemprop="dateModified" datetime="2021-08-03T13:44:13+00:00">2021-08-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -771,7 +865,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-17 11:03:14" itemprop="dateModified" datetime="2021-07-17T11:03:14+00:00">2021-07-17</time>
+                <time title="修改时间：2021-08-03 13:44:13" itemprop="dateModified" datetime="2021-08-03T13:44:13+00:00">2021-08-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -868,7 +962,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-17 11:03:14" itemprop="dateModified" datetime="2021-07-17T11:03:14+00:00">2021-07-17</time>
+                <time title="修改时间：2021-08-03 13:44:13" itemprop="dateModified" datetime="2021-08-03T13:44:13+00:00">2021-08-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -964,7 +1058,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-17 11:03:14" itemprop="dateModified" datetime="2021-07-17T11:03:14+00:00">2021-07-17</time>
+                <time title="修改时间：2021-08-03 13:44:13" itemprop="dateModified" datetime="2021-08-03T13:44:13+00:00">2021-08-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1008,94 +1102,6 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep -vFf file1 file2  <span class="comment"># 取出现在file2中而没出现在file1中的行，即file2-file1</span></span><br><span class="line">grep -Ff file1 file2 <span class="comment"># 取file1和file2的交集</span></span><br></pre></td></tr></table></figure>
 
 <p>原理是使用grep的查找功能，<code>grep -Ff file1 file2</code> 的含义是在file2中查找file1中的内容<br>而<code>grep -vFf file1 file2</code> 中 -v的含义是反向匹配，则是查找出现在file2中而未出现在file1中的行</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2021-03-28/vscode%E5%BF%AB%E9%80%9F%E9%80%89%E6%8B%A9%E6%8B%AC%E5%8F%B7%E5%92%8C%E5%BC%95%E5%8F%B7%E7%9A%84%E5%86%85%E5%AE%B9%E7%9A%84%E6%8F%92%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ggq">
-      <meta itemprop="description" content="用来记录一些技术的小问题和研究新技术的记录">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ggqshr's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021-03-28/vscode%E5%BF%AB%E9%80%9F%E9%80%89%E6%8B%A9%E6%8B%AC%E5%8F%B7%E5%92%8C%E5%BC%95%E5%8F%B7%E7%9A%84%E5%86%85%E5%AE%B9%E7%9A%84%E6%8F%92%E4%BB%B6/" class="post-title-link" itemprop="url">vscode快速选择括号和引号的内容的插件</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-28 09:11:57" itemprop="dateCreated datePublished" datetime="2021-03-28T09:11:57+00:00">2021-03-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-17 11:03:14" itemprop="dateModified" datetime="2021-07-17T11:03:14+00:00">2021-07-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/vscode/" itemprop="url" rel="index"><span itemprop="name">vscode</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>102</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>一个vscode的插件，quick and simple text selection<br>安装之后即可使用Ctrl+K 加 指定的范围选中内容，<br>比如Ctrl+K+” 是选中引号内的内容，加括号就是选中括号内的内容，非常好用</p>
 
       
     </div>
@@ -1180,20 +1186,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-count">42</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1240,7 +1246,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">43 分钟</span>
+    <span title="站点阅读时长">44 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
