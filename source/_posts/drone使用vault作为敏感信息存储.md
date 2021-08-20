@@ -10,6 +10,7 @@ categories: drone
 
 使用vault来存储secret，需要使用drone的drone-vault插件
 docker-compose文件内容如下：
+<!-- more -->
 ```yaml
 version: "2"
 
