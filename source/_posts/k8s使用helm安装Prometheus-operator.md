@@ -10,7 +10,7 @@ categories: k8s
 ```bash
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 ```
-
+<!-- more -->
 然后使用helm安装对应的repo，对应的chart链接为:https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
 ```bash
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
