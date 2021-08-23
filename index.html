@@ -201,7 +201,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-08-23 10:09:35 / 修改时间：02:49:13" itemprop="dateCreated datePublished" datetime="2021-08-23T10:09:35+00:00">2021-08-23</time>
+              <time title="创建时间：2021-08-23 10:09:35 / 修改时间：02:49:43" itemprop="dateCreated datePublished" datetime="2021-08-23T10:09:35+00:00">2021-08-23</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -240,18 +240,14 @@
       
           <p>使用helm来安装以来，首先安装helm</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash</span><br></pre></td></tr></table></figure>
-
-<p>然后使用helm安装对应的repo，对应的chart链接为:<a target="_blank" rel="noopener" href="https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack">https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">helm repo add prometheus-community https://prometheus-community.github.io/helm-charts</span><br><span class="line">helm repo update</span><br></pre></td></tr></table></figure>
-
-<p>然后安装对应的chart，使用下面的命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm install my-kube-prometheus-stack --namespace=monitoring prometheus-community/kube-prometheus-stack --version 18.0.0 --<span class="built_in">set</span> prometheusOperator.admissionWebhooks.enabled=<span class="literal">false</span> --<span class="built_in">set</span> prometheusOperator.admissionWebhooks.patch.enabled=<span class="literal">false</span> --<span class="built_in">set</span> prometheusOperator.tls.enabled=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<p>如果安装失败时，需要uninstall，也需要在helm对应的namespace下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm uninstall xxx -n monitoring</span><br></pre></td></tr></table></figure>
-
-<p>相关的页面，有错时可以参考:<br><a target="_blank" rel="noopener" href="https://github.com/prometheus-community/helm-charts/issues/418">https://github.com/prometheus-community/helm-charts/issues/418</a><br><a target="_blank" rel="noopener" href="https://github.com/helm/charts/issues/21080#issuecomment-596958610">https://github.com/helm/charts/issues/21080#issuecomment-596958610</a></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021-08-23/k8s%E4%BD%BF%E7%94%A8helm%E5%AE%89%E8%A3%85Prometheus-operator/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -301,7 +297,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-23 02:49:13" itemprop="dateModified" datetime="2021-08-23T02:49:13+00:00">2021-08-23</time>
+                <time title="修改时间：2021-08-23 02:49:43" itemprop="dateModified" datetime="2021-08-23T02:49:43+00:00">2021-08-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -395,7 +391,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-23 02:49:13" itemprop="dateModified" datetime="2021-08-23T02:49:13+00:00">2021-08-23</time>
+                <time title="修改时间：2021-08-23 02:49:43" itemprop="dateModified" datetime="2021-08-23T02:49:43+00:00">2021-08-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -485,7 +481,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-23 02:49:13" itemprop="dateModified" datetime="2021-08-23T02:49:13+00:00">2021-08-23</time>
+                <time title="修改时间：2021-08-23 02:49:43" itemprop="dateModified" datetime="2021-08-23T02:49:43+00:00">2021-08-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -575,7 +571,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-23 02:49:13" itemprop="dateModified" datetime="2021-08-23T02:49:13+00:00">2021-08-23</time>
+                <time title="修改时间：2021-08-23 02:49:43" itemprop="dateModified" datetime="2021-08-23T02:49:43+00:00">2021-08-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -670,7 +666,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-23 02:49:13" itemprop="dateModified" datetime="2021-08-23T02:49:13+00:00">2021-08-23</time>
+                <time title="修改时间：2021-08-23 02:49:43" itemprop="dateModified" datetime="2021-08-23T02:49:43+00:00">2021-08-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -763,7 +759,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-23 02:49:13" itemprop="dateModified" datetime="2021-08-23T02:49:13+00:00">2021-08-23</time>
+                <time title="修改时间：2021-08-23 02:49:43" itemprop="dateModified" datetime="2021-08-23T02:49:43+00:00">2021-08-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -860,7 +856,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-23 02:49:13" itemprop="dateModified" datetime="2021-08-23T02:49:13+00:00">2021-08-23</time>
+                <time title="修改时间：2021-08-23 02:49:43" itemprop="dateModified" datetime="2021-08-23T02:49:43+00:00">2021-08-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -956,7 +952,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-23 02:49:13" itemprop="dateModified" datetime="2021-08-23T02:49:13+00:00">2021-08-23</time>
+                <time title="修改时间：2021-08-23 02:49:43" itemprop="dateModified" datetime="2021-08-23T02:49:43+00:00">2021-08-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1053,7 +1049,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-23 02:49:13" itemprop="dateModified" datetime="2021-08-23T02:49:13+00:00">2021-08-23</time>
+                <time title="修改时间：2021-08-23 02:49:43" itemprop="dateModified" datetime="2021-08-23T02:49:43+00:00">2021-08-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
