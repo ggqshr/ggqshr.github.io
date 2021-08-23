@@ -176,6 +176,97 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2020-12-05/pandas%E5%86%99%E5%85%A5excel%E5%A4%9A%E4%B8%AAsheet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ggq">
+      <meta itemprop="description" content="用来记录一些技术的小问题和研究新技术的记录">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ggqshr's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020-12-05/pandas%E5%86%99%E5%85%A5excel%E5%A4%9A%E4%B8%AAsheet/" class="post-title-link" itemprop="url">pandas写入excel多个sheet</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-05 09:42:06" itemprop="dateCreated datePublished" datetime="2020-12-05T09:42:06+00:00">2020-12-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-23 02:49:13" itemprop="dateModified" datetime="2021-08-23T02:49:13+00:00">2021-08-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>241</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="pandas写excel文件，写入多个sheet"><a href="#pandas写excel文件，写入多个sheet" class="headerlink" title="pandas写excel文件，写入多个sheet"></a>pandas写excel文件，写入多个sheet</h1><p>可以使用pandas的ExcelWriter，使用以下代码即可</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> pda.ExcelWriter(<span class="string">&quot;xx.xlsx&quot;</span>) <span class="keyword">as</span> writer:</span><br><span class="line">    df1.to_excel(writer,sheet_name=<span class="string">&#x27;df1&#x27;</span>)</span><br><span class="line">    df2.to_excel(writer,sheet_name=<span class="string">&#x27;df2&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>即可将df1和df2的内容写入到xx.xlsx下的df1和df2的sheet中。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2020-12-01/win10-git-%E9%85%8D%E7%BD%AEssh%E4%BB%A3%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -207,7 +298,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-20 00:36:30" itemprop="dateModified" datetime="2021-08-20T00:36:30+00:00">2021-08-20</time>
+                <time title="修改时间：2021-08-23 02:49:13" itemprop="dateModified" datetime="2021-08-23T02:49:13+00:00">2021-08-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -310,7 +401,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-20 00:36:30" itemprop="dateModified" datetime="2021-08-20T00:36:30+00:00">2021-08-20</time>
+                <time title="修改时间：2021-08-23 02:49:13" itemprop="dateModified" datetime="2021-08-23T02:49:13+00:00">2021-08-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -428,7 +519,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-20 00:36:30" itemprop="dateModified" datetime="2021-08-20T00:36:30+00:00">2021-08-20</time>
+                <time title="修改时间：2021-08-23 02:49:13" itemprop="dateModified" datetime="2021-08-23T02:49:13+00:00">2021-08-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -519,7 +610,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-20 00:36:30" itemprop="dateModified" datetime="2021-08-20T00:36:30+00:00">2021-08-20</time>
+                <time title="修改时间：2021-08-23 02:49:13" itemprop="dateModified" datetime="2021-08-23T02:49:13+00:00">2021-08-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -610,7 +701,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-20 00:36:30" itemprop="dateModified" datetime="2021-08-20T00:36:30+00:00">2021-08-20</time>
+                <time title="修改时间：2021-08-23 02:49:13" itemprop="dateModified" datetime="2021-08-23T02:49:13+00:00">2021-08-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -706,7 +797,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-20 00:36:30" itemprop="dateModified" datetime="2021-08-20T00:36:30+00:00">2021-08-20</time>
+                <time title="修改时间：2021-08-23 02:49:13" itemprop="dateModified" datetime="2021-08-23T02:49:13+00:00">2021-08-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -814,7 +905,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-20 00:36:30" itemprop="dateModified" datetime="2021-08-20T00:36:30+00:00">2021-08-20</time>
+                <time title="修改时间：2021-08-23 02:49:13" itemprop="dateModified" datetime="2021-08-23T02:49:13+00:00">2021-08-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -908,7 +999,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-20 00:36:30" itemprop="dateModified" datetime="2021-08-20T00:36:30+00:00">2021-08-20</time>
+                <time title="修改时间：2021-08-23 02:49:13" itemprop="dateModified" datetime="2021-08-23T02:49:13+00:00">2021-08-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1061,7 +1152,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1074,7 +1165,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1115,7 +1206,7 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">48k</span>
+    <span title="站点总字数">49k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
