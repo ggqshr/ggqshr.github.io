@@ -1,5 +1,5 @@
 ---
-title: proxychains的安装和undefined symbol: pthread_once问题的解决
+title: proxychains安装和pthread_once问题的解决
 date: 2021-11-18 17:43:00
 tags:
     - proxychains
