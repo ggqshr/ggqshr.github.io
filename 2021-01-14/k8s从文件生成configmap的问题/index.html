@@ -29,17 +29,20 @@
     var CONFIG = {"hostname":"ggqshr.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="用来记录一些技术的小问题和研究新技术的记录">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ggqshr&#39;s blog">
-<meta property="og:url" content="https://ggqshr.github.io/tags/%E8%99%9A%E6%8B%9F%E7%BB%84%E7%BD%91/index.html">
+  <meta name="description" content="使用k8s的kustomize工具，生成configmap时，或者直接从file创建configmap时，有时会遇到一个问题，就是configmap中对应文件的内容直接被解析为一个大的字符串，换行符都变为了\n的显示， 12data:    key: &quot;header\n11&quot; 而我们期望的格式是 1234data:    key: |-    header    11  参考此">
+<meta property="og:type" content="article">
+<meta property="og:title" content="k8s从文件生成configmap的问题">
+<meta property="og:url" content="https://ggqshr.github.io/2021-01-14/k8s%E4%BB%8E%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90configmap%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="ggqshr&#39;s blog">
-<meta property="og:description" content="用来记录一些技术的小问题和研究新技术的记录">
+<meta property="og:description" content="使用k8s的kustomize工具，生成configmap时，或者直接从file创建configmap时，有时会遇到一个问题，就是configmap中对应文件的内容直接被解析为一个大的字符串，换行符都变为了\n的显示， 12data:    key: &quot;header\n11&quot; 而我们期望的格式是 1234data:    key: |-    header    11  参考此">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-14T11:39:35.000Z">
+<meta property="article:modified_time" content="2021-11-23T10:01:06.270Z">
 <meta property="article:author" content="ggq">
+<meta property="article:tag" content="k8s - configmap">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://ggqshr.github.io/tags/%E8%99%9A%E6%8B%9F%E7%BB%84%E7%BD%91/">
+<link rel="canonical" href="https://ggqshr.github.io/2021-01-14/k8s%E4%BB%8E%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90configmap%E7%9A%84%E9%97%AE%E9%A2%98/">
 
 
 <script id="page-configurations">
@@ -47,12 +50,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>标签: 虚拟组网 | ggqshr's blog</title>
+  <title>k8s从文件生成configmap的问题 | ggqshr's blog</title>
   
 
 
@@ -170,51 +173,126 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">虚拟组网
-          <small>标签</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2021-01-14/k8s%E4%BB%8E%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90configmap%E7%9A%84%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ggq">
+      <meta itemprop="description" content="用来记录一些技术的小问题和研究新技术的记录">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ggqshr's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          k8s从文件生成configmap的问题
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-14 11:39:35" itemprop="dateCreated datePublished" datetime="2021-01-14T11:39:35+00:00">2021-01-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-23 10:01:06" itemprop="dateModified" datetime="2021-11-23T10:01:06+00:00">2021-11-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>442</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
+        <p>使用k8s的kustomize工具，生成configmap时，或者直接从file创建configmap时，有时会遇到一个问题，<br>就是configmap中对应文件的内容直接被解析为一个大的字符串，换行符都变为了\n的显示，</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">data:</span></span><br><span class="line">    <span class="attr">key:</span> <span class="string">&quot;header\n11&quot;</span></span><br></pre></td></tr></table></figure>
+<p>而我们期望的格式是</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">data:</span></span><br><span class="line">    <span class="attr">key:</span> <span class="string">|-</span></span><br><span class="line">    <span class="string">header</span></span><br><span class="line">    <span class="number">11</span></span><br></pre></td></tr></table></figure>
+
+<p>参考此链接的解决方法，<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/51291521/kubernetes-configmap-prints-n-instead-of-a-newline">https://stackoverflow.com/questions/51291521/kubernetes-configmap-prints-n-instead-of-a-newline</a><br>将文件中的tab换成空格，并去除掉行尾多余的空格即可。<br>使用以下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i -E <span class="string">&#x27;s/[[:space:]]+$//g&#x27;</span> collect_disk_fault.sh</span><br><span class="line">sed -i <span class="string">&#x27;s/\t/    /g&#x27;</span> collect_disk_fault.sh</span><br></pre></td></tr></table></figure>
+<p>再次生成configmap即可得到我们想要的格式</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-12-21T14:07:10+00:00"
-              content="2020-12-21">
-          12-21
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/k8s-configmap/" rel="tag"># k8s - configmap</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2020-12-21/wireGuard%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B/" itemprop="url">
-            <span itemprop="name">wireGuard安装和配置过程</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020-12-23/python-requests-session-%E5%BC%80%E5%90%AFconnection-pool/" rel="prev" title="python requests session 开启connection pool">
+      <i class="fa fa-chevron-left"></i> python requests session 开启connection pool
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021-01-14/github-action%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E5%AE%9E%E7%8E%B0hexo%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="next" title="github action的使用，实现hexo自动化">
+      github action的使用，实现hexo自动化 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
