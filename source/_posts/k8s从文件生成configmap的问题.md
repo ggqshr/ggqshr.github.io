@@ -1,6 +1,6 @@
 ---
 title: k8s从文件生成configmap的问题
-date: 2021-01-14 11:39:35
+date: 2021-11-23 17:39:35
 tags:
 	- k8s
     - configmap
