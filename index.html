@@ -176,6 +176,95 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2021-11-23/k8s%E4%BB%8E%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90configmap%E7%9A%84%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ggq">
+      <meta itemprop="description" content="用来记录一些技术的小问题和研究新技术的记录">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ggqshr's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021-11-23/k8s%E4%BB%8E%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90configmap%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">k8s从文件生成configmap的问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-11-23 17:39:35 / 修改时间：13:16:24" itemprop="dateCreated datePublished" datetime="2021-11-23T17:39:35+00:00">2021-11-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>442</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>使用k8s的kustomize工具，生成configmap时，或者直接从file创建configmap时，有时会遇到一个问题，<br>就是configmap中对应文件的内容直接被解析为一个大的字符串，换行符都变为了\n的显示，</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">data:</span></span><br><span class="line">    <span class="attr">key:</span> <span class="string">&quot;header\n11&quot;</span></span><br></pre></td></tr></table></figure>
+<p>而我们期望的格式是</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">data:</span></span><br><span class="line">    <span class="attr">key:</span> <span class="string">|-</span></span><br><span class="line">    <span class="string">header</span></span><br><span class="line">    <span class="number">11</span></span><br></pre></td></tr></table></figure>
+
+<p>参考此链接的解决方法，<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/51291521/kubernetes-configmap-prints-n-instead-of-a-newline">https://stackoverflow.com/questions/51291521/kubernetes-configmap-prints-n-instead-of-a-newline</a><br>将文件中的tab换成空格，并去除掉行尾多余的空格即可。<br>使用以下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i -E <span class="string">&#x27;s/[[:space:]]+$//g&#x27;</span> collect_disk_fault.sh</span><br><span class="line">sed -i <span class="string">&#x27;s/\t/    /g&#x27;</span> collect_disk_fault.sh</span><br></pre></td></tr></table></figure>
+<p>再次生成configmap即可得到我们想要的格式</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2021-11-18/proxychains%E5%AE%89%E8%A3%85%E5%92%8Cpthread_once%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -207,7 +296,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-23 10:01:06" itemprop="dateModified" datetime="2021-11-23T10:01:06+00:00">2021-11-23</time>
+                <time title="修改时间：2021-11-23 13:16:24" itemprop="dateModified" datetime="2021-11-23T13:16:24+00:00">2021-11-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -301,7 +390,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-23 10:01:06" itemprop="dateModified" datetime="2021-11-23T10:01:06+00:00">2021-11-23</time>
+                <time title="修改时间：2021-11-23 13:16:24" itemprop="dateModified" datetime="2021-11-23T13:16:24+00:00">2021-11-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -396,7 +485,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-23 10:01:06" itemprop="dateModified" datetime="2021-11-23T10:01:06+00:00">2021-11-23</time>
+                <time title="修改时间：2021-11-23 13:16:24" itemprop="dateModified" datetime="2021-11-23T13:16:24+00:00">2021-11-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -492,7 +581,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-23 10:01:06" itemprop="dateModified" datetime="2021-11-23T10:01:06+00:00">2021-11-23</time>
+                <time title="修改时间：2021-11-23 13:16:24" itemprop="dateModified" datetime="2021-11-23T13:16:24+00:00">2021-11-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -586,7 +675,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-23 10:01:06" itemprop="dateModified" datetime="2021-11-23T10:01:06+00:00">2021-11-23</time>
+                <time title="修改时间：2021-11-23 13:16:24" itemprop="dateModified" datetime="2021-11-23T13:16:24+00:00">2021-11-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -676,7 +765,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-23 10:01:06" itemprop="dateModified" datetime="2021-11-23T10:01:06+00:00">2021-11-23</time>
+                <time title="修改时间：2021-11-23 13:16:24" itemprop="dateModified" datetime="2021-11-23T13:16:24+00:00">2021-11-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -766,7 +855,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-23 10:01:06" itemprop="dateModified" datetime="2021-11-23T10:01:06+00:00">2021-11-23</time>
+                <time title="修改时间：2021-11-23 13:16:24" itemprop="dateModified" datetime="2021-11-23T13:16:24+00:00">2021-11-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -861,7 +950,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-23 10:01:06" itemprop="dateModified" datetime="2021-11-23T10:01:06+00:00">2021-11-23</time>
+                <time title="修改时间：2021-11-23 13:16:24" itemprop="dateModified" datetime="2021-11-23T13:16:24+00:00">2021-11-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -954,7 +1043,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-23 10:01:06" itemprop="dateModified" datetime="2021-11-23T10:01:06+00:00">2021-11-23</time>
+                <time title="修改时间：2021-11-23 13:16:24" itemprop="dateModified" datetime="2021-11-23T13:16:24+00:00">2021-11-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -997,102 +1086,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021-05-16/openssl%E7%94%9F%E6%88%90https%E8%AF%81%E4%B9%A6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2021-05-16/requests%E5%8F%91%E9%80%81post%E8%AF%B7%E6%B1%82%E7%9A%84Content-type%E7%9B%B8%E5%85%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ggq">
-      <meta itemprop="description" content="用来记录一些技术的小问题和研究新技术的记录">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ggqshr's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021-05-16/requests%E5%8F%91%E9%80%81post%E8%AF%B7%E6%B1%82%E7%9A%84Content-type%E7%9B%B8%E5%85%B3/" class="post-title-link" itemprop="url">requests发送post请求的Content-type相关</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-16 13:22:07" itemprop="dateCreated datePublished" datetime="2021-05-16T13:22:07+00:00">2021-05-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-23 10:01:06" itemprop="dateModified" datetime="2021-11-23T10:01:06+00:00">2021-11-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>776</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>当使用requests库来发送post请求时，不同的参数写法会使得request的header中content-type有不同的值。</p>
-<h2 id="Content-type为application-x-www-form-urlencoded"><a href="#Content-type为application-x-www-form-urlencoded" class="headerlink" title="Content-type为application/x-www-form-urlencoded"></a>Content-type为application/x-www-form-urlencoded</h2><p>这应该是用的最多的一种情况，如果在发送post请求时，需要Content-type为application/x-www-form-urlencoded，则使用一下代码即可</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021-05-16/requests%E5%8F%91%E9%80%81post%E8%AF%B7%E6%B1%82%E7%9A%84Content-type%E7%9B%B8%E5%85%B3/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
