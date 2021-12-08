@@ -14,6 +14,7 @@ git clone https://github.com/rofl0r/proxychains-ng.git
 ./configure --prefix=/usr --sysconfdir=/etc
 sudo make
 sudo make install
+sudo make install-config
 ```
 
 如果出现了`symbol lookup error: ./libproxychains4.so: undefined symbol: pthread_once`相关的错误
