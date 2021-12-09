@@ -176,6 +176,99 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2021-06-08/%E4%BD%BF%E7%94%A8docker%E8%BF%90%E8%A1%8Cselenium%E7%9A%84chrome-webdriver/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ggq">
+      <meta itemprop="description" content="用来记录一些技术的小问题和研究新技术的记录">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ggqshr's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021-06-08/%E4%BD%BF%E7%94%A8docker%E8%BF%90%E8%A1%8Cselenium%E7%9A%84chrome-webdriver/" class="post-title-link" itemprop="url">使用docker运行selenium的chrome webdriver</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-08 10:35:39" itemprop="dateCreated datePublished" datetime="2021-06-08T10:35:39+00:00">2021-06-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-09 07:47:36" itemprop="dateModified" datetime="2021-12-09T07:47:36+00:00">2021-12-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>647</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>首先使用对应的docker镜像来运行chrome webderiver，这是对应项目的主页：<a target="_blank" rel="noopener" href="https://github.com/SeleniumHQ/docker-selenium">https://github.com/SeleniumHQ/docker-selenium</a><br>使用下面的命令来运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome:3.141.59-dubnium</span><br><span class="line"><span class="comment">#OR</span></span><br><span class="line">$ docker run -d -p 4444:4444 --shm-size=2g selenium/standalone-chrome:3.141.59-dubnium</span><br></pre></td></tr></table></figure>
+
+<p>运行后，即可使用python运行selenium来连接，使用下面的代码即可</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.desired_capabilities <span class="keyword">import</span> DesiredCapabilities</span><br><span class="line"></span><br><span class="line">driver = webdriver.Remote(</span><br><span class="line">    command_executor=<span class="string">&quot;http://127.0.0.1:4444/wd/hub&quot;</span>,</span><br><span class="line">    desired_capabilities=DesiredCapabilities.CHROME</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">driver.get(<span class="string">&quot;http://httpbin.org/ip&quot;</span>)</span><br><span class="line">print(driver.page_source)</span><br><span class="line">driver.close()</span><br></pre></td></tr></table></figure>
+<p>看到正常输出信息即可。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2021-05-16/openssl%E7%94%9F%E6%88%90https%E8%AF%81%E4%B9%A6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -207,7 +300,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-08 02:34:06" itemprop="dateModified" datetime="2021-12-08T02:34:06+00:00">2021-12-08</time>
+                <time title="修改时间：2021-12-09 07:47:36" itemprop="dateModified" datetime="2021-12-09T07:47:36+00:00">2021-12-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -304,7 +397,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-08 02:34:06" itemprop="dateModified" datetime="2021-12-08T02:34:06+00:00">2021-12-08</time>
+                <time title="修改时间：2021-12-09 07:47:36" itemprop="dateModified" datetime="2021-12-09T07:47:36+00:00">2021-12-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -400,7 +493,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-08 02:34:06" itemprop="dateModified" datetime="2021-12-08T02:34:06+00:00">2021-12-08</time>
+                <time title="修改时间：2021-12-09 07:47:36" itemprop="dateModified" datetime="2021-12-09T07:47:36+00:00">2021-12-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -497,7 +590,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-08 02:34:06" itemprop="dateModified" datetime="2021-12-08T02:34:06+00:00">2021-12-08</time>
+                <time title="修改时间：2021-12-09 07:47:36" itemprop="dateModified" datetime="2021-12-09T07:47:36+00:00">2021-12-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -593,7 +686,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-08 02:34:06" itemprop="dateModified" datetime="2021-12-08T02:34:06+00:00">2021-12-08</time>
+                <time title="修改时间：2021-12-09 07:47:36" itemprop="dateModified" datetime="2021-12-09T07:47:36+00:00">2021-12-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -687,7 +780,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-08 02:34:06" itemprop="dateModified" datetime="2021-12-08T02:34:06+00:00">2021-12-08</time>
+                <time title="修改时间：2021-12-09 07:47:36" itemprop="dateModified" datetime="2021-12-09T07:47:36+00:00">2021-12-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -775,7 +868,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-08 02:34:06" itemprop="dateModified" datetime="2021-12-08T02:34:06+00:00">2021-12-08</time>
+                <time title="修改时间：2021-12-09 07:47:36" itemprop="dateModified" datetime="2021-12-09T07:47:36+00:00">2021-12-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -864,7 +957,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-08 02:34:06" itemprop="dateModified" datetime="2021-12-08T02:34:06+00:00">2021-12-08</time>
+                <time title="修改时间：2021-12-09 07:47:36" itemprop="dateModified" datetime="2021-12-09T07:47:36+00:00">2021-12-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -956,7 +1049,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-08 02:34:06" itemprop="dateModified" datetime="2021-12-08T02:34:06+00:00">2021-12-08</time>
+                <time title="修改时间：2021-12-09 07:47:36" itemprop="dateModified" datetime="2021-12-09T07:47:36+00:00">2021-12-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1000,101 +1093,6 @@
 <p>最后重启sshd服务即可</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service sshd restart </span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2021-02-27/git-lfs-%E4%B8%8D%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ggq">
-      <meta itemprop="description" content="用来记录一些技术的小问题和研究新技术的记录">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ggqshr's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021-02-27/git-lfs-%E4%B8%8D%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">git-lfs 不下载文件</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-02-27 19:18:36" itemprop="dateCreated datePublished" datetime="2021-02-27T19:18:36+00:00">2021-02-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-08 02:34:06" itemprop="dateModified" datetime="2021-12-08T02:34:06+00:00">2021-12-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>214</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://sabicalija.github.io/git-lfs-intro/">https://sabicalija.github.io/git-lfs-intro/</a><br><a target="_blank" rel="noopener" href="https://zzz.buzz/zh/2016/04/19/the-guide-to-git-lfs/">https://zzz.buzz/zh/2016/04/19/the-guide-to-git-lfs/</a></p>
-<p>本地可以使用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git lfs install --<span class="built_in">local</span> --skip-smudge </span><br></pre></td></tr></table></figure>
-
-<p>全局就是</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git lfs install --skip-smudge</span><br></pre></td></tr></table></figure>
-
-<p>下载某个文件是</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git lfs pull --include=<span class="string">&quot;filename&quot;</span></span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -1178,7 +1176,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1232,13 +1230,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">50k</span>
+    <span title="站点总字数">54k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">46 分钟</span>
+    <span title="站点阅读时长">49 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
