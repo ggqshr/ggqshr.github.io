@@ -29,7 +29,7 @@ ssh -L 10000:inner:3306 user@remote
 
 上述的隧道代理通过remote中转，将发往user本地10000端口的请求通过ssh隧道代理经过remote中转转发到了inner的3306端口上。
 
-![image-20211226223823013](C:\Project\blog\source\_posts\ssh隧道代理\image-20211226223823013.png)
+![image-20211226223823013](./ssh隧道代理\image-20211226223823013.png)
 
 
 
@@ -45,7 +45,7 @@ ssh -R 8080:127.0.0.1:7080 user@remote
 
 通过上述的命令，我们即可将访问remote8080端口的数据通过隧道全部连接到本地的7080端口上来，比较常用的场景是在开发和前端联合调试时，user没有公网ip，其他人无法直接访问到，但是大家都可以访问到公网的remote，通过这种方式，可以直接让前端访问到位于user的服务。
 
-![image-20211226224849812](C:\Project\blog\source\_posts\ssh隧道代理\image-20211226224849812.png)
+![image-20211226224849812](./ssh隧道代理\image-20211226224849812.png)
 
 ## 动态端口转发
 
@@ -65,7 +65,7 @@ curl -x socks5://127.0.0.1:9090 inner:8080
 
 这时是将ssh隧道当作一个代理，这个代理可以转发任何流量使其通过remote到达remote可以访问的机器上。
 
-![image-20211226225803889](C:\Project\blog\source\_posts\ssh隧道代理\image-20211226225803889.png)
+![image-20211226225803889](./ssh隧道代理\image-20211226225803889.png)
 
 ## 补充
 
