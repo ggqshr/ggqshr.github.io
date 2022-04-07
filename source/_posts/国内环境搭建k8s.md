@@ -58,12 +58,11 @@ modprobe br_netfilter
 cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
-baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
+baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
 enabled=1
-gpgcheck=1
-repo_gpgcheck=1
-gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
-exclude=kubelet kubeadm kubectl
+gpgcheck=0
+repo_gpgcheck=0
+gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
 EOF
 
 sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
@@ -86,8 +85,6 @@ kubeadm config print init-defaults > kubeadm.conf
 ```yaml
 改成阿里的镜像
 imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers 
-将1.1.1.1改成自己主机的ip
-advertiseAddress: 1.1.1.1
 nenetworking:
  podSubnet: 10.244.0.0/16 # 添加这个，为以后的flannel做准备
 ```
