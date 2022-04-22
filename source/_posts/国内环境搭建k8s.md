@@ -10,9 +10,41 @@ categories: k8s
 安装还是比较简单的，直接按照kubernetes官网的教程来就可以了，但是唯一比较麻烦的点在于kubernetes相关的一些镜像的下载。
 这些镜像是放在gcr上的，而国内无法通过代理的方式访问gcr,只能通过替换源的方式来下载这些镜像。
 
-该方法假设docker已经安装完毕。
+# 1. 安装k8s的runtime
 
-# 安装对应软件
+这里选择使用docker作为k8s的runtime，可以直接使用docker官方提供的一键脚本
+```bash
+wget -qO- https://get.docker.com/ | sh
+```
+
+设置docker使用的cgroupdriver，修改成和kubelet的一致，使用以下命令
+```bash
+cat <<EOF > /etc/docker/daemon.json
+{
+  "exec-opts": ["native.cgroupdriver=systemd"]
+}
+EOF
+```
+
+如果不修改这个cgroupdriver在`kubelet`启动时会出现如下报错
+```
+"Failed to run kubelet" err="failed to run Kubelet: misconfiguration: kubelet cgroup driver: \"systemd\" is different from docker cgroup driver: \"cgroupfs\""
+```
+
+然后运行docker即可
+```bash
+systemctl restart docker
+```
+
+然后查看docker的运行情况
+```bash
+systemctl status docker
+```
+
+看到以下的输出就说明docker正常启动了
+![](国内环境搭建k8s/2022-04-22-16-47-45.png)
+
+# 2. 安装kubelet、kubeadm、kubectl
 
 按照官方的文档，[链接](https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
 
@@ -31,7 +63,7 @@ EOF
 sudo sysctl --system
 ```
 
-然后关闭防火墙和selinuex
+然后关闭防火墙和selinuex，如果是公网服务器不建议关闭防火墙
 
 ```bash
 systemctl stop firewalld    //关闭防火墙
@@ -52,7 +84,7 @@ vi /etc/fstab
 modprobe br_netfilter
 ```
 
-然后安装 kubeadm、kubelet 和 kubectl
+然后安装 kubeadm、kubelet 和 kubectl，这里选择安装版本为`1.22.9`
 
 ```bash
 cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
@@ -64,13 +96,22 @@ gpgcheck=0
 repo_gpgcheck=0
 gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
 EOF
-
-sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
-
-sudo systemctl enable kubelet
 ```
 
-# 初始化
+然后可以使用以下命令查看有哪些版本，本文已经选定了版本，可以不运行下面的命令，如果需要安装其他版本的话，可以运行一下下方的命令看有哪些版本可选
+```bash
+yum list kubelet kubeadm kubectl  --showduplicates|sort -r
+```
+
+然后安装对应的版本
+
+```bash
+yum install kubelet-1.22.9-0 kubeadm-1.22.9-0 kubectl-1.22.9-0
+
+systemctl enable kubelet
+```
+
+# 3. 初始化
 
 安装好上述的软件之后，开始使用kubeadm进行初始化。
 
@@ -80,12 +121,12 @@ sudo systemctl enable kubelet
 kubeadm config print init-defaults > kubeadm.conf
 ```
 
-然后修改kubeadm.conf中的三个地方，
+然后修改kubeadm.conf中的三个地方，首先将镜像源改成阿里的镜像
 
 ```yaml
-改成阿里的镜像
 imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers 
-nenetworking:
+advertiseAddress: 10.0.0.2 # apiserver绑定的ip，一般写内网的ip地址
+networking:
  podSubnet: 10.244.0.0/16 # 添加这个，为以后的flannel做准备
 ```
 
@@ -95,12 +136,8 @@ nenetworking:
 kubeadm config images pull --config kubeadm.conf
 ```
 
-如果遇到coredns/coredns下载不下来的情况，可以去dockerhub下载，然后手动tag一下，我这里在阿里的源中无法下载到coredns/coredns:1.8，所以我使用了以下的方法
-
-```bash
-docker pull coredns/coredns:1.8.0
-docker tag coredns/coredns:1.8.0 registry.cn-hangzhou.aliyuncs.com/google_containers/coredns/coredns:v1.8.0 	
-```
+正常来讲，可以看到以下的输出
+![](国内环境搭建k8s/2022-04-22-16-47-04.png)
 
 下载完成之后，即可使用以下命令来初始化
 
@@ -111,6 +148,13 @@ sudo kubeadm init --config kubeadm.conf
 最后看到如下的页面，就代表配置成功了
 
 [![国内环境搭建k8s_0](https://z3.ax1x.com/2021/05/16/gcR2sP.png)](https://imgtu.com/i/gcR2sP)
+
+然后按照其提示，配置一下kubectl需要的配置文件
+```bash
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
 
 然后设置网络相关，使用以下命令
 
@@ -144,7 +188,7 @@ kubectl taint node localhost.localdomain node-role.kubernetes.io/master-
 另外也可以参考[这种方式](https://segmentfault.com/a/1190000022369750)，自己搭建gcr的代理镜像服务器，但是我在搭建k8s的1.21.0版本时，发现有些镜像使用这种方式下载不到
 
 
-## 其他问题
+## 3.1. 其他问题
 如果自己安装的k8s 是无法使用LoadBalance类型的service的，需要自己指定一个外部的ip，如果不指定的话，
 使用`kubectl get svc` 查看对应LoadBalancer的外部IP一直是pending
 在yml文件中指定 externalIPs字段
@@ -161,3 +205,9 @@ spec:
 参考链接 https://stackoverflow.com/questions/44110876/kubernetes-service-external-ip-pending
 
 如果下载不了镜像也可以采取这种方式，自己通过阿里云的服务来构建https://mp.weixin.qq.com/s/kf0SrktAze3bT7LcIveDYw
+
+## 3.2. kubeadm 初始化失败
+有些时候kubeadm可能会初始化失败，这时候需要将一些配置重置，使用以下命令
+```bash
+kubeadm reset
+```
