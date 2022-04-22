@@ -42,7 +42,7 @@ systemctl status docker
 ```
 
 看到以下的输出就说明docker正常启动了
-![](国内环境搭建k8s/2022-04-22-16-47-45.png)
+[![国内环境搭建k8s_0](https://s1.ax1x.com/2022/04/22/L25HTx.png)](https://imgtu.com/i/L25HTx)
 
 # 2. 安装kubelet、kubeadm、kubectl
 
@@ -137,7 +137,7 @@ kubeadm config images pull --config kubeadm.conf
 ```
 
 正常来讲，可以看到以下的输出
-![](国内环境搭建k8s/2022-04-22-16-47-04.png)
+[![国内环境搭建k8s_1](https://s1.ax1x.com/2022/04/22/L25qk6.png)](https://imgtu.com/i/L25qk6)
 
 下载完成之后，即可使用以下命令来初始化
 
