@@ -29,22 +29,24 @@
     var CONFIG = {"hostname":"ggqshr.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="安装还是比较简单的，直接按照kubernetes官网的教程来就可以了，但是唯一比较麻烦的点在于kubernetes相关的一些镜像的下载。这些镜像是放在gcr上的，而国内无法通过代理的方式访问gcr,只能通过替换源的方式来下载这些镜像。 该方法假设docker已经安装完毕。 安装对应软件按照官方的文档，链接">
+  <meta name="description" content="安装还是比较简单的，直接按照kubernetes官网的教程来就可以了，但是唯一比较麻烦的点在于kubernetes相关的一些镜像的下载。这些镜像是放在gcr上的，而国内无法通过代理的方式访问gcr,只能通过替换源的方式来下载这些镜像。 1. 安装k8s的runtime这里选择使用docker作为k8s的runtime，可以直接使用docker官方提供的一键脚本 1wget -qO- https:&#x2F;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cenots7国内环境搭建k8s">
 <meta property="og:url" content="https://ggqshr.github.io/2021-05-14/%E5%9B%BD%E5%86%85%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BAk8s/index.html">
 <meta property="og:site_name" content="ggqshr&#39;s blog">
-<meta property="og:description" content="安装还是比较简单的，直接按照kubernetes官网的教程来就可以了，但是唯一比较麻烦的点在于kubernetes相关的一些镜像的下载。这些镜像是放在gcr上的，而国内无法通过代理的方式访问gcr,只能通过替换源的方式来下载这些镜像。 该方法假设docker已经安装完毕。 安装对应软件按照官方的文档，链接">
+<meta property="og:description" content="安装还是比较简单的，直接按照kubernetes官网的教程来就可以了，但是唯一比较麻烦的点在于kubernetes相关的一些镜像的下载。这些镜像是放在gcr上的，而国内无法通过代理的方式访问gcr,只能通过替换源的方式来下载这些镜像。 1. 安装k8s的runtime这里选择使用docker作为k8s的runtime，可以直接使用docker官方提供的一键脚本 1wget -qO- https:&#x2F;">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s1.ax1x.com/2022/04/22/L25HTx.png">
+<meta property="og:image" content="https://s1.ax1x.com/2022/04/22/L25qk6.png">
 <meta property="og:image" content="https://z3.ax1x.com/2021/05/16/gcR2sP.png">
 <meta property="og:image" content="https://z3.ax1x.com/2021/05/21/gH581J.png">
 <meta property="og:image" content="https://z3.ax1x.com/2021/05/21/gHIgxJ.png">
 <meta property="article:published_time" content="2021-05-14T16:30:21.000Z">
-<meta property="article:modified_time" content="2022-04-07T09:35:07.318Z">
+<meta property="article:modified_time" content="2022-04-22T08:56:38.970Z">
 <meta property="article:author" content="ggq">
 <meta property="article:tag" content="k8s">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://z3.ax1x.com/2021/05/16/gcR2sP.png">
+<meta name="twitter:image" content="https://s1.ax1x.com/2022/04/22/L25HTx.png">
 
 <link rel="canonical" href="https://ggqshr.github.io/2021-05-14/%E5%9B%BD%E5%86%85%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BAk8s/">
 
@@ -214,7 +216,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-07 09:35:07" itemprop="dateModified" datetime="2022-04-07T09:35:07+00:00">2022-04-07</time>
+                <time title="修改时间：2022-04-22 08:56:38" itemprop="dateModified" datetime="2022-04-22T08:56:38+00:00">2022-04-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -239,7 +241,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.9k</span>
+              <span>3.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -259,39 +261,61 @@
 
       
         <p>安装还是比较简单的，直接按照kubernetes官网的教程来就可以了，但是唯一比较麻烦的点在于kubernetes相关的一些镜像的下载。<br>这些镜像是放在gcr上的，而国内无法通过代理的方式访问gcr,只能通过替换源的方式来下载这些镜像。</p>
-<p>该方法假设docker已经安装完毕。</p>
-<h1 id="安装对应软件"><a href="#安装对应软件" class="headerlink" title="安装对应软件"></a>安装对应软件</h1><p>按照官方的文档，<a target="_blank" rel="noopener" href="https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/install-kubeadm/">链接</a></p>
+<h1 id="1-安装k8s的runtime"><a href="#1-安装k8s的runtime" class="headerlink" title="1. 安装k8s的runtime"></a>1. 安装k8s的runtime</h1><p>这里选择使用docker作为k8s的runtime，可以直接使用docker官方提供的一键脚本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- https://get.docker.com/ | sh</span><br></pre></td></tr></table></figure>
+
+<p>设置docker使用的cgroupdriver，修改成和kubelet的一致，使用以下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;<span class="string">EOF &gt; /etc/docker/daemon.json</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">  &quot;exec-opts&quot;: [&quot;native.cgroupdriver=systemd&quot;]</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
+
+<p>如果不修改这个cgroupdriver在<code>kubelet</code>启动时会出现如下报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;Failed to run kubelet&quot; err&#x3D;&quot;failed to run Kubelet: misconfiguration: kubelet cgroup driver: \&quot;systemd\&quot; is different from docker cgroup driver: \&quot;cgroupfs\&quot;&quot;</span><br></pre></td></tr></table></figure>
+
+<p>然后运行docker即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+<p>然后查看docker的运行情况</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status docker</span><br></pre></td></tr></table></figure>
+
+<p>看到以下的输出就说明docker正常启动了<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/L25HTx"><img src="https://s1.ax1x.com/2022/04/22/L25HTx.png" alt="国内环境搭建k8s_0"></a></p>
+<h1 id="2-安装kubelet、kubeadm、kubectl"><a href="#2-安装kubelet、kubeadm、kubectl" class="headerlink" title="2. 安装kubelet、kubeadm、kubectl"></a>2. 安装kubelet、kubeadm、kubectl</h1><p>按照官方的文档，<a target="_blank" rel="noopener" href="https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/install-kubeadm/">链接</a></p>
 <a id="more"></a>
 <p>首先设置允许桥接流量</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;<span class="string">EOF | sudo tee /etc/modules-load.d/k8s.conf</span></span><br><span class="line"><span class="string">br_netfilter</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line">cat &lt;&lt;<span class="string">EOF | sudo tee /etc/sysctl.d/k8s.conf</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-ip6tables = 1</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-iptables = 1</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line">sudo sysctl --system</span><br></pre></td></tr></table></figure>
 
-<p>然后关闭防火墙和selinuex</p>
+<p>然后关闭防火墙和selinuex，如果是公网服务器不建议关闭防火墙</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld    //关闭防火墙</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld //禁止防火墙自动启动</span><br><span class="line"></span><br><span class="line">sudo setenforce 0</span><br><span class="line">sudo sed -i <span class="string">&#x27;s/^SELINUX=enforcing$/SELINUX=permissive/&#x27;</span> /etc/selinux/config</span><br></pre></td></tr></table></figure>
 
 <p>同时关闭掉交换区</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">swapoff -a</span><br><span class="line">vi /etc/fstab</span><br><span class="line">//注释掉swap分区</span><br><span class="line"><span class="comment">#/dev/mapper/centos_centos75-swap swap</span></span><br><span class="line">//加载br_netfilter</span><br><span class="line">modprobe br_netfilter</span><br></pre></td></tr></table></figure>
 
-<p>然后安装 kubeadm、kubelet 和 kubectl</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;<span class="string">EOF | sudo tee /etc/yum.repos.d/kubernetes.repo</span></span><br><span class="line"><span class="string">[kubernetes]</span></span><br><span class="line"><span class="string">name=Kubernetes</span></span><br><span class="line"><span class="string">baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/</span></span><br><span class="line"><span class="string">enabled=1</span></span><br><span class="line"><span class="string">gpgcheck=0</span></span><br><span class="line"><span class="string">repo_gpgcheck=0</span></span><br><span class="line"><span class="string">gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line">sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes</span><br><span class="line"></span><br><span class="line">sudo systemctl <span class="built_in">enable</span> kubelet</span><br></pre></td></tr></table></figure>
+<p>然后安装 kubeadm、kubelet 和 kubectl，这里选择安装版本为<code>1.22.9</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;<span class="string">EOF | sudo tee /etc/yum.repos.d/kubernetes.repo</span></span><br><span class="line"><span class="string">[kubernetes]</span></span><br><span class="line"><span class="string">name=Kubernetes</span></span><br><span class="line"><span class="string">baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/</span></span><br><span class="line"><span class="string">enabled=1</span></span><br><span class="line"><span class="string">gpgcheck=0</span></span><br><span class="line"><span class="string">repo_gpgcheck=0</span></span><br><span class="line"><span class="string">gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h1><p>安装好上述的软件之后，开始使用kubeadm进行初始化。</p>
+<p>然后可以使用以下命令查看有哪些版本，本文已经选定了版本，可以不运行下面的命令，如果需要安装其他版本的话，可以运行一下下方的命令看有哪些版本可选</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list kubelet kubeadm kubectl  --showduplicates|sort -r</span><br></pre></td></tr></table></figure>
+
+<p>然后安装对应的版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install kubelet-1.22.9-0 kubeadm-1.22.9-0 kubectl-1.22.9-0</span><br><span class="line"></span><br><span class="line">systemctl <span class="built_in">enable</span> kubelet</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-初始化"><a href="#3-初始化" class="headerlink" title="3. 初始化"></a>3. 初始化</h1><p>安装好上述的软件之后，开始使用kubeadm进行初始化。</p>
 <p>首先将初始化使用的配置文件导出，修改其中的两个部分，使用如下命令导出.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm config <span class="built_in">print</span> init-defaults &gt; kubeadm.conf</span><br></pre></td></tr></table></figure>
 
-<p>然后修改kubeadm.conf中的三个地方，</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">改成阿里的镜像</span></span><br><span class="line"><span class="attr">imageRepository:</span> <span class="string">registry.cn-hangzhou.aliyuncs.com/google_containers</span> </span><br><span class="line"><span class="attr">nenetworking:</span></span><br><span class="line"> <span class="attr">podSubnet:</span> <span class="number">10.244</span><span class="number">.0</span><span class="number">.0</span><span class="string">/16</span> <span class="comment"># 添加这个，为以后的flannel做准备</span></span><br></pre></td></tr></table></figure>
+<p>然后修改kubeadm.conf中的三个地方，首先将镜像源改成阿里的镜像</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">imageRepository:</span> <span class="string">registry.cn-hangzhou.aliyuncs.com/google_containers</span> </span><br><span class="line"><span class="attr">advertiseAddress:</span> <span class="number">10.0</span><span class="number">.0</span><span class="number">.2</span> <span class="comment"># apiserver绑定的ip，一般写内网的ip地址</span></span><br><span class="line"><span class="attr">networking:</span></span><br><span class="line"> <span class="attr">podSubnet:</span> <span class="number">10.244</span><span class="number">.0</span><span class="number">.0</span><span class="string">/16</span> <span class="comment"># 添加这个，为以后的flannel做准备</span></span><br></pre></td></tr></table></figure>
 
 <p>然后使用以下命令来拉取需要的镜像</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm config images pull --config kubeadm.conf</span><br></pre></td></tr></table></figure>
 
-<p>如果遇到coredns/coredns下载不下来的情况，可以去dockerhub下载，然后手动tag一下，我这里在阿里的源中无法下载到coredns/coredns:1.8，所以我使用了以下的方法</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull coredns/coredns:1.8.0</span><br><span class="line">docker tag coredns/coredns:1.8.0 registry.cn-hangzhou.aliyuncs.com/google_containers/coredns/coredns:v1.8.0 	</span><br></pre></td></tr></table></figure>
-
+<p>正常来讲，可以看到以下的输出<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/L25qk6"><img src="https://s1.ax1x.com/2022/04/22/L25qk6.png" alt="国内环境搭建k8s_1"></a></p>
 <p>下载完成之后，即可使用以下命令来初始化</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo kubeadm init --config kubeadm.conf </span><br></pre></td></tr></table></figure>
 
 <p>最后看到如下的页面，就代表配置成功了</p>
 <p><a target="_blank" rel="noopener" href="https://imgtu.com/i/gcR2sP"><img src="https://z3.ax1x.com/2021/05/16/gcR2sP.png" alt="国内环境搭建k8s_0"></a></p>
+<p>然后按照其提示，配置一下kubectl需要的配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p <span class="variable">$HOME</span>/.kube</span><br><span class="line">sudo cp -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">sudo chown $(id -u):$(id -g) <span class="variable">$HOME</span>/.kube/config</span><br></pre></td></tr></table></figure>
+
 <p>然后设置网络相关，使用以下命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml</span><br></pre></td></tr></table></figure>
 
@@ -309,13 +333,14 @@
 </blockquote>
 <p>可以参考这个的解决方案  <a target="_blank" rel="noopener" href="https://github.com/kubernetes/kubernetes/issues/70202#issuecomment-481173403">https://github.com/kubernetes/kubernetes/issues/70202#issuecomment-481173403</a></p>
 <p>另外也可以参考<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000022369750">这种方式</a>，自己搭建gcr的代理镜像服务器，但是我在搭建k8s的1.21.0版本时，发现有些镜像使用这种方式下载不到</p>
-<h2 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h2><p>如果自己安装的k8s 是无法使用LoadBalance类型的service的，需要自己指定一个外部的ip，如果不指定的话，<br>使用<code>kubectl get svc</code> 查看对应LoadBalancer的外部IP一直是pending<br>在yml文件中指定 externalIPs字段</p>
+<h2 id="3-1-其他问题"><a href="#3-1-其他问题" class="headerlink" title="3.1. 其他问题"></a>3.1. 其他问题</h2><p>如果自己安装的k8s 是无法使用LoadBalance类型的service的，需要自己指定一个外部的ip，如果不指定的话，<br>使用<code>kubectl get svc</code> 查看对应LoadBalancer的外部IP一直是pending<br>在yml文件中指定 externalIPs字段</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">...</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">LoadBalancer</span></span><br><span class="line">  <span class="attr">externalIPs:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="number">192.168</span><span class="number">.0</span><span class="number">.10</span></span><br></pre></td></tr></table></figure>
 
 <p><a target="_blank" rel="noopener" href="https://imgtu.com/i/gHIgxJ"><img src="https://z3.ax1x.com/2021/05/21/gHIgxJ.png" alt="国内环境搭建k8s_2"></a></p>
 <p>参考链接 <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/44110876/kubernetes-service-external-ip-pending">https://stackoverflow.com/questions/44110876/kubernetes-service-external-ip-pending</a></p>
 <p>如果下载不了镜像也可以采取这种方式，自己通过阿里云的服务来构建<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/kf0SrktAze3bT7LcIveDYw">https://mp.weixin.qq.com/s/kf0SrktAze3bT7LcIveDYw</a></p>
-
+<h2 id="3-2-kubeadm-初始化失败"><a href="#3-2-kubeadm-初始化失败" class="headerlink" title="3.2. kubeadm 初始化失败"></a>3.2. kubeadm 初始化失败</h2><p>有些时候kubeadm可能会初始化失败，这时候需要将一些配置重置，使用以下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm reset</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -398,7 +423,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%AF%B9%E5%BA%94%E8%BD%AF%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">安装对应软件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">其他问题</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85k8s%E7%9A%84runtime"><span class="nav-number">1.</span> <span class="nav-text">1. 安装k8s的runtime</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85kubelet%E3%80%81kubeadm%E3%80%81kubectl"><span class="nav-number">2.</span> <span class="nav-text">2. 安装kubelet、kubeadm、kubectl</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">3. 初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E5%85%B6%E4%BB%96%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.</span> <span class="nav-text">3.1. 其他问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-kubeadm-%E5%88%9D%E5%A7%8B%E5%8C%96%E5%A4%B1%E8%B4%A5"><span class="nav-number">3.2.</span> <span class="nav-text">3.2. kubeadm 初始化失败</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
