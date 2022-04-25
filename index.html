@@ -176,6 +176,103 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2022-04-25/win10%E6%81%A2%E5%A4%8D%E5%88%A0%E9%99%A4%E7%9A%84%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ggq">
+      <meta itemprop="description" content="用来记录一些技术的小问题和研究新技术的记录">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ggqshr's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022-04-25/win10%E6%81%A2%E5%A4%8D%E5%88%A0%E9%99%A4%E7%9A%84%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">win10恢复删除的文件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-04-25 21:46:12 / 修改时间：14:28:58" itemprop="dateCreated datePublished" datetime="2022-04-25T21:46:12+00:00">2022-04-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/win10/" itemprop="url" rel="index"><span itemprop="name">win10</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>win10恢复删除的文件的使用的工具是微软提供的官方工具，可以参考链接 <a target="_blank" rel="noopener" href="https://support.microsoft.com/zh-cn/windows/%E5%9C%A8-windows-10-%E4%B8%8A%E6%81%A2%E5%A4%8D%E4%B8%A2%E5%A4%B1%E7%9A%84%E6%96%87%E4%BB%B6-61f5b28a-f5b8-3cc2-0f8e-a63cb4e1d4c4">https://support.microsoft.com/zh-cn/windows/%E5%9C%A8-windows-10-%E4%B8%8A%E6%81%A2%E5%A4%8D%E4%B8%A2%E5%A4%B1%E7%9A%84%E6%96%87%E4%BB%B6-61f5b28a-f5b8-3cc2-0f8e-a63cb4e1d4c4</a></p>
+<p>在恢复时分为两种情况：</p>
+<ul>
+<li>将文件移入到了回收站，然后清空了回收站</li>
+<li>直接在文件的原始目录中将其删除掉了</li>
+</ul>
+<p>两种情况的恢复方式略有不同，但是总体思路是一样的。</p>
+<h2 id="下载工具"><a href="#下载工具" class="headerlink" title="下载工具"></a>下载工具</h2><p>到微软商店中搜索<code>Windows File Recovery</code>，然后安装.<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/LTYZwD"><img src="https://s1.ax1x.com/2022/04/25/LTYZwD.png" alt="win10恢复删除的文件_0"></a><br>安装完成后，在开始菜单，找到如下的软件，然后点击打开。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/LTYeTe"><img src="https://s1.ax1x.com/2022/04/25/LTYeTe.png" alt="win10恢复删除的文件_1"></a><br>打开后界面如下图所示：<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/LTYnFH"><img src="https://s1.ax1x.com/2022/04/25/LTYnFH.png" alt="win10恢复删除的文件_2"></a></p>
+<h2 id="恢复在回收站中清空的文件"><a href="#恢复在回收站中清空的文件" class="headerlink" title="恢复在回收站中清空的文件"></a>恢复在回收站中清空的文件</h2><p>假如文件的名字为<code>test.mp4</code>,原本在c盘中，经过文件被删除，然后清空了回收站，可以使用如下命令进行恢复</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Winfr C: E: /regular /n <span class="string">&quot;\<span class="variable">$Recycle</span>.Bin\S-1-5-21-3294416634-774128395-1159491300-1001\*.mp4&quot;</span></span><br></pre></td></tr></table></figure>
+<p>以win10为例，回收站在各个盘下的目录为<code>盘符:\$Recycle.Bin\S-1-5-21-3294416634-774128395-1159491300-1001\</code>,<br>上面命令的含义就是使用winfr工具，将c盘下的回收站内的所有以<code>mp4</code>为扩展名的文件进行恢复，恢复的结果会存放到e盘中。但是恢复后的文件可能并不是原本的文件名，如果是可执行或者是类似mp4可以播放的文件，可以通过尝试执行或者播放来查看文件是否恢复完全了，有概率会失败的。<br>另外在测试的时候，发现一些较小的文件可能无法恢复，20m或者更大一点的文件大概率能够恢复成功，猜测是因为文件过小不到一个block，所以软件无法重建文件的信息。</p>
+<p><strong>注意</strong>：文件能够恢复的前提是，你在清空了回收站后没有做其他的任何操作，包括再次将一些文件放入到回收站等，如果做了其他的操作，那么有可能会导致恢复失败。</p>
+<h2 id="恢复在其他文件夹内直接删除的文件"><a href="#恢复在其他文件夹内直接删除的文件" class="headerlink" title="恢复在其他文件夹内直接删除的文件"></a>恢复在其他文件夹内直接删除的文件</h2><p>假设有一个文件<code>test.mp4</code>，没有经过回收站的回收然后清空，而是直接在c盘的moives文件夹内被删除掉了，这时可以使用如下的命令进行恢复</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Winfr C: E: /regular /n \moives\*.mp4</span><br></pre></td></tr></table></figure>
+
+<p>当然能够恢复的前提也是你没有再在c的movies文件夹下做任何操作，包括拷贝新的文件到这个目录，或者在这个目录复制粘贴文件。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2021-12-26/chrome%E7%9A%84cookies-hook/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -207,7 +304,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-25 13:17:40" itemprop="dateModified" datetime="2022-04-25T13:17:40+00:00">2022-04-25</time>
+                <time title="修改时间：2022-04-25 14:28:38" itemprop="dateModified" datetime="2022-04-25T14:28:38+00:00">2022-04-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -301,7 +398,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-25 13:17:41" itemprop="dateModified" datetime="2022-04-25T13:17:41+00:00">2022-04-25</time>
+                <time title="修改时间：2022-04-25 14:28:39" itemprop="dateModified" datetime="2022-04-25T14:28:39+00:00">2022-04-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -396,7 +493,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-25 13:17:41" itemprop="dateModified" datetime="2022-04-25T13:17:41+00:00">2022-04-25</time>
+                <time title="修改时间：2022-04-25 14:28:39" itemprop="dateModified" datetime="2022-04-25T14:28:39+00:00">2022-04-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -492,7 +589,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-25 13:17:40" itemprop="dateModified" datetime="2022-04-25T13:17:40+00:00">2022-04-25</time>
+                <time title="修改时间：2022-04-25 14:28:38" itemprop="dateModified" datetime="2022-04-25T14:28:38+00:00">2022-04-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -581,7 +678,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-25 13:17:41" itemprop="dateModified" datetime="2022-04-25T13:17:41+00:00">2022-04-25</time>
+                <time title="修改时间：2022-04-25 14:28:39" itemprop="dateModified" datetime="2022-04-25T14:28:39+00:00">2022-04-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -676,7 +773,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-25 13:17:41" itemprop="dateModified" datetime="2022-04-25T13:17:41+00:00">2022-04-25</time>
+                <time title="修改时间：2022-04-25 14:28:39" itemprop="dateModified" datetime="2022-04-25T14:28:39+00:00">2022-04-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -770,7 +867,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-25 13:17:41" itemprop="dateModified" datetime="2022-04-25T13:17:41+00:00">2022-04-25</time>
+                <time title="修改时间：2022-04-25 14:28:39" itemprop="dateModified" datetime="2022-04-25T14:28:39+00:00">2022-04-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -865,7 +962,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-25 13:17:41" itemprop="dateModified" datetime="2022-04-25T13:17:41+00:00">2022-04-25</time>
+                <time title="修改时间：2022-04-25 14:28:39" itemprop="dateModified" datetime="2022-04-25T14:28:39+00:00">2022-04-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -961,7 +1058,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-25 13:17:41" itemprop="dateModified" datetime="2022-04-25T13:17:41+00:00">2022-04-25</time>
+                <time title="修改时间：2022-04-25 14:28:39" itemprop="dateModified" datetime="2022-04-25T14:28:39+00:00">2022-04-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1005,96 +1102,6 @@
 <p>如果有被杀掉的应用，那么显示就会如上图</p>
 <p>同时也可以使用<code>journalctl -k </code>命令来查询系统的日志，如果有的话那么会在日志中显示完整的oom被杀掉的过程。</p>
 <p>其中<code>dmesg</code>命令是用来在Unix-like系统中显示内核的相关信息的。dmesg全称是display message (or display driver)，即显示信息。实际上，dmesg命令是从内核环形缓冲区中获取数据的。当我们在Linux上排除故障时，dmesg命令会十分方便，它能很好地帮我们鉴别硬件相关的error和warning。除此之外，dmesg命令还能打印出守护进程相关的信息，已帮助我们debug。因此OOM相关的信息可以在这里看到。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2021-07-17/clash%E5%9C%A8%E7%BA%BF%E8%BD%AC%E6%8D%A2%E6%9C%8D%E5%8A%A1%EF%BC%8C%E8%87%AA%E5%B7%B1%E6%90%AD%E5%BB%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ggq">
-      <meta itemprop="description" content="用来记录一些技术的小问题和研究新技术的记录">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ggqshr's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021-07-17/clash%E5%9C%A8%E7%BA%BF%E8%BD%AC%E6%8D%A2%E6%9C%8D%E5%8A%A1%EF%BC%8C%E8%87%AA%E5%B7%B1%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">clash在线转换服务，自己搭建</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-07-17 19:01:10" itemprop="dateCreated datePublished" datetime="2021-07-17T19:01:10+00:00">2021-07-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-25 13:17:40" itemprop="dateModified" datetime="2022-04-25T13:17:40+00:00">2022-04-25</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/clash/" itemprop="url" rel="index"><span itemprop="name">clash</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>197</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>使用的是这个项目，<a target="_blank" rel="noopener" href="https://github.com/CareyWang/sub-web">https://github.com/CareyWang/sub-web</a><br>可以直接使用docker运行 </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 58080:80 --restart always --name subweb careywong/subweb:latest</span><br></pre></td></tr></table></figure>
-<p>打开对应网址在指定位置输入对应的vmess协议的url或者其他协议的url即可完成转换，将转换完的url复制到clash中即可使用。</p>
 
       
     </div>
@@ -1179,7 +1186,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-count">47</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1192,7 +1199,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-count">53</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1233,13 +1240,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">56k</span>
+    <span title="站点总字数">58k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">51 分钟</span>
+    <span title="站点阅读时长">52 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
