@@ -124,8 +124,11 @@ kubeadm config print init-defaults > kubeadm.conf
 然后修改kubeadm.conf中的三个地方，首先将镜像源改成阿里的镜像
 
 ```yaml
-imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers 
+...
 advertiseAddress: 10.0.0.2 # apiserver绑定的ip，一般写内网的ip地址
+...
+imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers 
+...
 networking:
  podSubnet: 10.244.0.0/16 # 添加这个，为以后的flannel做准备
 ```
