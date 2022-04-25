@@ -20,11 +20,11 @@ win10恢复删除的文件的使用的工具是微软提供的官方工具，可
 ## 下载工具
 
 到微软商店中搜索`Windows File Recovery`，然后安装.
-![](win10恢复删除的文件/2022-04-25-21-50-46.png)
+[![win10恢复删除的文件_0](https://s1.ax1x.com/2022/04/25/LTYZwD.png)](https://imgtu.com/i/LTYZwD)
 安装完成后，在开始菜单，找到如下的软件，然后点击打开。
-![](win10恢复删除的文件/2022-04-25-22-27-11.png)
+[![win10恢复删除的文件_1](https://s1.ax1x.com/2022/04/25/LTYeTe.png)](https://imgtu.com/i/LTYeTe)
 打开后界面如下图所示：
-![](win10恢复删除的文件/2022-04-25-22-27-53.png)
+[![win10恢复删除的文件_2](https://s1.ax1x.com/2022/04/25/LTYnFH.png)](https://imgtu.com/i/LTYnFH)
 
 ## 恢复在回收站中清空的文件
 
