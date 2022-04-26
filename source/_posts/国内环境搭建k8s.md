@@ -17,6 +17,17 @@ categories: k8s
 wget -qO- https://get.docker.com/ | sh
 ```
 
+然后启动一下docker
+```bash
+systemctl start docker
+```
+
+查看一下docker的状态
+
+```bash
+systemctl status docker
+```
+
 设置docker使用的cgroupdriver，修改成和kubelet的一致，使用以下命令
 ```bash
 cat <<EOF > /etc/docker/daemon.json
@@ -78,9 +89,9 @@ sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 ```bash
 swapoff -a
 vi /etc/fstab
-//注释掉swap分区
+//注释掉swap分区,如果有的话
 #/dev/mapper/centos_centos75-swap swap
-//加载br_netfilter
+//然后保存退出，执行命令加载br_netfilter
 modprobe br_netfilter
 ```
 
