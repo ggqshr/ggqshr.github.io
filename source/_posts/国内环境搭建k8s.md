@@ -122,6 +122,9 @@ yum install kubelet-1.22.9-0 kubeadm-1.22.9-0 kubectl-1.22.9-0
 systemctl enable kubelet
 ```
 
+**注意**：若为worker节点，只需要进行到此步骤即可，若为master节点还需继续往下执行
+worker节点在安装了kubelet、kubeadm已经kubectl之后就可以被初始化了，等到master安装完成使用`kubeadm join`即可加入到集群中
+
 # 3. 初始化
 
 安装好上述的软件之后，开始使用kubeadm进行初始化。
@@ -180,7 +183,7 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documen
 
 [![国内环境搭建k8s_1](https://z3.ax1x.com/2021/05/21/gH581J.png)](https://imgtu.com/i/gH581J)
 
-在其他机器上只需要使用其输出的命令即可加入到主节点当中
+在其他worker节点上只需要使用其输出的命令即可加入到主节点当中
 
 ```bash
 kubeadm join 主机ip:6443 --token abcdef.0123456789abcdef \
