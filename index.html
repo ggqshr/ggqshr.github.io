@@ -176,6 +176,129 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2022-05-20/k8s%E5%AE%89%E8%A3%85rancher%E5%B9%B6%E4%B8%94%E9%85%8D%E7%BD%AEingress%E8%AE%BF%E9%97%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ggq">
+      <meta itemprop="description" content="用来记录一些技术的小问题和研究新技术的记录">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ggqshr's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022-05-20/k8s%E5%AE%89%E8%A3%85rancher%E5%B9%B6%E4%B8%94%E9%85%8D%E7%BD%AEingress%E8%AE%BF%E9%97%AE/" class="post-title-link" itemprop="url">k8s安装rancher并且配置ingress访问</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-05-20 15:30:15 / 修改时间：10:20:41" itemprop="dateCreated datePublished" datetime="2022-05-20T15:30:15+00:00">2022-05-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="安装rancher"><a href="#安装rancher" class="headerlink" title="安装rancher"></a>安装rancher</h1><p>在安装rancher之前需要先安装cert-manager，以及ingress-nginx</p>
+<h2 id="安装cert-manager"><a href="#安装cert-manager" class="headerlink" title="安装cert-manager"></a>安装cert-manager</h2><p>使用以下命令安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.8.0/cert-manager.yaml</span><br></pre></td></tr></table></figure>
+
+<p>然后查看一下几个对应的pod是否正常启动了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -n cert-manager</span><br></pre></td></tr></table></figure>
+
+<p>达到下面的状态表明已经安装成功<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOBYVI"><img src="https://s1.ax1x.com/2022/05/20/OOBYVI.png" alt="k8s安装rancher并且配置ingress访问_0"></a></p>
+<h2 id="安装ingress-nginx"><a href="#安装ingress-nginx" class="headerlink" title="安装ingress-nginx"></a>安装ingress-nginx</h2><p>这里希望在外部访问集群内的rancher，因此需要ingress，使用以下命令来安装ingress-nginx</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/ggqshr/k8s-ingress-nginx/main/ingress-nginx-v1.1.1.yaml</span><br></pre></td></tr></table></figure>
+
+<p>达到下面的状态就说明ingress-nginx安装成功<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOBtat"><img src="https://s1.ax1x.com/2022/05/20/OOBtat.png" alt="k8s安装rancher并且配置ingress访问_1"></a></p>
+<p>且能在svc下面看到对应的NodePort服务<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOBNIP"><img src="https://s1.ax1x.com/2022/05/20/OOBNIP.png" alt="k8s安装rancher并且配置ingress访问_2"></a><br>后续我们需要通过这两个port来访问对应的服务，在这里端口是<code>30543</code></p>
+<h2 id="安装helm"><a href="#安装helm" class="headerlink" title="安装helm"></a>安装helm</h2><p>可以使用以下命令来直接安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash</span><br></pre></td></tr></table></figure>
+
+<p>如果上面的脚本因为网络问题一直下载不下来，可以采取手动安装的方式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://get.helm.sh/helm-v3.9.0-linux-amd64.tar.gz</span><br><span class="line">tar -zxvf helm-v3.9.0-linux-amd64.tar.gz</span><br><span class="line">mv linux-amd64/ /usr/<span class="built_in">local</span>/include/helm</span><br><span class="line">ln -s /usr/<span class="built_in">local</span>/include/helm/helm /usr/<span class="built_in">local</span>/bin/helm</span><br></pre></td></tr></table></figure>
+
+<p>然后输入以下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm version</span><br></pre></td></tr></table></figure>
+
+<p>能够看到以下信息就说明安装成功了<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOBaPf"><img src="https://s1.ax1x.com/2022/05/20/OOBaPf.png" alt="k8s安装rancher并且配置ingress访问_3"></a></p>
+<h2 id="安装rancher-1"><a href="#安装rancher-1" class="headerlink" title="安装rancher"></a>安装rancher</h2><p>添加对应的repo然后创建rancher对应的namespace</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">helm repo add rancher-latest https://releases.rancher.com/server-charts/latest</span><br><span class="line">kubectl create namespace cattle-system</span><br></pre></td></tr></table></figure>
+
+<p>参考rancher官方的文档进行安装，使用以下命令来安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">helm install rancher rancher-latest/rancher \</span><br><span class="line">  --namespace cattle-system \</span><br><span class="line">  --<span class="built_in">set</span> hostname=rancher.my.org</span><br></pre></td></tr></table></figure>
+
+<p>其中的<code>rancher.my.org</code>是可以自定义的，后面通过ingress访问时需要修改本地的hosts映射为对应的地址，这里以<code>rancher.my.org</code>为例</p>
+<p>然后使用kubectl来查看是否安装成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -n cattle-system</span><br></pre></td></tr></table></figure>
+
+<p>达到以下状态说明安装成功<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOBdG8"><img src="https://s1.ax1x.com/2022/05/20/OOBdG8.png" alt="k8s安装rancher并且配置ingress访问_4"></a></p>
+<h2 id="设置访问"><a href="#设置访问" class="headerlink" title="设置访问"></a>设置访问</h2><p>上述的版本在安装时，默认的ingress资源会有一些问题，缺少一些相应的字段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">store.go:420] &quot;Ignoring ingress because of error while validating ingress class&quot; ingress&#x3D;&quot;cattle-system&#x2F;rancher&quot; error&#x3D;&quot;ingress does not contain a valid IngressClass&quot;</span><br></pre></td></tr></table></figure>
+
+<p>可以通过<code>kubectl logs</code>查看<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOBwRS"><img src="https://s1.ax1x.com/2022/05/20/OOBwRS.png" alt="k8s安装rancher并且配置ingress访问_5"></a></p>
+<p>能够看到下面的报错<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOBDMQ"><img src="https://s1.ax1x.com/2022/05/20/OOBDMQ.png" alt="k8s安装rancher并且配置ingress访问_6"></a></p>
+<h2 id="登陆rancher"><a href="#登陆rancher" class="headerlink" title="登陆rancher"></a>登陆rancher</h2><p>重置rancher密码<br>kubectl -n cattle-system exec $(kubectl -n cattle-system get pods -l app=rancher | grep ‘1/1’ | head -1 | awk ‘{ print $1 }’) – reset-password</p>
+<p>如果insgress一直404，需要在rancher的ingress资源的metadata中加上<br>annotations:<br>    kubernetes.io/ingress.class: “nginx”</p>
+<p>安装cert-manager<br>kubectl apply -f <a target="_blank" rel="noopener" href="https://github.com/cert-manager/cert-manager/releases/download/v1.8.0/cert-manager.yaml">https://github.com/cert-manager/cert-manager/releases/download/v1.8.0/cert-manager.yaml</a><br><a target="_blank" rel="noopener" href="https://github.com/cert-manager/cert-manager/releases/">https://github.com/cert-manager/cert-manager/releases/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2022-04-25/win10%E6%81%A2%E5%A4%8D%E5%88%A0%E9%99%A4%E7%9A%84%E6%96%87%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -207,7 +330,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-10 13:29:18" itemprop="dateModified" datetime="2022-05-10T13:29:18+00:00">2022-05-10</time>
+                <time title="修改时间：2022-05-20 10:20:15" itemprop="dateModified" datetime="2022-05-20T10:20:15+00:00">2022-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -308,7 +431,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-10 13:29:18" itemprop="dateModified" datetime="2022-05-10T13:29:18+00:00">2022-05-10</time>
+                <time title="修改时间：2022-05-20 10:20:15" itemprop="dateModified" datetime="2022-05-20T10:20:15+00:00">2022-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -402,7 +525,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-10 13:29:18" itemprop="dateModified" datetime="2022-05-10T13:29:18+00:00">2022-05-10</time>
+                <time title="修改时间：2022-05-20 10:20:15" itemprop="dateModified" datetime="2022-05-20T10:20:15+00:00">2022-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -497,7 +620,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-10 13:29:18" itemprop="dateModified" datetime="2022-05-10T13:29:18+00:00">2022-05-10</time>
+                <time title="修改时间：2022-05-20 10:20:15" itemprop="dateModified" datetime="2022-05-20T10:20:15+00:00">2022-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -593,7 +716,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-10 13:29:18" itemprop="dateModified" datetime="2022-05-10T13:29:18+00:00">2022-05-10</time>
+                <time title="修改时间：2022-05-20 10:20:15" itemprop="dateModified" datetime="2022-05-20T10:20:15+00:00">2022-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -682,7 +805,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-10 13:29:18" itemprop="dateModified" datetime="2022-05-10T13:29:18+00:00">2022-05-10</time>
+                <time title="修改时间：2022-05-20 10:20:15" itemprop="dateModified" datetime="2022-05-20T10:20:15+00:00">2022-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -777,7 +900,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-10 13:29:18" itemprop="dateModified" datetime="2022-05-10T13:29:18+00:00">2022-05-10</time>
+                <time title="修改时间：2022-05-20 10:20:15" itemprop="dateModified" datetime="2022-05-20T10:20:15+00:00">2022-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -871,7 +994,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-10 13:29:18" itemprop="dateModified" datetime="2022-05-10T13:29:18+00:00">2022-05-10</time>
+                <time title="修改时间：2022-05-20 10:20:15" itemprop="dateModified" datetime="2022-05-20T10:20:15+00:00">2022-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -966,7 +1089,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-10 13:29:18" itemprop="dateModified" datetime="2022-05-10T13:29:18+00:00">2022-05-10</time>
+                <time title="修改时间：2022-05-20 10:20:15" itemprop="dateModified" datetime="2022-05-20T10:20:15+00:00">2022-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1013,100 +1136,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ggqshr.github.io/2021-08-03/linux%E6%9F%A5%E8%AF%A2%E5%9B%A0%E4%B8%BAoom%E8%A2%AB%E6%9D%80%E6%8E%89%E7%9A%84%E8%BF%9B%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ggq">
-      <meta itemprop="description" content="用来记录一些技术的小问题和研究新技术的记录">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ggqshr's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021-08-03/linux%E6%9F%A5%E8%AF%A2%E5%9B%A0%E4%B8%BAoom%E8%A2%AB%E6%9D%80%E6%8E%89%E7%9A%84%E8%BF%9B%E7%A8%8B/" class="post-title-link" itemprop="url">linux查询因为oom被杀掉的进程</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-03 21:30:58" itemprop="dateCreated datePublished" datetime="2021-08-03T21:30:58+00:00">2021-08-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-10 13:29:18" itemprop="dateModified" datetime="2022-05-10T13:29:18+00:00">2022-05-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>365</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>在linux上可以使用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmesg -T | egrep -i <span class="string">&#x27;killed process&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>来查询因为oom被杀掉的应用</p>
-<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/fFMI1I"><img src="https://z3.ax1x.com/2021/08/03/fFMI1I.png" alt="linux查询因为oom被杀掉的进程_0"></a></p>
-<p>如果有被杀掉的应用，那么显示就会如上图</p>
-<p>同时也可以使用<code>journalctl -k </code>命令来查询系统的日志，如果有的话那么会在日志中显示完整的oom被杀掉的过程。</p>
-<p>其中<code>dmesg</code>命令是用来在Unix-like系统中显示内核的相关信息的。dmesg全称是display message (or display driver)，即显示信息。实际上，dmesg命令是从内核环形缓冲区中获取数据的。当我们在Linux上排除故障时，dmesg命令会十分方便，它能很好地帮我们鉴别硬件相关的error和warning。除此之外，dmesg命令还能打印出守护进程相关的信息，已帮助我们debug。因此OOM相关的信息可以在这里看到。</p>
-
       
     </div>
 
@@ -1190,7 +1219,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1203,7 +1232,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">55</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1244,13 +1273,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">58k</span>
+    <span title="站点总字数">60k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">53 分钟</span>
+    <span title="站点阅读时长">55 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>

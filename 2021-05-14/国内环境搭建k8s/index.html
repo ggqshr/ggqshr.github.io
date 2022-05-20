@@ -42,7 +42,7 @@
 <meta property="og:image" content="https://z3.ax1x.com/2021/05/21/gH581J.png">
 <meta property="og:image" content="https://z3.ax1x.com/2021/05/21/gHIgxJ.png">
 <meta property="article:published_time" content="2021-05-14T16:30:21.000Z">
-<meta property="article:modified_time" content="2022-05-10T13:29:18.505Z">
+<meta property="article:modified_time" content="2022-05-20T10:20:15.661Z">
 <meta property="article:author" content="ggq">
 <meta property="article:tag" content="k8s">
 <meta name="twitter:card" content="summary">
@@ -216,7 +216,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-10 13:29:18" itemprop="dateModified" datetime="2022-05-10T13:29:18+00:00">2022-05-10</time>
+                <time title="修改时间：2022-05-20 10:20:15" itemprop="dateModified" datetime="2022-05-20T10:20:15+00:00">2022-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -241,7 +241,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.9k</span>
+              <span>4.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -348,6 +348,21 @@
 <p>如果下载不了镜像也可以采取这种方式，自己通过阿里云的服务来构建<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/kf0SrktAze3bT7LcIveDYw">https://mp.weixin.qq.com/s/kf0SrktAze3bT7LcIveDYw</a></p>
 <h2 id="3-2-kubeadm-初始化失败"><a href="#3-2-kubeadm-初始化失败" class="headerlink" title="3.2. kubeadm 初始化失败"></a>3.2. kubeadm 初始化失败</h2><p>有些时候kubeadm可能会初始化失败，这时候需要将一些配置重置，使用以下命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm reset</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-3-配置kubectl在bash下的自动补全"><a href="#3-3-配置kubectl在bash下的自动补全" class="headerlink" title="3.3. 配置kubectl在bash下的自动补全"></a>3.3. 配置kubectl在bash下的自动补全</h2><p>全局的自动补全</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl &gt; /dev/null</span><br></pre></td></tr></table></figure>
+
+<p>当前用户的自动补全</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;source &lt;(kubectl completion bash)&#x27;</span> &gt;&gt;~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>然后执行重启一下shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exec</span> bash</span><br></pre></td></tr></table></figure>
+
+<p>如果出现以下错误</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash: _get_comp_words_by_ref: command not found</span><br></pre></td></tr></table></figure>
+
+<p>需要安装一下bash-completion</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install bash-completion</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -430,7 +445,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85k8s%E7%9A%84runtime"><span class="nav-number">1.</span> <span class="nav-text">1. 安装k8s的runtime</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85kubelet%E3%80%81kubeadm%E3%80%81kubectl"><span class="nav-number">2.</span> <span class="nav-text">2. 安装kubelet、kubeadm、kubectl</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">3. 初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E5%85%B6%E4%BB%96%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.</span> <span class="nav-text">3.1. 其他问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-kubeadm-%E5%88%9D%E5%A7%8B%E5%8C%96%E5%A4%B1%E8%B4%A5"><span class="nav-number">3.2.</span> <span class="nav-text">3.2. kubeadm 初始化失败</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85k8s%E7%9A%84runtime"><span class="nav-number">1.</span> <span class="nav-text">1. 安装k8s的runtime</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85kubelet%E3%80%81kubeadm%E3%80%81kubectl"><span class="nav-number">2.</span> <span class="nav-text">2. 安装kubelet、kubeadm、kubectl</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">3. 初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E5%85%B6%E4%BB%96%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.</span> <span class="nav-text">3.1. 其他问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-kubeadm-%E5%88%9D%E5%A7%8B%E5%8C%96%E5%A4%B1%E8%B4%A5"><span class="nav-number">3.2.</span> <span class="nav-text">3.2. kubeadm 初始化失败</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E9%85%8D%E7%BD%AEkubectl%E5%9C%A8bash%E4%B8%8B%E7%9A%84%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8"><span class="nav-number">3.3.</span> <span class="nav-text">3.3. 配置kubectl在bash下的自动补全</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -444,7 +459,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -457,7 +472,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">55</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -498,13 +513,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">58k</span>
+    <span title="站点总字数">60k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">53 分钟</span>
+    <span title="站点阅读时长">55 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
