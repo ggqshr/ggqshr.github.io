@@ -228,3 +228,31 @@ spec:
 ```bash
 kubeadm reset
 ```
+
+## 3.3. 配置kubectl在bash下的自动补全
+
+全局的自动补全
+```bash
+kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null
+```
+
+当前用户的自动补全
+```bash
+echo 'source <(kubectl completion bash)' >>~/.bashrc
+```
+
+然后执行重启一下shell
+```bash
+exec bash
+```
+
+如果出现以下错误
+```
+bash: _get_comp_words_by_ref: command not found
+```
+
+需要安装一下bash-completion
+
+```bash
+yum -y install bash-completion
+```
