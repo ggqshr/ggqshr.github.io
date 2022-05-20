@@ -29,12 +29,12 @@
     var CONFIG = {"hostname":"ggqshr.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="安装rancher在安装rancher之前需要先安装cert-manager，以及ingress-nginx 安装cert-manager使用以下命令安装 1kubectl apply -f https:&#x2F;&#x2F;github.com&#x2F;cert-manager&#x2F;cert-manager&#x2F;releases&#x2F;download&#x2F;v1.8.0&#x2F;cert-manager.yaml  然后查看一下几个对应的pod是">
+  <meta name="description" content="安装rancher在安装rancher之前需要先安装cert-manager，以及ingress-nginx">
 <meta property="og:type" content="article">
 <meta property="og:title" content="k8s安装rancher并且配置ingress访问">
 <meta property="og:url" content="https://ggqshr.github.io/2022-05-20/k8s%E5%AE%89%E8%A3%85rancher%E5%B9%B6%E4%B8%94%E9%85%8D%E7%BD%AEingress%E8%AE%BF%E9%97%AE/index.html">
 <meta property="og:site_name" content="ggqshr&#39;s blog">
-<meta property="og:description" content="安装rancher在安装rancher之前需要先安装cert-manager，以及ingress-nginx 安装cert-manager使用以下命令安装 1kubectl apply -f https:&#x2F;&#x2F;github.com&#x2F;cert-manager&#x2F;cert-manager&#x2F;releases&#x2F;download&#x2F;v1.8.0&#x2F;cert-manager.yaml  然后查看一下几个对应的pod是">
+<meta property="og:description" content="安装rancher在安装rancher之前需要先安装cert-manager，以及ingress-nginx">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s1.ax1x.com/2022/05/20/OOBYVI.png">
 <meta property="og:image" content="https://s1.ax1x.com/2022/05/20/OOBtat.png">
@@ -43,8 +43,13 @@
 <meta property="og:image" content="https://s1.ax1x.com/2022/05/20/OOBdG8.png">
 <meta property="og:image" content="https://s1.ax1x.com/2022/05/20/OOBwRS.png">
 <meta property="og:image" content="https://s1.ax1x.com/2022/05/20/OOBDMQ.png">
+<meta property="og:image" content="https://s1.ax1x.com/2022/05/20/OOoPTf.png">
+<meta property="og:image" content="https://s1.ax1x.com/2022/05/20/OOoFk8.png">
+<meta property="og:image" content="https://s1.ax1x.com/2022/05/20/OOoktS.png">
+<meta property="og:image" content="https://s1.ax1x.com/2022/05/20/OOoAfg.png">
+<meta property="og:image" content="https://s1.ax1x.com/2022/05/20/OOoVpQ.png">
 <meta property="article:published_time" content="2022-05-20T15:30:15.000Z">
-<meta property="article:modified_time" content="2022-05-20T10:20:41.413Z">
+<meta property="article:modified_time" content="2022-05-20T12:35:03.378Z">
 <meta property="article:author" content="ggq">
 <meta property="article:tag" content="k8s">
 <meta property="article:tag" content="rancher">
@@ -214,7 +219,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-05-20 15:30:15 / 修改时间：10:20:41" itemprop="dateCreated datePublished" datetime="2022-05-20T15:30:15+00:00">2022-05-20</time>
+              <time title="创建时间：2022-05-20 15:30:15 / 修改时间：12:35:03" itemprop="dateCreated datePublished" datetime="2022-05-20T15:30:15+00:00">2022-05-20</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -239,14 +244,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
+              <span>2.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -259,10 +264,11 @@
 
       
         <h1 id="安装rancher"><a href="#安装rancher" class="headerlink" title="安装rancher"></a>安装rancher</h1><p>在安装rancher之前需要先安装cert-manager，以及ingress-nginx</p>
+<a id="more"></a>
 <h2 id="安装cert-manager"><a href="#安装cert-manager" class="headerlink" title="安装cert-manager"></a>安装cert-manager</h2><p>使用以下命令安装</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.8.0/cert-manager.yaml</span><br></pre></td></tr></table></figure>
 
-<p>然后查看一下几个对应的pod是否正常启动了</p>
+<p>然后等待一下，查看一下几个对应的pod是否正常启动了</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -n cert-manager</span><br></pre></td></tr></table></figure>
 
 <p>达到下面的状态表明已经安装成功<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOBYVI"><img src="https://s1.ax1x.com/2022/05/20/OOBYVI.png" alt="k8s安装rancher并且配置ingress访问_0"></a></p>
@@ -270,7 +276,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/ggqshr/k8s-ingress-nginx/main/ingress-nginx-v1.1.1.yaml</span><br></pre></td></tr></table></figure>
 
 <p>达到下面的状态就说明ingress-nginx安装成功<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOBtat"><img src="https://s1.ax1x.com/2022/05/20/OOBtat.png" alt="k8s安装rancher并且配置ingress访问_1"></a></p>
-<p>且能在svc下面看到对应的NodePort服务<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOBNIP"><img src="https://s1.ax1x.com/2022/05/20/OOBNIP.png" alt="k8s安装rancher并且配置ingress访问_2"></a><br>后续我们需要通过这两个port来访问对应的服务，在这里端口是<code>30543</code></p>
+<p>且能在svc下面看到对应的NodePort服务<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOBNIP"><img src="https://s1.ax1x.com/2022/05/20/OOBNIP.png" alt="k8s安装rancher并且配置ingress访问_2"></a><br>后续我们需要通过这两个port来访问对应的服务，在这里端口是<code>30543</code>，记住这个端口，后面需要配置对应的安全组。</p>
 <h2 id="安装helm"><a href="#安装helm" class="headerlink" title="安装helm"></a>安装helm</h2><p>可以使用以下命令来直接安装</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash</span><br></pre></td></tr></table></figure>
 
@@ -287,19 +293,37 @@
 <p>参考rancher官方的文档进行安装，使用以下命令来安装</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">helm install rancher rancher-latest/rancher \</span><br><span class="line">  --namespace cattle-system \</span><br><span class="line">  --<span class="built_in">set</span> hostname=rancher.my.org</span><br></pre></td></tr></table></figure>
 
-<p>其中的<code>rancher.my.org</code>是可以自定义的，后面通过ingress访问时需要修改本地的hosts映射为对应的地址，这里以<code>rancher.my.org</code>为例</p>
-<p>然后使用kubectl来查看是否安装成功</p>
+<p>其中的<code>rancher.my.org</code>是可以自定义的，后面通过ingress访问时需要修改本地的hosts映射为对应的地址，这里以<code>rancher.my.org</code>为例。（记住这个域名，后面需要修改本地的Hosts文件）</p>
+<p>然后等待一下，使用kubectl来查看是否安装成功</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -n cattle-system</span><br></pre></td></tr></table></figure>
 
 <p>达到以下状态说明安装成功<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOBdG8"><img src="https://s1.ax1x.com/2022/05/20/OOBdG8.png" alt="k8s安装rancher并且配置ingress访问_4"></a></p>
-<h2 id="设置访问"><a href="#设置访问" class="headerlink" title="设置访问"></a>设置访问</h2><p>上述的版本在安装时，默认的ingress资源会有一些问题，缺少一些相应的字段</p>
+<h2 id="设置访问"><a href="#设置访问" class="headerlink" title="设置访问"></a>设置访问</h2><p>上述的版本在安装时，rancher默认的ingress资源会有一些问题，缺少一些相应的字段</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">store.go:420] &quot;Ignoring ingress because of error while validating ingress class&quot; ingress&#x3D;&quot;cattle-system&#x2F;rancher&quot; error&#x3D;&quot;ingress does not contain a valid IngressClass&quot;</span><br></pre></td></tr></table></figure>
 
 <p>可以通过<code>kubectl logs</code>查看<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOBwRS"><img src="https://s1.ax1x.com/2022/05/20/OOBwRS.png" alt="k8s安装rancher并且配置ingress访问_5"></a></p>
 <p>能够看到下面的报错<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOBDMQ"><img src="https://s1.ax1x.com/2022/05/20/OOBDMQ.png" alt="k8s安装rancher并且配置ingress访问_6"></a></p>
-<h2 id="登陆rancher"><a href="#登陆rancher" class="headerlink" title="登陆rancher"></a>登陆rancher</h2><p>重置rancher密码<br>kubectl -n cattle-system exec $(kubectl -n cattle-system get pods -l app=rancher | grep ‘1/1’ | head -1 | awk ‘{ print $1 }’) – reset-password</p>
-<p>如果insgress一直404，需要在rancher的ingress资源的metadata中加上<br>annotations:<br>    kubernetes.io/ingress.class: “nginx”</p>
-<p>安装cert-manager<br>kubectl apply -f <a target="_blank" rel="noopener" href="https://github.com/cert-manager/cert-manager/releases/download/v1.8.0/cert-manager.yaml">https://github.com/cert-manager/cert-manager/releases/download/v1.8.0/cert-manager.yaml</a><br><a target="_blank" rel="noopener" href="https://github.com/cert-manager/cert-manager/releases/">https://github.com/cert-manager/cert-manager/releases/</a></p>
+<p>这时需要修改一下rancher对应的ingress资源，加上缺失的部分，需要在metadata的annotations的字段加上<code>kubernetes.io/ingress.class: &quot;nginx&quot;</code></p>
+<p>首先使用kubectl来编辑对应的资源,rancher对应的ingress资源默认在<code>cattle-system</code>的命名空间下，名字就叫做<code>rancher</code>，使用kubectl edit 默认是用vim打开</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl edit ingress -n cattle-system rancher</span><br></pre></td></tr></table></figure>
+
+<p>在对应的字段中新增箭头所指的部分，修改完成后应该是下图中的样子，且需要注意的是，<strong>对于缩进最好使用空格，不要使用tab，因为vim默认的tab长度不对，且可能有问题</strong><br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOoPTf"><img src="https://s1.ax1x.com/2022/05/20/OOoPTf.png" alt="k8s安装rancher并且配置ingress访问_7"></a><br>然后保存退出即可</p>
+<p>如果修改正确的话，在ingress-nginx-controller的日志中可以看到如下的内容<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOoFk8"><img src="https://s1.ax1x.com/2022/05/20/OOoFk8.png" alt="k8s安装rancher并且配置ingress访问_8"></a></p>
+<p>这时就表明修改成功了</p>
+<h2 id="登陆rancher"><a href="#登陆rancher" class="headerlink" title="登陆rancher"></a>登陆rancher</h2><h3 id="配置虚机的安全组"><a href="#配置虚机的安全组" class="headerlink" title="配置虚机的安全组"></a>配置虚机的安全组</h3><p>经过上述的步骤，rancher已经搭建好了，且ingress也配置好了，可以尝试访问rancher，首先需要配置一下虚机的安全组，需要将ingress的service对应的NodePort对应的端口的入方向放通，在本文中，这个端口就是<code>30543</code></p>
+<h3 id="修改本地的hosts映射"><a href="#修改本地的hosts映射" class="headerlink" title="修改本地的hosts映射"></a>修改本地的hosts映射</h3><p>放通后，还需要修改本地的hosts文件，win10下<code>hosts</code>文件在下列位置:<code>C:\WINDOWS\system32\drivers\etc</code><br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOoktS"><img src="https://s1.ax1x.com/2022/05/20/OOoktS.png" alt="k8s安装rancher并且配置ingress访问_9"></a></p>
+<p>在文件中新增一行自定义域名映射，需要将之前安装rancher时配置的域名映射到虚机的公网ip上，在本文中，安装时配置的域名为<code>rancher.my.org</code>,假设虚机的公网ip为<code>1.1.1.1</code>，则需要在hosts文件中新增一行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.1.1.1 rancher.my.org</span><br></pre></td></tr></table></figure>
+
+<p>保存并退出文件，然后在浏览器中可以使用自定义的域名来访问rancher，在本文中，这个地址是（要以https开头才可）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;rancher.my.org:30543</span><br></pre></td></tr></table></figure>
+
+<p>如果顺利的话，就可以看到rancher的页面了<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOoAfg"><img src="https://s1.ax1x.com/2022/05/20/OOoAfg.png" alt="k8s安装rancher并且配置ingress访问_10"></a></p>
+<p>然后使用下列命令才重置一下rancher的密码，即可登陆</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl -n cattle-system <span class="built_in">exec</span> $(kubectl -n cattle-system get pods -l app=rancher | grep <span class="string">&#x27;1/1&#x27;</span> | head -1 | awk <span class="string">&#x27;&#123; print $1 &#125;&#x27;</span>) -- reset-password</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOoVpQ"><img src="https://s1.ax1x.com/2022/05/20/OOoVpQ.png" alt="k8s安装rancher并且配置ingress访问_11"></a></p>
+<p>同时在第二个页面填写rancher的地址时，<strong>如果后续需要纳管其他集群，需要填写一个其他集群都能够访问到的地址</strong>，这里没有这种需求，因此直接默认即可。</p>
+<p>如果采用本文的方式安装的rancher，是会自动纳管所在的集群的，所以登陆进去后就可以发现当前的集群已经出现在rancher中了。</p>
 
     </div>
 
@@ -382,7 +406,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85rancher"><span class="nav-number">1.</span> <span class="nav-text">安装rancher</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85cert-manager"><span class="nav-number">1.1.</span> <span class="nav-text">安装cert-manager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85ingress-nginx"><span class="nav-number">1.2.</span> <span class="nav-text">安装ingress-nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85helm"><span class="nav-number">1.3.</span> <span class="nav-text">安装helm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85rancher-1"><span class="nav-number">1.4.</span> <span class="nav-text">安装rancher</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%AE%BF%E9%97%AE"><span class="nav-number">1.5.</span> <span class="nav-text">设置访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%99%BB%E9%99%86rancher"><span class="nav-number">1.6.</span> <span class="nav-text">登陆rancher</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85rancher"><span class="nav-number">1.</span> <span class="nav-text">安装rancher</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85cert-manager"><span class="nav-number">1.1.</span> <span class="nav-text">安装cert-manager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85ingress-nginx"><span class="nav-number">1.2.</span> <span class="nav-text">安装ingress-nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85helm"><span class="nav-number">1.3.</span> <span class="nav-text">安装helm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85rancher-1"><span class="nav-number">1.4.</span> <span class="nav-text">安装rancher</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%AE%BF%E9%97%AE"><span class="nav-number">1.5.</span> <span class="nav-text">设置访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%99%BB%E9%99%86rancher"><span class="nav-number">1.6.</span> <span class="nav-text">登陆rancher</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%99%9A%E6%9C%BA%E7%9A%84%E5%AE%89%E5%85%A8%E7%BB%84"><span class="nav-number">1.6.1.</span> <span class="nav-text">配置虚机的安全组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%9C%AC%E5%9C%B0%E7%9A%84hosts%E6%98%A0%E5%B0%84"><span class="nav-number">1.6.2.</span> <span class="nav-text">修改本地的hosts映射</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -450,7 +474,7 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">60k</span>
+    <span title="站点总字数">61k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>

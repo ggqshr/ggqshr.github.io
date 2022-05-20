@@ -201,7 +201,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-05-20 15:30:15 / 修改时间：10:20:41" itemprop="dateCreated datePublished" datetime="2022-05-20T15:30:15+00:00">2022-05-20</time>
+              <time title="创建时间：2022-05-20 15:30:15 / 修改时间：12:35:03" itemprop="dateCreated datePublished" datetime="2022-05-20T15:30:15+00:00">2022-05-20</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -219,14 +219,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
+              <span>2.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -239,48 +239,14 @@
 
       
           <h1 id="安装rancher"><a href="#安装rancher" class="headerlink" title="安装rancher"></a>安装rancher</h1><p>在安装rancher之前需要先安装cert-manager，以及ingress-nginx</p>
-<h2 id="安装cert-manager"><a href="#安装cert-manager" class="headerlink" title="安装cert-manager"></a>安装cert-manager</h2><p>使用以下命令安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.8.0/cert-manager.yaml</span><br></pre></td></tr></table></figure>
-
-<p>然后查看一下几个对应的pod是否正常启动了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -n cert-manager</span><br></pre></td></tr></table></figure>
-
-<p>达到下面的状态表明已经安装成功<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOBYVI"><img src="https://s1.ax1x.com/2022/05/20/OOBYVI.png" alt="k8s安装rancher并且配置ingress访问_0"></a></p>
-<h2 id="安装ingress-nginx"><a href="#安装ingress-nginx" class="headerlink" title="安装ingress-nginx"></a>安装ingress-nginx</h2><p>这里希望在外部访问集群内的rancher，因此需要ingress，使用以下命令来安装ingress-nginx</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/ggqshr/k8s-ingress-nginx/main/ingress-nginx-v1.1.1.yaml</span><br></pre></td></tr></table></figure>
-
-<p>达到下面的状态就说明ingress-nginx安装成功<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOBtat"><img src="https://s1.ax1x.com/2022/05/20/OOBtat.png" alt="k8s安装rancher并且配置ingress访问_1"></a></p>
-<p>且能在svc下面看到对应的NodePort服务<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOBNIP"><img src="https://s1.ax1x.com/2022/05/20/OOBNIP.png" alt="k8s安装rancher并且配置ingress访问_2"></a><br>后续我们需要通过这两个port来访问对应的服务，在这里端口是<code>30543</code></p>
-<h2 id="安装helm"><a href="#安装helm" class="headerlink" title="安装helm"></a>安装helm</h2><p>可以使用以下命令来直接安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash</span><br></pre></td></tr></table></figure>
-
-<p>如果上面的脚本因为网络问题一直下载不下来，可以采取手动安装的方式</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://get.helm.sh/helm-v3.9.0-linux-amd64.tar.gz</span><br><span class="line">tar -zxvf helm-v3.9.0-linux-amd64.tar.gz</span><br><span class="line">mv linux-amd64/ /usr/<span class="built_in">local</span>/include/helm</span><br><span class="line">ln -s /usr/<span class="built_in">local</span>/include/helm/helm /usr/<span class="built_in">local</span>/bin/helm</span><br></pre></td></tr></table></figure>
-
-<p>然后输入以下命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm version</span><br></pre></td></tr></table></figure>
-
-<p>能够看到以下信息就说明安装成功了<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOBaPf"><img src="https://s1.ax1x.com/2022/05/20/OOBaPf.png" alt="k8s安装rancher并且配置ingress访问_3"></a></p>
-<h2 id="安装rancher-1"><a href="#安装rancher-1" class="headerlink" title="安装rancher"></a>安装rancher</h2><p>添加对应的repo然后创建rancher对应的namespace</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">helm repo add rancher-latest https://releases.rancher.com/server-charts/latest</span><br><span class="line">kubectl create namespace cattle-system</span><br></pre></td></tr></table></figure>
-
-<p>参考rancher官方的文档进行安装，使用以下命令来安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">helm install rancher rancher-latest/rancher \</span><br><span class="line">  --namespace cattle-system \</span><br><span class="line">  --<span class="built_in">set</span> hostname=rancher.my.org</span><br></pre></td></tr></table></figure>
-
-<p>其中的<code>rancher.my.org</code>是可以自定义的，后面通过ingress访问时需要修改本地的hosts映射为对应的地址，这里以<code>rancher.my.org</code>为例</p>
-<p>然后使用kubectl来查看是否安装成功</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -n cattle-system</span><br></pre></td></tr></table></figure>
-
-<p>达到以下状态说明安装成功<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOBdG8"><img src="https://s1.ax1x.com/2022/05/20/OOBdG8.png" alt="k8s安装rancher并且配置ingress访问_4"></a></p>
-<h2 id="设置访问"><a href="#设置访问" class="headerlink" title="设置访问"></a>设置访问</h2><p>上述的版本在安装时，默认的ingress资源会有一些问题，缺少一些相应的字段</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">store.go:420] &quot;Ignoring ingress because of error while validating ingress class&quot; ingress&#x3D;&quot;cattle-system&#x2F;rancher&quot; error&#x3D;&quot;ingress does not contain a valid IngressClass&quot;</span><br></pre></td></tr></table></figure>
-
-<p>可以通过<code>kubectl logs</code>查看<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOBwRS"><img src="https://s1.ax1x.com/2022/05/20/OOBwRS.png" alt="k8s安装rancher并且配置ingress访问_5"></a></p>
-<p>能够看到下面的报错<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OOBDMQ"><img src="https://s1.ax1x.com/2022/05/20/OOBDMQ.png" alt="k8s安装rancher并且配置ingress访问_6"></a></p>
-<h2 id="登陆rancher"><a href="#登陆rancher" class="headerlink" title="登陆rancher"></a>登陆rancher</h2><p>重置rancher密码<br>kubectl -n cattle-system exec $(kubectl -n cattle-system get pods -l app=rancher | grep ‘1/1’ | head -1 | awk ‘{ print $1 }’) – reset-password</p>
-<p>如果insgress一直404，需要在rancher的ingress资源的metadata中加上<br>annotations:<br>    kubernetes.io/ingress.class: “nginx”</p>
-<p>安装cert-manager<br>kubectl apply -f <a target="_blank" rel="noopener" href="https://github.com/cert-manager/cert-manager/releases/download/v1.8.0/cert-manager.yaml">https://github.com/cert-manager/cert-manager/releases/download/v1.8.0/cert-manager.yaml</a><br><a target="_blank" rel="noopener" href="https://github.com/cert-manager/cert-manager/releases/">https://github.com/cert-manager/cert-manager/releases/</a></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022-05-20/k8s%E5%AE%89%E8%A3%85rancher%E5%B9%B6%E4%B8%94%E9%85%8D%E7%BD%AEingress%E8%AE%BF%E9%97%AE/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -330,7 +296,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-20 10:20:15" itemprop="dateModified" datetime="2022-05-20T10:20:15+00:00">2022-05-20</time>
+                <time title="修改时间：2022-05-20 12:34:43" itemprop="dateModified" datetime="2022-05-20T12:34:43+00:00">2022-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -431,7 +397,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-20 10:20:15" itemprop="dateModified" datetime="2022-05-20T10:20:15+00:00">2022-05-20</time>
+                <time title="修改时间：2022-05-20 12:34:43" itemprop="dateModified" datetime="2022-05-20T12:34:43+00:00">2022-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -525,7 +491,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-20 10:20:15" itemprop="dateModified" datetime="2022-05-20T10:20:15+00:00">2022-05-20</time>
+                <time title="修改时间：2022-05-20 12:34:43" itemprop="dateModified" datetime="2022-05-20T12:34:43+00:00">2022-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -620,7 +586,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-20 10:20:15" itemprop="dateModified" datetime="2022-05-20T10:20:15+00:00">2022-05-20</time>
+                <time title="修改时间：2022-05-20 12:34:43" itemprop="dateModified" datetime="2022-05-20T12:34:43+00:00">2022-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -716,7 +682,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-20 10:20:15" itemprop="dateModified" datetime="2022-05-20T10:20:15+00:00">2022-05-20</time>
+                <time title="修改时间：2022-05-20 12:34:43" itemprop="dateModified" datetime="2022-05-20T12:34:43+00:00">2022-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -805,7 +771,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-20 10:20:15" itemprop="dateModified" datetime="2022-05-20T10:20:15+00:00">2022-05-20</time>
+                <time title="修改时间：2022-05-20 12:34:43" itemprop="dateModified" datetime="2022-05-20T12:34:43+00:00">2022-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -900,7 +866,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-20 10:20:15" itemprop="dateModified" datetime="2022-05-20T10:20:15+00:00">2022-05-20</time>
+                <time title="修改时间：2022-05-20 12:34:43" itemprop="dateModified" datetime="2022-05-20T12:34:43+00:00">2022-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -994,7 +960,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-20 10:20:15" itemprop="dateModified" datetime="2022-05-20T10:20:15+00:00">2022-05-20</time>
+                <time title="修改时间：2022-05-20 12:34:43" itemprop="dateModified" datetime="2022-05-20T12:34:43+00:00">2022-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1089,7 +1055,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-20 10:20:15" itemprop="dateModified" datetime="2022-05-20T10:20:15+00:00">2022-05-20</time>
+                <time title="修改时间：2022-05-20 12:34:43" itemprop="dateModified" datetime="2022-05-20T12:34:43+00:00">2022-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1273,7 +1239,7 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">60k</span>
+    <span title="站点总字数">61k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
