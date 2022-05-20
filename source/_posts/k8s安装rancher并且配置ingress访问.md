@@ -123,7 +123,7 @@ kubectl edit ingress -n cattle-system rancher
 
 ### 配置虚机的安全组
 
-经过上述的步骤，rancher已经搭建好了，且ingress也配置好了，可以尝试访问rancher，首先需要配置一下虚机的安全组，需要将ingress的service对应的NodePort对应的端口的入方向放通，在本文中，这个端口就是`30543`
+经过上述的步骤，rancher已经搭建好了，且ingress也配置好了，可以尝试访问rancher，首先需要配置一下虚机的安全组，需要将ingress的service对应的NodePort对应的端口的入方向放通，在本文中，这个端口就是`30543`，如果是单节点，只需要配置一下对应节点的安全组即可，如果是多个节点，可以配置任意一个节点的安全组，因为NodePort会在集群中所有节点上监听相同的端口。
 
 ### 修改本地的hosts映射
 
