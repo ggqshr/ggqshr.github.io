@@ -26,7 +26,7 @@ kubectl get pods -n cert-manager
 ```
 
 达到下面的状态表明已经安装成功
-![](k8s安装rancher并且配置ingress访问/2022-05-20-17-36-08.png)
+[![k8s安装rancher并且配置ingress访问_0](https://s1.ax1x.com/2022/05/20/OOBYVI.png)](https://imgtu.com/i/OOBYVI)
 
 ## 安装ingress-nginx
 
@@ -36,10 +36,10 @@ kubectl apply -f https://raw.githubusercontent.com/ggqshr/k8s-ingress-nginx/main
 ```
 
 达到下面的状态就说明ingress-nginx安装成功
-![](k8s安装rancher并且配置ingress访问/2022-05-20-17-43-21.png)
+[![k8s安装rancher并且配置ingress访问_1](https://s1.ax1x.com/2022/05/20/OOBtat.png)](https://imgtu.com/i/OOBtat)
 
 且能在svc下面看到对应的NodePort服务
-![](k8s安装rancher并且配置ingress访问/2022-05-20-18-09-03.png)
+[![k8s安装rancher并且配置ingress访问_2](https://s1.ax1x.com/2022/05/20/OOBNIP.png)](https://imgtu.com/i/OOBNIP)
 后续我们需要通过这两个port来访问对应的服务，在这里端口是`30543`
 
 ## 安装helm
@@ -63,7 +63,7 @@ helm version
 ```
 
 能够看到以下信息就说明安装成功了
-![](k8s安装rancher并且配置ingress访问/2022-05-20-18-00-48.png)
+[![k8s安装rancher并且配置ingress访问_3](https://s1.ax1x.com/2022/05/20/OOBaPf.png)](https://imgtu.com/i/OOBaPf)
 
 ## 安装rancher
 
@@ -88,7 +88,7 @@ kubectl get pods -n cattle-system
 ```
 
 达到以下状态说明安装成功
-![](k8s安装rancher并且配置ingress访问/2022-05-20-18-05-58.png)
+[![k8s安装rancher并且配置ingress访问_4](https://s1.ax1x.com/2022/05/20/OOBdG8.png)](https://imgtu.com/i/OOBdG8)
 
 ## 设置访问
 
@@ -98,10 +98,10 @@ store.go:420] "Ignoring ingress because of error while validating ingress class"
 ```
 
 可以通过`kubectl logs`查看
-![](k8s安装rancher并且配置ingress访问/2022-05-20-18-19-27.png)
+[![k8s安装rancher并且配置ingress访问_5](https://s1.ax1x.com/2022/05/20/OOBwRS.png)](https://imgtu.com/i/OOBwRS)
 
 能够看到下面的报错
-![](k8s安装rancher并且配置ingress访问/2022-05-20-18-15-30.png)
+[![k8s安装rancher并且配置ingress访问_6](https://s1.ax1x.com/2022/05/20/OOBDMQ.png)](https://imgtu.com/i/OOBDMQ)
 
 ## 登陆rancher
 
