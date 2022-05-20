@@ -112,11 +112,11 @@ kubectl edit ingress -n cattle-system rancher
 ```
 
 在对应的字段中新增箭头所指的部分，修改完成后应该是下图中的样子，且需要注意的是，**对于缩进最好使用空格，不要使用tab，因为vim默认的tab长度不对，且可能有问题**
-![](k8s安装rancher并且配置ingress访问/2022-05-20-20-12-47.png)
+[![k8s安装rancher并且配置ingress访问_7](https://s1.ax1x.com/2022/05/20/OOoPTf.png)](https://imgtu.com/i/OOoPTf)
 然后保存退出即可
 
 如果修改正确的话，在ingress-nginx-controller的日志中可以看到如下的内容
-![](k8s安装rancher并且配置ingress访问/2022-05-20-20-15-57.png)
+[![k8s安装rancher并且配置ingress访问_8](https://s1.ax1x.com/2022/05/20/OOoFk8.png)](https://imgtu.com/i/OOoFk8)
 
 这时就表明修改成功了
 ## 登陆rancher
@@ -128,7 +128,7 @@ kubectl edit ingress -n cattle-system rancher
 ### 修改本地的hosts映射
 
 放通后，还需要修改本地的hosts文件，win10下`hosts`文件在下列位置:`C:\WINDOWS\system32\drivers\etc`
-![](k8s安装rancher并且配置ingress访问/2022-05-20-20-19-29.png)
+[![k8s安装rancher并且配置ingress访问_9](https://s1.ax1x.com/2022/05/20/OOoktS.png)](https://imgtu.com/i/OOoktS)
 
 在文件中新增一行自定义域名映射，需要将之前安装rancher时配置的域名映射到虚机的公网ip上，在本文中，安装时配置的域名为`rancher.my.org`,假设虚机的公网ip为`1.1.1.1`，则需要在hosts文件中新增一行
 ```
@@ -141,13 +141,13 @@ https://rancher.my.org:30543
 ```
 
 如果顺利的话，就可以看到rancher的页面了
-![](k8s安装rancher并且配置ingress访问/2022-05-20-20-25-34.png)
+[![k8s安装rancher并且配置ingress访问_10](https://s1.ax1x.com/2022/05/20/OOoAfg.png)](https://imgtu.com/i/OOoAfg)
 
 然后使用下列命令才重置一下rancher的密码，即可登陆
 ```bash
 kubectl -n cattle-system exec $(kubectl -n cattle-system get pods -l app=rancher | grep '1/1' | head -1 | awk '{ print $1 }') -- reset-password
 ```
-![](k8s安装rancher并且配置ingress访问/2022-05-20-20-26-42.png)
+[![k8s安装rancher并且配置ingress访问_11](https://s1.ax1x.com/2022/05/20/OOoVpQ.png)](https://imgtu.com/i/OOoVpQ)
 
 同时在第二个页面填写rancher的地址时，**如果后续需要纳管其他集群，需要填写一个其他集群都能够访问到的地址**，这里没有这种需求，因此直接默认即可。
 
