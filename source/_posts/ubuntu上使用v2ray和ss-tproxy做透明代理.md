@@ -148,6 +148,8 @@ sudo ss-tproxy status
 curl -4vsSkL https://www.baidu.com
 ```
 
+如果启动dnsmasq失败，需要关闭ubuntu的默认dns，可以参考`https://www.netroby.com/view/4076`
+
 如果能看到网页源码的输出，则说明没有问题
 
 然后来测试国外网址的代理是否生效，新开一个ssh连接到服务器，使用`journalctl -u v2ray -f` 来查看v2ray的输出。
